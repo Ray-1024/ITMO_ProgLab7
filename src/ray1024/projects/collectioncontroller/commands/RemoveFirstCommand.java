@@ -1,21 +1,31 @@
 package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.terminal.MicroShell;
+import ray1024.projects.collectioncontroller.terminal.Terminal;
+import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
  * Удаляет из коллекции первый элемент
  */
 public class RemoveFirstCommand extends BaseCommand {
-    public RemoveFirstCommand() {
-    }
 
-    public RemoveFirstCommand(MicroShell _parentShell) {
-        super(_parentShell);
+    public RemoveFirstCommand(Terminal terminal) {
+        setName("remove_first").setDescription(Phrases.getPhrase("RemoveFirstCommandDescription")).setParentTerminal(terminal);
+        CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        if (parentShell != null && parentShell.getManagedCollection() != null)
-            parentShell.getManagedCollection().removeAtIndex(0);
+        getParentTerminal().getCollectionController().getManagedCollection().getVec().remove(0);
+    }
+
+    @Override
+    public void inputLine(String line) throws IllegalStateException {
+
+    }
+
+    @Override
+    public String getStepDescription() {
+        return "";
     }
 }

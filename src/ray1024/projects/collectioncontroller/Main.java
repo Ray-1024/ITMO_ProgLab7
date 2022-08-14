@@ -1,5 +1,6 @@
 package ray1024.projects.collectioncontroller;
 
+import ray1024.projects.collectioncontroller.commands.*;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.ConsoleInputter;
 import ray1024.projects.collectioncontroller.tools.ConsoleOutputter;
@@ -21,6 +22,17 @@ public class Main {
             System.out.println(Phrases.getPhrase("EnvironmentVariableDoesn'tExist"));
         }
         Terminal terminal = new Terminal(new ConsoleInputter(), new ConsoleOutputter(), filename);
+        // Creating new commands for registration in CommandBuilder
+        new HelpCommand(terminal);
+        new InfoCommand(terminal);
+        new AddCommand(terminal);
+        new ClearCommand(terminal);
+        new AddIfMinCommand(terminal);
+        new ExitCommand(terminal);
+        new ShowCommand(terminal);
+        new SaveCommand(terminal);
+        new RemoveFirstCommand(terminal);
+        //
         terminal.run();
     }
 

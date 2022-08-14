@@ -43,14 +43,14 @@ public class StudyGroupCollectionController {
         }
     }
 
-    public void saveCollection() throws Exception {
+    public void saveCollection() throws RuntimeException {
         if (collectionFilename == null) return;
         try {
             XMLEncoder xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(collectionFilename)));
             xmlEncoder.writeObject(managedCollection);
             xmlEncoder.close();
         } catch (FileNotFoundException e) {
-            throw new Exception(Phrases.getPhrase("CantSaveCollectionToFile"));
+            throw new RuntimeException(Phrases.getPhrase("CantSaveCollectionToFile"));
         }
     }
 

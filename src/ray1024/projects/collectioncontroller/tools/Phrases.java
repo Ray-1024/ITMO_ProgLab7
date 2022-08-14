@@ -62,6 +62,8 @@ public class Phrases {
             phrases.put("AddIfMinCommandDescription", "Добавляет новый элемент в коллекцию, если он меньше любого элемента коллекции/");
             phrases.put("ExitCommandDescription", "Завершает программу без сохранения коллекции.");
             phrases.put("ShowCommandDescription", "Показывает коллекцию.");
+            phrases.put("SaveCommandDescription", "Сохраняет коллекцию в файл.");
+            phrases.put("RemoveFirstCommandDescription", "Удаляет первый элемент коллекции.");
         }
     }
 }

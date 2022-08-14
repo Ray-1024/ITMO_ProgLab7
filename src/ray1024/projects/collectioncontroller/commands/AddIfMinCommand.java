@@ -12,7 +12,7 @@ public class AddIfMinCommand extends BaseCommand {
     private final StudyGroup studyGroup = new StudyGroup();
 
     public AddIfMinCommand(Terminal terminal) {
-        this.setName("addifmin").setDescription(Phrases.getPhrase("AddIfMinCommandDescription")).setParentTerminal(terminal);
+        this.setName("add_if_min").setDescription(Phrases.getPhrase("AddIfMinCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
         stepsCount = studyGroup.getStepsCount();
     }

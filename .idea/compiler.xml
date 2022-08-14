@@ -7,8 +7,6 @@
       <file url="file://$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/FilterStartsWithNameCommand.java" />
       <file url="file://$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/PrintDescendingCommand.java" />
       <file url="file://$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/RemoveByIDCommand.java" />
-      <file url="file://$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/RemoveFirstCommand.java" />
-      <file url="file://$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/SaveCommand.java" />
       <file url="file://$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ShuffleCommand.java" />
       <file url="file://$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/UpdateIDCommand.java" />
     </excludeFromCompile>

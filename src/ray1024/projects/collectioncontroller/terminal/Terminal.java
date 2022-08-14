@@ -76,13 +76,7 @@ public class Terminal implements Runnable {
         }
         microShells.add(new MicroShell(this));
 
-        new HelpCommand(this);
-        new InfoCommand(this);
-        new AddCommand(this);
-        new ClearCommand(this);
-        new AddIfMinCommand(this);
-        new ExitCommand(this);
-        new ShowCommand(this);
+
     }
 
 
