@@ -1,0 +1,16 @@
+add
+NAME
+1
+2
+23
+DISTANCE_EDUCATION
+FIRST
+ADMIN
+1
+11
+22
+33
+info
+show
+execute_script script.txt
+
