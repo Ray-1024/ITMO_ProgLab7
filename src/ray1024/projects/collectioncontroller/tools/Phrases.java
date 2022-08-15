@@ -64,6 +64,13 @@ public class Phrases {
             phrases.put("ShowCommandDescription", "Показывает коллекцию.");
             phrases.put("SaveCommandDescription", "Сохраняет коллекцию в файл.");
             phrases.put("RemoveFirstCommandDescription", "Удаляет первый элемент коллекции.");
+            phrases.put("ShuffleCommandDescription", "Случайным образом меняет местами элементы коллекции.");
+            phrases.put("PrintDescendingDescription", "Выводит коллекцию в лексикографическом порядке не меняя ее.");
+            phrases.put("WrongCommandArgs", "Введенные вами аргументы команды неверны.");
+            phrases.put("RemoveByIdCommandDescription", "Удаляет элемент коллекции с тем же ID что и аргумент команды.");
+            phrases.put("UpdateByIdCommandDescription", "Заменяет элемент с указанным ID на новый.");
+            phrases.put("FilterLessThanStudentsCountCommandDescription", "Показывает учебные группы в которых студентов меньше указано в аргументе команды");
+
         }
     }
 }

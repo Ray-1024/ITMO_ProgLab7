@@ -3,6 +3,7 @@ package ray1024.projects.collectioncontroller.data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Vector;
+import java.util.stream.Stream;
 
 /**
  * Класс управляющий коллекцией учебных групп
@@ -35,6 +36,10 @@ public class MyCollection<T> implements Serializable {
     public CollectionInfo getCollectionInfo() {
         collectionInfo.elementsCount = vec.size();
         return collectionInfo;
+    }
+
+    public Stream<T> stream() {
+        return vec.stream();
     }
 
     public T get(int index) {

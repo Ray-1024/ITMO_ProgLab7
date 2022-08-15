@@ -2,6 +2,8 @@ package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.data.MyCollection;
 import ray1024.projects.collectioncontroller.terminal.MicroShell;
+import ray1024.projects.collectioncontroller.terminal.Terminal;
+import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
  * Выводит те элементы коллекции, которые имеют меньшее колличество студентов в группе чем задано в параметре
@@ -9,22 +11,39 @@ import ray1024.projects.collectioncontroller.terminal.MicroShell;
 public class FilterLessThanStudentsCountCommand extends BaseCommand {
     int studentsCount = 0;
 
-    public FilterLessThanStudentsCountCommand(MicroShell _parentShell, int studentsCount) {
-        super(_parentShell);
-        this.studentsCount = studentsCount;
+    public FilterLessThanStudentsCountCommand(Terminal terminal) {
+        setName("filter_less_than_students_count").setParentTerminal(terminal).setDescription(Phrases.getPhrase("FilterLessThanStudentsCountCommandDescription"));
+        CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        if (parentShell != null && parentShell.getManagedCollection() != null) {
-            MyCollection coll = parentShell.getManagedCollection();
-            int ind = 1;
-            for (int i = 0; i < coll.size(); ++i) {
-                if (coll.get(i).getStudentsCount() < studentsCount) {
-                    System.out.print("    " + ind + ". ");
-                    System.out.println(coll.get(i));
-                }
+        final int[] ind = new int[1];
+        getParentTerminal().getCollectionController().getManagedCollection().stream()
+                .filter((elem) -> elem.getStudentsCount() < studentsCount).forEach((elem) -> {
+                    getParentTerminal().getOutputter().writeLine(String.format("\t%d. %s", ++ind[0], elem));
+                });
+    }
+
+    @Override
+    public BaseCommand setArgs(String[] args) throws RuntimeException {
+        if (args != null && args.length == 2) {
+            try {
+                studentsCount = Integer.parseInt(args[1]);
+                return this;
+            } catch (NumberFormatException ignored) {
             }
         }
+        throw new RuntimeException(Phrases.getPhrase("WrongCommandArgs"));
+    }
+
+    @Override
+    public void inputLine(String line) throws IllegalStateException {
+
+    }
+
+    @Override
+    public String getStepDescription() {
+        return "";
     }
 }

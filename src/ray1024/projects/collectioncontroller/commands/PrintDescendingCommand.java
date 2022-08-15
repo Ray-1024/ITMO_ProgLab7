@@ -1,7 +1,9 @@
 package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.data.MyCollection;
-import ray1024.projects.collectioncontroller.terminal.MicroShell;
+import ray1024.projects.collectioncontroller.data.StudyGroup;
+import ray1024.projects.collectioncontroller.terminal.Terminal;
+import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,23 +13,39 @@ import java.util.Comparator;
  * Не меняет коллекцию
  */
 public class PrintDescendingCommand extends BaseCommand {
-    public PrintDescendingCommand(MicroShell _parentShell) {
-        super(_parentShell);
+    public PrintDescendingCommand(Terminal terminal) {
+        setName("print_descending").setDescription(Phrases.getPhrase("PrintDescendingDescription")).setParentTerminal(terminal);
+        CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
 
-        if (parentShell != null && parentShell.getManagedCollection() != null) {
-            MyCollection coll = parentShell.getManagedCollection();
-            ArrayList<Integer> arr = new ArrayList<>(coll.size());
-            for (int i = 0; i < coll.size(); ++i) arr.add(i);
 
-            arr.sort(Comparator.comparing(coll::get));
-            for (int i = coll.size() - 1; i >= 0; --i) {
-                System.out.print("    " + (coll.size() - i) + ". ");
-                System.out.println(coll.get(arr.get(i)));
-            }
+        MyCollection<StudyGroup> coll = getParentTerminal().getCollectionController().getManagedCollection();
+        ArrayList<Integer> arr = new ArrayList<>(coll.size());
+        for (int i = 0; i < coll.size(); ++i) arr.add(i);
+
+        arr.sort(Comparator.comparing(coll::get));
+        for (int i = coll.size() - 1; i >= 0; --i) {
+            System.out.print("    " + (coll.size() - i) + ". ");
+            System.out.println(coll.get(arr.get(i)));
         }
+    }
+
+    @Override
+    public void inputLine(String line) throws IllegalStateException {
+
+    }
+
+    @Override
+    public String getStepDescription() {
+        return "";
+    }
+
+    @Override
+    public BaseCommand setArgs(String[] args) throws RuntimeException {
+        if (args == null || args.length != 1) throw new RuntimeException(Phrases.getPhrase("WrongCommandArgs"));
+        return this;
     }
 }

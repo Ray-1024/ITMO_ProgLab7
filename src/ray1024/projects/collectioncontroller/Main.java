@@ -32,6 +32,11 @@ public class Main {
         new ShowCommand(terminal);
         new SaveCommand(terminal);
         new RemoveFirstCommand(terminal);
+        new ShuffleCommand(terminal);
+        new PrintDescendingCommand(terminal);
+        new RemoveByIDCommand(terminal);
+        new UpdateByIDCommand(terminal);
+        new FilterLessThanStudentsCountCommand(terminal);
         //
         terminal.run();
     }

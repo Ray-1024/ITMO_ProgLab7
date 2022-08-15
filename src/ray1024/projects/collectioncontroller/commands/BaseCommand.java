@@ -23,6 +23,8 @@ public abstract class BaseCommand extends SteppedInputObject implements IExecute
         return name;
     }
 
+    public abstract BaseCommand setArgs(String[] args) throws RuntimeException;
+
 
     public BaseCommand setName(String name) {
         this.name = name;

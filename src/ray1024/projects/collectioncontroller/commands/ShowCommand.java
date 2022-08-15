@@ -27,4 +27,10 @@ public class ShowCommand extends BaseCommand {
     public String getStepDescription() {
         return "";
     }
+
+    @Override
+    public BaseCommand setArgs(String[] args) throws RuntimeException {
+        if (args == null || args.length != 1) throw new RuntimeException(Phrases.getPhrase("WrongCommandArgs"));
+        return this;
+    }
 }
