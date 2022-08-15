@@ -37,6 +37,7 @@ public class Main {
         new RemoveByIDCommand(terminal);
         new UpdateByIDCommand(terminal);
         new FilterLessThanStudentsCountCommand(terminal);
+        new FilterStartsWithNameCommand(terminal);
         //
         terminal.run();
     }

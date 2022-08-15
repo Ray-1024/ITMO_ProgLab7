@@ -69,7 +69,8 @@ public class Phrases {
             phrases.put("WrongCommandArgs", "Введенные вами аргументы команды неверны.");
             phrases.put("RemoveByIdCommandDescription", "Удаляет элемент коллекции с тем же ID что и аргумент команды.");
             phrases.put("UpdateByIdCommandDescription", "Заменяет элемент с указанным ID на новый.");
-            phrases.put("FilterLessThanStudentsCountCommandDescription", "Показывает учебные группы в которых студентов меньше указано в аргументе команды");
+            phrases.put("FilterLessThanStudentsCountCommandDescription", "Показывает учебные группы в которых студентов меньше указано в аргументе команды.");
+            phrases.put("FilterStartsWithNameCommandDescription", "Показывает группы названия которых начинаются с аргумента команды.");
 
         }
     }

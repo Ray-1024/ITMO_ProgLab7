@@ -1,7 +1,7 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.data.MyCollection;
-import ray1024.projects.collectioncontroller.terminal.MicroShell;
+import ray1024.projects.collectioncontroller.terminal.Terminal;
+import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
  * Выводит те элементы коллекции, названия групп которых начинаются с аргумента команды
@@ -9,23 +9,35 @@ import ray1024.projects.collectioncontroller.terminal.MicroShell;
 public class FilterStartsWithNameCommand extends BaseCommand {
     String name = null;
 
-    public FilterStartsWithNameCommand(MicroShell _parentShell, String name) {
-        super(_parentShell);
-        this.name = name;
+    public FilterStartsWithNameCommand(Terminal terminal) {
+        setName("filter_starts_with_name").setDescription(Phrases.getPhrase("FilterStartsWithNameCommandDescription")).setParentTerminal(terminal);
+        CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        if (name != null && parentShell != null && parentShell.getManagedCollection() != null) {
-            MyCollection coll = parentShell.getManagedCollection();
-            int ind = 1;
-            for (int i = 0; i < coll.size(); ++i) {
-                if (coll.get(i).getName().startsWith(name)) {
-                    System.out.print((ind) + ". ");
-                    ind++;
-                    System.out.println(coll.get(i));
-                }
-            }
+        final int[] ind = new int[1];
+        getParentTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> elem.getName().startsWith(name)).forEach((elem) -> {
+            getParentTerminal().getOutputter().writeLine(String.format("    %d. %s", ++ind[0], elem));
+        });
+    }
+
+    @Override
+    public BaseCommand setArgs(String[] args) throws RuntimeException {
+        if (args != null && args.length == 2) {
+            name = args[1];
+            return this;
         }
+        throw new RuntimeException(Phrases.getPhrase("WrongCommandArgs"));
+    }
+
+    @Override
+    public void inputLine(String line) throws IllegalStateException {
+
+    }
+
+    @Override
+    public String getStepDescription() {
+        return "";
     }
 }
