@@ -10,8 +10,9 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
 public class UpdateByIDCommand extends BaseCommand {
     int updateID = -1;
     StudyGroup elem = new StudyGroup();
+    public static final UpdateByIDCommand command = new UpdateByIDCommand(null);
 
-    public UpdateByIDCommand(Terminal terminal) {
+    private UpdateByIDCommand(Terminal terminal) {
         setName("update_by_id").setDescription(Phrases.getPhrase("UpdateByIdCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
         stepsCount = elem.getStepsCount();

@@ -13,7 +13,8 @@ import java.util.Comparator;
  * Не меняет коллекцию
  */
 public class PrintDescendingCommand extends BaseCommand {
-    public PrintDescendingCommand(Terminal terminal) {
+    public static final PrintDescendingCommand command = new PrintDescendingCommand(null);
+    private PrintDescendingCommand(Terminal terminal) {
         setName("print_descending").setDescription(Phrases.getPhrase("PrintDescendingDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
     }

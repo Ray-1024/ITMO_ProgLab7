@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.MicroShell;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
@@ -9,8 +8,9 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Колекция хранится в формате XML
  */
 public class SaveCommand extends BaseCommand {
+    public static final SaveCommand command = new SaveCommand(null);
 
-    public SaveCommand(Terminal terminal) {
+    private SaveCommand(Terminal terminal) {
         setName("save").setDescription(Phrases.getPhrase("SaveCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
     }

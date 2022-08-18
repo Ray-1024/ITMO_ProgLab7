@@ -9,8 +9,9 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  */
 public class AddCommand extends BaseCommand {
     StudyGroup studyGroup = new StudyGroup();
+    public static final AddCommand command = new AddCommand(null);
 
-    public AddCommand(Terminal terminal) {
+    private AddCommand(Terminal terminal) {
         this.setName("add").setDescription(Phrases.getPhrase("AddCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
         stepsCount = studyGroup.getStepsCount();

@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.MicroShell;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
@@ -10,8 +9,9 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
 public class RemoveByIDCommand extends BaseCommand {
 
     int removeID = -1;
+    public static final RemoveByIDCommand command = new RemoveByIDCommand(null);
 
-    public RemoveByIDCommand(Terminal terminal) {
+    private RemoveByIDCommand(Terminal terminal) {
         setName("remove_by_id").setDescription(Phrases.getPhrase("RemoveByIdCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
     }

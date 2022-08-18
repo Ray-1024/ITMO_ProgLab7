@@ -8,8 +8,9 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  */
 public class FilterStartsWithNameCommand extends BaseCommand {
     String name = null;
+    public static final FilterStartsWithNameCommand command = new FilterStartsWithNameCommand(null);
 
-    public FilterStartsWithNameCommand(Terminal terminal) {
+    private FilterStartsWithNameCommand(Terminal terminal) {
         setName("filter_starts_with_name").setDescription(Phrases.getPhrase("FilterStartsWithNameCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
     }

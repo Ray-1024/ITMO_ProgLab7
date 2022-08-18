@@ -8,7 +8,8 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Например: дата создания, колличество элементов
  */
 public class InfoCommand extends BaseCommand {
-    public InfoCommand(Terminal terminal) {
+    public static final InfoCommand command = new InfoCommand(null);
+    private InfoCommand(Terminal terminal) {
         this.setName("info").setDescription(Phrases.getPhrase("InfoCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
     }

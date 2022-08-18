@@ -7,8 +7,9 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Показывает все элементы коллекции
  */
 public class ShowCommand extends BaseCommand {
+    public static final ShowCommand command = new ShowCommand(null);
 
-    public ShowCommand(Terminal terminal) {
+    private ShowCommand(Terminal terminal) {
         setName("show").setDescription(Phrases.getPhrase("ShowCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
     }

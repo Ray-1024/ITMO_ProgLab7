@@ -9,7 +9,9 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * в скрипте все поля должны быть указаны начиная со следующей строки за командой, по 1 аргументу в строке
  */
 public class HelpCommand extends BaseCommand {
-    public HelpCommand(Terminal terminal) {
+    public static final HelpCommand command = new HelpCommand(null);
+
+    private HelpCommand(Terminal terminal) {
         this.setParentTerminal(getParentTerminal()).setName("help").setDescription(Phrases.getPhrase("HelpCommandDescription"));
         CommandBuilder.registerCommand(this);
     }

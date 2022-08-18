@@ -22,22 +22,6 @@ public class Main {
             System.out.println(Phrases.getPhrase("EnvironmentVariableDoesn'tExist"));
         }
         Terminal terminal = new Terminal(new ConsoleInputter(), new ConsoleOutputter(), filename);
-        // Creating new commands for registration in CommandBuilder
-        new HelpCommand(terminal);
-        new InfoCommand(terminal);
-        new AddCommand(terminal);
-        new ClearCommand(terminal);
-        new AddIfMinCommand(terminal);
-        new ExitCommand(terminal);
-        new ShowCommand(terminal);
-        new SaveCommand(terminal);
-        new RemoveFirstCommand(terminal);
-        new ShuffleCommand(terminal);
-        new PrintDescendingCommand(terminal);
-        new RemoveByIDCommand(terminal);
-        new UpdateByIDCommand(terminal);
-        new FilterLessThanStudentsCountCommand(terminal);
-        new FilterStartsWithNameCommand(terminal);
         //
         terminal.run();
     }

@@ -2,15 +2,15 @@ package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
-import sun.awt.SunGraphicsCallback;
 
 /**
  * Завершает программу
  * Не сохраняет коллекцию в файл
  */
 public class ExitCommand extends BaseCommand {
+    public static final ExitCommand command = new ExitCommand(null);
 
-    public ExitCommand(Terminal terminal) {
+    private ExitCommand(Terminal terminal) {
         setName("exit").setDescription(Phrases.getPhrase("ExitCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
     }

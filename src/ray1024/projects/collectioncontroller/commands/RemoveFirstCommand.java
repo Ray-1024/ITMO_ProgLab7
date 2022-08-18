@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.MicroShell;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
@@ -8,8 +7,9 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Удаляет из коллекции первый элемент
  */
 public class RemoveFirstCommand extends BaseCommand {
+    public static final RemoveFirstCommand command = new RemoveFirstCommand(null);
 
-    public RemoveFirstCommand(Terminal terminal) {
+    private RemoveFirstCommand(Terminal terminal) {
         setName("remove_first").setDescription(Phrases.getPhrase("RemoveFirstCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
     }

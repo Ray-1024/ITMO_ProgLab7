@@ -33,30 +33,5 @@ public class CommandBuilder {
         prototype.reset();
         return prototype.clone();
     }
-/*
-    public static LinkedList<BaseCommand> parseCommandFromScript(MicroShell microShell, String[] lines) {
-        try {
-            LinkedList<BaseCommand> queue = new LinkedList<>();
-            for (int offset = 0; offset < lines.length; ++offset) {
-                String[] args = lines[offset].split(" ");
-                if (!commands.containsKey(args[0])) {
-                    System.out.println(Phrases.UnregisteredScriptCommand);
-                    return null;
-                }
-                BaseCommand prototype = commands.get(args[0]).setParentShell(microShell);
-                int cntLines = prototype.parseCommandFromText(args, lines, offset);
-                if (cntLines > 0) queue.add((BaseCommand) prototype.clone());
-                else {
-                    System.out.println(Phrases.WrongCommandScriptSpelling);
-                    return null;
-                }
-            }
-
-        } catch (Throwable ignored) {
-        }
-        System.out.println(Phrases.WrongCommandScriptSpelling);
-        return null;
-    }
-*/
 
 }

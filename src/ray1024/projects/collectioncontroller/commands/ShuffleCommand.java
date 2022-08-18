@@ -9,8 +9,9 @@ import java.util.Collections;
  * Случайным образом перемешивает элементы коллекции
  */
 public class ShuffleCommand extends BaseCommand {
+    public static final ShuffleCommand command = new ShuffleCommand(null);
 
-    public ShuffleCommand(Terminal terminal) {
+    private ShuffleCommand(Terminal terminal) {
         setName("shuffle").setDescription(Phrases.getPhrase("ShuffleCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
     }

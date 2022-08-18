@@ -7,8 +7,8 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Команда очищающая коллекцию, делая ее пустой
  */
 public class ClearCommand extends BaseCommand {
-
-    public ClearCommand(Terminal terminal) {
+    public static final ClearCommand command = new ClearCommand(null);
+    private ClearCommand(Terminal terminal) {
         this.setName("clear").setParentTerminal(terminal).setDescription(Phrases.getPhrase("ClearCommandDescription"));
         CommandBuilder.registerCommand(this);
     }

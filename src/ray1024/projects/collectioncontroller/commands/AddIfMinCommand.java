@@ -11,7 +11,8 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
 public class AddIfMinCommand extends BaseCommand {
     private final StudyGroup studyGroup = new StudyGroup();
 
-    public AddIfMinCommand(Terminal terminal) {
+    public static final AddIfMinCommand command = new AddIfMinCommand(null);
+    private AddIfMinCommand(Terminal terminal) {
         this.setName("add_if_min").setDescription(Phrases.getPhrase("AddIfMinCommandDescription")).setParentTerminal(terminal);
         CommandBuilder.registerCommand(this);
         stepsCount = studyGroup.getStepsCount();

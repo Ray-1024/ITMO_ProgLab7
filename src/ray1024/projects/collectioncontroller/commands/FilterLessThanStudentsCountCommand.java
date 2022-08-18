@@ -1,7 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.data.MyCollection;
-import ray1024.projects.collectioncontroller.terminal.MicroShell;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
@@ -10,8 +8,9 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  */
 public class FilterLessThanStudentsCountCommand extends BaseCommand {
     int studentsCount = 0;
+    public static final FilterLessThanStudentsCountCommand command = new FilterLessThanStudentsCountCommand(null);
 
-    public FilterLessThanStudentsCountCommand(Terminal terminal) {
+    private FilterLessThanStudentsCountCommand(Terminal terminal) {
         setName("filter_less_than_students_count").setParentTerminal(terminal).setDescription(Phrases.getPhrase("FilterLessThanStudentsCountCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
