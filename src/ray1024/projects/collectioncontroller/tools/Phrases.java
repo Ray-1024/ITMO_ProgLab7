@@ -15,6 +15,10 @@ public class Phrases {
 
     private static final HashMap<String, String> phrases = new HashMap<>();
 
+    static {
+        setLocale("Russian");
+    }
+
     private Phrases() {
     }
 

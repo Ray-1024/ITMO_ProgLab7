@@ -17,7 +17,7 @@ public class CommandBuilder {
     private static final HashMap<String, BaseCommand> commands = new HashMap<>();
 
     public static void registerCommand(BaseCommand command) {
-        if (!commands.containsKey(command.getName())) commands.put(command.getName(), command);
+        commands.put(command.getName(), command);
     }
 
     public static Stream<BaseCommand> getRegisteredCommandsStream() {

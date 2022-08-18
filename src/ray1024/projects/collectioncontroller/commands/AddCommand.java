@@ -8,13 +8,13 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Команда добавляет в коллекцию элемент
  */
 public class AddCommand extends BaseCommand {
-    StudyGroup studyGroup = new StudyGroup();
-    public static final AddCommand command = new AddCommand(null);
+    private final StudyGroup studyGroup = new StudyGroup();
+    public static final AddCommand command = new AddCommand();
 
-    private AddCommand(Terminal terminal) {
-        this.setName("add").setDescription(Phrases.getPhrase("AddCommandDescription")).setParentTerminal(terminal);
-        CommandBuilder.registerCommand(this);
+    private AddCommand() {
+        setName("add").setDescription(Phrases.getPhrase("AddCommandDescription"));
         stepsCount = studyGroup.getStepsCount();
+        CommandBuilder.registerCommand(this);
     }
 
 
