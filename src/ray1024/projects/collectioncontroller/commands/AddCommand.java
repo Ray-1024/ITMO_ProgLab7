@@ -1,7 +1,6 @@
 package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.data.StudyGroup;
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -21,7 +20,7 @@ public class AddCommand extends BaseCommand {
     @Override
     public void execute() throws RuntimeException {
         try {
-            getParentTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
+            getParentShell().getCollectionController().getManagedCollection().getVec().add(studyGroup);
         } catch (Exception e) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

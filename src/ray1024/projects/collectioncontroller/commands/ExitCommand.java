@@ -11,7 +11,7 @@ public class ExitCommand extends BaseCommand {
     public static final ExitCommand command = new ExitCommand(null);
 
     private ExitCommand(Terminal terminal) {
-        setName("exit").setDescription(Phrases.getPhrase("ExitCommandDescription")).setParentTerminal(terminal);
+        setName("exit").setDescription(Phrases.getPhrase("ExitCommandDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
     }
 

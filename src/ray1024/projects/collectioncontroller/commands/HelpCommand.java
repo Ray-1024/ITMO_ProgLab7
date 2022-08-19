@@ -12,7 +12,7 @@ public class HelpCommand extends BaseCommand {
     public static final HelpCommand command = new HelpCommand(null);
 
     private HelpCommand(Terminal terminal) {
-        this.setParentTerminal(getParentTerminal()).setName("help").setDescription(Phrases.getPhrase("HelpCommandDescription"));
+        this.setParentShell(getParentShell()).setName("help").setDescription(Phrases.getPhrase("HelpCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
@@ -21,7 +21,7 @@ public class HelpCommand extends BaseCommand {
         try {
             final int[] strNumber = {1};
             CommandBuilder.getRegisteredCommandsStream().forEach((command) -> {
-                getParentTerminal().getOutputter().writeLine(String.format("%d. %s: %s", strNumber[0], command.getName(), command.getDescription()));
+                getParentShell().getOutputter().writeLine(String.format("%d. %s: %s", strNumber[0], command.getName(), command.getDescription()));
                 ++strNumber[0];
             });
         } catch (Throwable throwable) {

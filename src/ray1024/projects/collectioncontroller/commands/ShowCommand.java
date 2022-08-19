@@ -10,13 +10,13 @@ public class ShowCommand extends BaseCommand {
     public static final ShowCommand command = new ShowCommand(null);
 
     private ShowCommand(Terminal terminal) {
-        setName("show").setDescription(Phrases.getPhrase("ShowCommandDescription")).setParentTerminal(terminal);
+        setName("show").setDescription(Phrases.getPhrase("ShowCommandDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        getParentTerminal().getOutputter().writeLine(getParentTerminal().getCollectionController().getManagedCollection().toString());
+        getParentShell().getOutputter().writeLine(getParentShell().getCollectionController().getManagedCollection().toString());
     }
 
     @Override

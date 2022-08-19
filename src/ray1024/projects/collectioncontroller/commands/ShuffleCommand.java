@@ -12,13 +12,13 @@ public class ShuffleCommand extends BaseCommand {
     public static final ShuffleCommand command = new ShuffleCommand(null);
 
     private ShuffleCommand(Terminal terminal) {
-        setName("shuffle").setDescription(Phrases.getPhrase("ShuffleCommandDescription")).setParentTerminal(terminal);
+        setName("shuffle").setDescription(Phrases.getPhrase("ShuffleCommandDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        Collections.shuffle(getParentTerminal().getCollectionController().getManagedCollection().getVec());
+        Collections.shuffle(getParentShell().getCollectionController().getManagedCollection().getVec());
     }
 
     @Override

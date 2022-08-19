@@ -1,38 +1,73 @@
 package ray1024.projects.collectioncontroller.terminal;
 
+import ray1024.projects.collectioncontroller.commands.BaseCommand;
+import ray1024.projects.collectioncontroller.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.interfaces.IExecute;
+import ray1024.projects.collectioncontroller.interfaces.IInputter;
+import ray1024.projects.collectioncontroller.interfaces.IOutputter;
+import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.util.ArrayList;
 
 /**
  * Класс предназначенный для исполнения команд из очереди, пока та не закончится
  */
-public class MicroShell implements IExecute {
+public class MicroShell implements Runnable {
     private final Terminal parentTerminal;
-    private final ArrayList<IExecute> commandsQueue = new ArrayList<IExecute>();
+    private final IInputter inputter;
+    private final IOutputter outputter;
+    private BaseCommand currentCommand;
 
-    public Terminal getParentTerminal() {
-        return parentTerminal;
-    }
-
-    public MicroShell(Terminal parentTerminal) {
+    public MicroShell(Terminal parentTerminal, IInputter Iinputter, IOutputter Ioutputter) {
         this.parentTerminal = parentTerminal;
+        if (Iinputter == null) throw new IllegalArgumentException(Phrases.getPhrase("InputterCan'tBeNullException"));
+        this.inputter = Iinputter;
+        if (Ioutputter == null) throw new IllegalArgumentException(Phrases.getPhrase("OutputterCan'tBeNullException"));
+        outputter = Ioutputter;
     }
 
     @Override
-    public void execute() throws RuntimeException {
-        for (IExecute target : commandsQueue) {
-            target.execute();
+    public void run() {
+        while (true) {
+            if (currentCommand == null) {
+                outputter.writeLine(Phrases.getPhrase("TerminalWaitNewCommand"));
+                try {
+                    if (!inputter.hasGetLine()) break;
+                    currentCommand = CommandBuilder.parseInteractiveCommand(inputter.getLine(), this);
+                } catch (IllegalStateException illegalStateException) {
+                    outputter.writeLine(illegalStateException.getMessage());
+                }
+                continue;
+            }
+            if (!currentCommand.isObjectReady()) {
+                outputter.writeLine(currentCommand.getStepDescription());
+                try {
+                    if (!inputter.hasGetLine()) break;
+                    currentCommand.inputLine(inputter.getLine());
+                } catch (IllegalStateException illegalStateException) {
+                    outputter.writeLine(illegalStateException.getMessage());
+                }
+                continue;
+            }
+            try {
+                currentCommand.execute();
+            } catch (RuntimeException e) {
+                outputter.writeLine(e.getMessage());
+            }
+            currentCommand = null;
         }
-        commandsQueue.clear();
     }
 
-    public void addCommandInQueue(IExecute command) {
-        if (command != null) commandsQueue.add(command);
+    public IInputter getInputter() {
+        return inputter;
     }
 
-    public void addCommandsInQueue(ArrayList<? extends IExecute> commandsDump) {
-        if (commandsDump != null) commandsQueue.addAll(commandsDump);
+    public IOutputter getOutputter() {
+        return outputter;
+    }
+
+    public Terminal getParentTerminal() {
+        return parentTerminal;
     }
 
 }

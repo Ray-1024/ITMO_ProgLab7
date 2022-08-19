@@ -11,16 +11,16 @@ public class FilterLessThanStudentsCountCommand extends BaseCommand {
     public static final FilterLessThanStudentsCountCommand command = new FilterLessThanStudentsCountCommand(null);
 
     private FilterLessThanStudentsCountCommand(Terminal terminal) {
-        setName("filter_less_than_students_count").setParentTerminal(terminal).setDescription(Phrases.getPhrase("FilterLessThanStudentsCountCommandDescription"));
+        setName("filter_less_than_students_count").setParentShell(terminal).setDescription(Phrases.getPhrase("FilterLessThanStudentsCountCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
         final int[] ind = new int[1];
-        getParentTerminal().getCollectionController().getManagedCollection().stream()
+        getParentShell().getCollectionController().getManagedCollection().stream()
                 .filter((elem) -> elem.getStudentsCount() < studentsCount).forEach((elem) -> {
-                    getParentTerminal().getOutputter().writeLine(String.format("\t%d. %s", ++ind[0], elem));
+                    getParentShell().getOutputter().writeLine(String.format("\t%d. %s", ++ind[0], elem));
                 });
     }
 

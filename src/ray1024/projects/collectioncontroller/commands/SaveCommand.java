@@ -11,13 +11,13 @@ public class SaveCommand extends BaseCommand {
     public static final SaveCommand command = new SaveCommand(null);
 
     private SaveCommand(Terminal terminal) {
-        setName("save").setDescription(Phrases.getPhrase("SaveCommandDescription")).setParentTerminal(terminal);
+        setName("save").setDescription(Phrases.getPhrase("SaveCommandDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() throws RuntimeException {
-        getParentTerminal().getCollectionController().saveCollection();
+        getParentShell().getCollectionController().saveCollection();
     }
 
     @Override

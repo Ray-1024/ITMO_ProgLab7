@@ -12,13 +12,13 @@ public class RemoveByIDCommand extends BaseCommand {
     public static final RemoveByIDCommand command = new RemoveByIDCommand(null);
 
     private RemoveByIDCommand(Terminal terminal) {
-        setName("remove_by_id").setDescription(Phrases.getPhrase("RemoveByIdCommandDescription")).setParentTerminal(terminal);
+        setName("remove_by_id").setDescription(Phrases.getPhrase("RemoveByIdCommandDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        getParentTerminal().getCollectionController().getManagedCollection().getVec().removeIf((elem) -> {
+        getParentShell().getCollectionController().getManagedCollection().getVec().removeIf((elem) -> {
             return elem.getId() == removeID;
         });
     }

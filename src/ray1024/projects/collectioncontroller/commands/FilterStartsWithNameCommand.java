@@ -11,15 +11,15 @@ public class FilterStartsWithNameCommand extends BaseCommand {
     public static final FilterStartsWithNameCommand command = new FilterStartsWithNameCommand(null);
 
     private FilterStartsWithNameCommand(Terminal terminal) {
-        setName("filter_starts_with_name").setDescription(Phrases.getPhrase("FilterStartsWithNameCommandDescription")).setParentTerminal(terminal);
+        setName("filter_starts_with_name").setDescription(Phrases.getPhrase("FilterStartsWithNameCommandDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
         final int[] ind = new int[1];
-        getParentTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> elem.getName().startsWith(name)).forEach((elem) -> {
-            getParentTerminal().getOutputter().writeLine(String.format("    %d. %s", ++ind[0], elem));
+        getParentShell().getCollectionController().getManagedCollection().stream().filter((elem) -> elem.getName().startsWith(name)).forEach((elem) -> {
+            getParentShell().getOutputter().writeLine(String.format("    %d. %s", ++ind[0], elem));
         });
     }
 

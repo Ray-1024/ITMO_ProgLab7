@@ -13,7 +13,7 @@ public class AddIfMinCommand extends BaseCommand {
 
     public static final AddIfMinCommand command = new AddIfMinCommand(null);
     private AddIfMinCommand(Terminal terminal) {
-        this.setName("add_if_min").setDescription(Phrases.getPhrase("AddIfMinCommandDescription")).setParentTerminal(terminal);
+        this.setName("add_if_min").setDescription(Phrases.getPhrase("AddIfMinCommandDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
         stepsCount = studyGroup.getStepsCount();
     }
@@ -22,9 +22,9 @@ public class AddIfMinCommand extends BaseCommand {
     @Override
     public void execute() throws RuntimeException {
         try {
-            if (getParentTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> {
+            if (getParentShell().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> {
                 return i.compareTo(studyGroup) > 0;
-            })) getParentTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
+            })) getParentShell().getCollectionController().getManagedCollection().getVec().add(studyGroup);
         } catch (Exception e) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

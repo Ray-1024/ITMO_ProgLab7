@@ -9,14 +9,14 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
 public class ClearCommand extends BaseCommand {
     public static final ClearCommand command = new ClearCommand(null);
     private ClearCommand(Terminal terminal) {
-        this.setName("clear").setParentTerminal(terminal).setDescription(Phrases.getPhrase("ClearCommandDescription"));
+        this.setName("clear").setParentShell(terminal).setDescription(Phrases.getPhrase("ClearCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() throws RuntimeException {
         try {
-            getParentTerminal().getCollectionController().getManagedCollection().clear();
+            getParentShell().getCollectionController().getManagedCollection().clear();
         } catch (Exception e) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

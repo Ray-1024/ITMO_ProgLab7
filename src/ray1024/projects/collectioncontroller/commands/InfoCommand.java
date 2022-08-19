@@ -10,14 +10,14 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
 public class InfoCommand extends BaseCommand {
     public static final InfoCommand command = new InfoCommand(null);
     private InfoCommand(Terminal terminal) {
-        this.setName("info").setDescription(Phrases.getPhrase("InfoCommandDescription")).setParentTerminal(terminal);
+        this.setName("info").setDescription(Phrases.getPhrase("InfoCommandDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() throws RuntimeException {
         try {
-            getParentTerminal().getOutputter().writeLine(getParentTerminal().getCollectionController().getManagedCollection().getCollectionInfo().toString());
+            getParentShell().getOutputter().writeLine(getParentShell().getCollectionController().getManagedCollection().getCollectionInfo().toString());
         } catch (Throwable ex) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

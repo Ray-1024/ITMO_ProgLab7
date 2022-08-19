@@ -6,9 +6,25 @@
   <component name="ChangeListManager">
     <list default="true" id="64ad19ee-ac90-4d5a-bae1-1d252618de2e" name="Changes" comment="1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/AddIfMinCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/AddIfMinCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/BaseCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/BaseCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ClearCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/CommandBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/CommandBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ExitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/FilterLessThanStudentsCountCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/FilterLessThanStudentsCountCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/FilterStartsWithNameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/FilterStartsWithNameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/InfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/PrintDescendingCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/PrintDescendingCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/RemoveByIDCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/RemoveByIDCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/RemoveFirstCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/RemoveFirstCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/SaveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ShowCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ShuffleCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ShuffleCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/UpdateByIDCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/UpdateByIDCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/terminal/MicroShell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/terminal/MicroShell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/terminal/Terminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/terminal/Terminal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/Phrases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/Phrases.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,20 +72,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/skovo/Documents/MyProjects/Java/Lab5_CollectionController",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "com.intellij.jarRepository.settings.RemoteRepositoriesConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/skovo/Documents/MyProjects/Java/Lab5_CollectionController&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.jarRepository.settings.RemoteRepositoriesConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
       <envs>
@@ -273,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660838632010</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="1">
+      <created>1660844114923</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1660844114923</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

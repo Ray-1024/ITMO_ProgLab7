@@ -10,13 +10,13 @@ public class RemoveFirstCommand extends BaseCommand {
     public static final RemoveFirstCommand command = new RemoveFirstCommand(null);
 
     private RemoveFirstCommand(Terminal terminal) {
-        setName("remove_first").setDescription(Phrases.getPhrase("RemoveFirstCommandDescription")).setParentTerminal(terminal);
+        setName("remove_first").setDescription(Phrases.getPhrase("RemoveFirstCommandDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        getParentTerminal().getCollectionController().getManagedCollection().getVec().remove(0);
+        getParentShell().getCollectionController().getManagedCollection().getVec().remove(0);
     }
 
     @Override

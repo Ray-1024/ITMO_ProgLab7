@@ -75,7 +75,7 @@ public class Phrases {
             phrases.put("UpdateByIdCommandDescription", "Заменяет элемент с указанным ID на новый.");
             phrases.put("FilterLessThanStudentsCountCommandDescription", "Показывает учебные группы в которых студентов меньше указано в аргументе команды.");
             phrases.put("FilterStartsWithNameCommandDescription", "Показывает группы названия которых начинаются с аргумента команды.");
-
+            phrases.put("TooManyMicroshells", "В текущем терминале слишком много исполнителей создание еще одного невозможно.");
         }
     }
 }

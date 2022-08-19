@@ -13,7 +13,7 @@ public class UpdateByIDCommand extends BaseCommand {
     public static final UpdateByIDCommand command = new UpdateByIDCommand(null);
 
     private UpdateByIDCommand(Terminal terminal) {
-        setName("update_by_id").setDescription(Phrases.getPhrase("UpdateByIdCommandDescription")).setParentTerminal(terminal);
+        setName("update_by_id").setDescription(Phrases.getPhrase("UpdateByIdCommandDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
         stepsCount = elem.getStepsCount();
     }
@@ -21,10 +21,10 @@ public class UpdateByIDCommand extends BaseCommand {
     @Override
     public void execute() {
 
-        elem.setId(getParentTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> {
+        elem.setId(getParentShell().getCollectionController().getManagedCollection().stream().filter((elem) -> {
             return elem.getId() == updateID;
         }).findFirst().get().getId());
-        getParentTerminal().getCollectionController().getManagedCollection().getVec().replaceAll((i) -> {
+        getParentShell().getCollectionController().getManagedCollection().getVec().replaceAll((i) -> {
             if (i.getId() == elem.getId()) return elem;
             return i;
         });

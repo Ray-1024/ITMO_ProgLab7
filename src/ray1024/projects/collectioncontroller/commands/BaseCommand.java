@@ -1,6 +1,7 @@
 package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.interfaces.IExecute;
+import ray1024.projects.collectioncontroller.terminal.MicroShell;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.SteppedInputObject;
 
@@ -13,7 +14,7 @@ public abstract class BaseCommand extends SteppedInputObject implements IExecute
 
     private String name = "BaseCommand";
     private String description = "Base command";
-    private Terminal parentTerminal = null;
+    private MicroShell parentShell = null;
 
     public BaseCommand() {
         stepsCount = 0;
@@ -41,12 +42,12 @@ public abstract class BaseCommand extends SteppedInputObject implements IExecute
         return description;
     }
 
-    public Terminal getParentTerminal() {
-        return parentTerminal;
+    public MicroShell getParentShell() {
+        return parentShell;
     }
 
-    public BaseCommand setParentTerminal(Terminal parentTerminal) {
-        this.parentTerminal = parentTerminal;
+    public BaseCommand setParentShell(MicroShell parentShell) {
+        this.parentShell = parentShell;
         return this;
     }
 

@@ -1,6 +1,6 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
+import ray1024.projects.collectioncontroller.terminal.MicroShell;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.util.HashMap;
@@ -25,11 +25,11 @@ public class CommandBuilder {
     }
 
 
-    public static BaseCommand parseInteractiveCommand(String line, Terminal executor) throws IllegalStateException {
+    public static BaseCommand parseInteractiveCommand(String line, MicroShell executor) throws IllegalStateException {
         String[] args = line.split(" ");
         if (args.length == 0) return null;
         if (!commands.containsKey(args[0])) throw new IllegalStateException(Phrases.getPhrase("WrongCommandInLine"));
-        BaseCommand prototype = commands.get(args[0]).setParentTerminal(executor).setArgs(args);
+        BaseCommand prototype = commands.get(args[0]).setParentShell(executor).setArgs(args);
         prototype.reset();
         return prototype.clone();
     }

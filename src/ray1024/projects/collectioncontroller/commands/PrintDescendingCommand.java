@@ -15,7 +15,7 @@ import java.util.Comparator;
 public class PrintDescendingCommand extends BaseCommand {
     public static final PrintDescendingCommand command = new PrintDescendingCommand(null);
     private PrintDescendingCommand(Terminal terminal) {
-        setName("print_descending").setDescription(Phrases.getPhrase("PrintDescendingDescription")).setParentTerminal(terminal);
+        setName("print_descending").setDescription(Phrases.getPhrase("PrintDescendingDescription")).setParentShell(terminal);
         CommandBuilder.registerCommand(this);
     }
 
@@ -23,7 +23,7 @@ public class PrintDescendingCommand extends BaseCommand {
     public void execute() {
 
 
-        MyCollection<StudyGroup> coll = getParentTerminal().getCollectionController().getManagedCollection();
+        MyCollection<StudyGroup> coll = getParentShell().getCollectionController().getManagedCollection();
         ArrayList<Integer> arr = new ArrayList<>(coll.size());
         for (int i = 0; i < coll.size(); ++i) arr.add(i);
 
