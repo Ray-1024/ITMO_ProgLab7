@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -8,10 +7,10 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Не сохраняет коллекцию в файл
  */
 public class ExitCommand extends BaseCommand {
-    public static final ExitCommand command = new ExitCommand(null);
+    public static final ExitCommand command = new ExitCommand();
 
-    private ExitCommand(Terminal terminal) {
-        setName("exit").setDescription(Phrases.getPhrase("ExitCommandDescription")).setParentShell(terminal);
+    private ExitCommand() {
+        setName("exit").setDescription(Phrases.getPhrase("ExitCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 

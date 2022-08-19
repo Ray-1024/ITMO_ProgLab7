@@ -9,16 +9,16 @@ import java.util.Collections;
  * Случайным образом перемешивает элементы коллекции
  */
 public class ShuffleCommand extends BaseCommand {
-    public static final ShuffleCommand command = new ShuffleCommand(null);
+    public static final ShuffleCommand command = new ShuffleCommand();
 
-    private ShuffleCommand(Terminal terminal) {
-        setName("shuffle").setDescription(Phrases.getPhrase("ShuffleCommandDescription")).setParentShell(terminal);
+    private ShuffleCommand() {
+        setName("shuffle").setDescription(Phrases.getPhrase("ShuffleCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        Collections.shuffle(getParentShell().getCollectionController().getManagedCollection().getVec());
+        Collections.shuffle(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec());
     }
 
     @Override

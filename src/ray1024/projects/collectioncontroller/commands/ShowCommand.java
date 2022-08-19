@@ -7,16 +7,16 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Показывает все элементы коллекции
  */
 public class ShowCommand extends BaseCommand {
-    public static final ShowCommand command = new ShowCommand(null);
+    public static final ShowCommand command = new ShowCommand();
 
-    private ShowCommand(Terminal terminal) {
-        setName("show").setDescription(Phrases.getPhrase("ShowCommandDescription")).setParentShell(terminal);
+    private ShowCommand() {
+        setName("show").setDescription(Phrases.getPhrase("ShowCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        getParentShell().getOutputter().writeLine(getParentShell().getCollectionController().getManagedCollection().toString());
+        getParentShell().getParentTerminal().getOutputter().writeLine(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().toString());
     }
 
     @Override

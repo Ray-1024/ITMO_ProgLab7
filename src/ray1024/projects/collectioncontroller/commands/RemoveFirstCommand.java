@@ -7,16 +7,16 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Удаляет из коллекции первый элемент
  */
 public class RemoveFirstCommand extends BaseCommand {
-    public static final RemoveFirstCommand command = new RemoveFirstCommand(null);
+    public static final RemoveFirstCommand command = new RemoveFirstCommand();
 
-    private RemoveFirstCommand(Terminal terminal) {
-        setName("remove_first").setDescription(Phrases.getPhrase("RemoveFirstCommandDescription")).setParentShell(terminal);
+    private RemoveFirstCommand() {
+        setName("remove_first").setDescription(Phrases.getPhrase("RemoveFirstCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        getParentShell().getCollectionController().getManagedCollection().getVec().remove(0);
+        getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().remove(0);
     }
 
     @Override

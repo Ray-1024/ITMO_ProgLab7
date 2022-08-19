@@ -9,16 +9,16 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
 public class RemoveByIDCommand extends BaseCommand {
 
     int removeID = -1;
-    public static final RemoveByIDCommand command = new RemoveByIDCommand(null);
+    public static final RemoveByIDCommand command = new RemoveByIDCommand();
 
-    private RemoveByIDCommand(Terminal terminal) {
-        setName("remove_by_id").setDescription(Phrases.getPhrase("RemoveByIdCommandDescription")).setParentShell(terminal);
+    private RemoveByIDCommand() {
+        setName("remove_by_id").setDescription(Phrases.getPhrase("RemoveByIdCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        getParentShell().getCollectionController().getManagedCollection().getVec().removeIf((elem) -> {
+        getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().removeIf((elem) -> {
             return elem.getId() == removeID;
         });
     }

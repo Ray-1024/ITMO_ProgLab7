@@ -8,16 +8,16 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Например: дата создания, колличество элементов
  */
 public class InfoCommand extends BaseCommand {
-    public static final InfoCommand command = new InfoCommand(null);
-    private InfoCommand(Terminal terminal) {
-        this.setName("info").setDescription(Phrases.getPhrase("InfoCommandDescription")).setParentShell(terminal);
+    public static final InfoCommand command = new InfoCommand();
+    private InfoCommand() {
+        this.setName("info").setDescription(Phrases.getPhrase("InfoCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() throws RuntimeException {
         try {
-            getParentShell().getOutputter().writeLine(getParentShell().getCollectionController().getManagedCollection().getCollectionInfo().toString());
+            getParentShell().getParentTerminal().getOutputter().writeLine(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getCollectionInfo().toString());
         } catch (Throwable ex) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

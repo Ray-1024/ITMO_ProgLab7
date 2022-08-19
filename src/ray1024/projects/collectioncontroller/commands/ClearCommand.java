@@ -7,16 +7,17 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Команда очищающая коллекцию, делая ее пустой
  */
 public class ClearCommand extends BaseCommand {
-    public static final ClearCommand command = new ClearCommand(null);
-    private ClearCommand(Terminal terminal) {
-        this.setName("clear").setParentShell(terminal).setDescription(Phrases.getPhrase("ClearCommandDescription"));
+    public static final ClearCommand command = new ClearCommand();
+
+    private ClearCommand() {
+        this.setName("clear").setDescription(Phrases.getPhrase("ClearCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() throws RuntimeException {
         try {
-            getParentShell().getCollectionController().getManagedCollection().clear();
+            getParentShell().getParentTerminal().getCollectionController().getManagedCollection().clear();
         } catch (Exception e) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

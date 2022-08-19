@@ -11,9 +11,10 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
 public class AddIfMinCommand extends BaseCommand {
     private final StudyGroup studyGroup = new StudyGroup();
 
-    public static final AddIfMinCommand command = new AddIfMinCommand(null);
-    private AddIfMinCommand(Terminal terminal) {
-        this.setName("add_if_min").setDescription(Phrases.getPhrase("AddIfMinCommandDescription")).setParentShell(terminal);
+    public static final AddIfMinCommand command = new AddIfMinCommand();
+
+    private AddIfMinCommand() {
+        this.setName("add_if_min").setDescription(Phrases.getPhrase("AddIfMinCommandDescription"));
         CommandBuilder.registerCommand(this);
         stepsCount = studyGroup.getStepsCount();
     }
@@ -22,9 +23,10 @@ public class AddIfMinCommand extends BaseCommand {
     @Override
     public void execute() throws RuntimeException {
         try {
-            if (getParentShell().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> {
+            if (getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> {
                 return i.compareTo(studyGroup) > 0;
-            })) getParentShell().getCollectionController().getManagedCollection().getVec().add(studyGroup);
+            }))
+                getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
         } catch (Exception e) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

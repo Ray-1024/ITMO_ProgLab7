@@ -8,19 +8,19 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  */
 public class FilterLessThanStudentsCountCommand extends BaseCommand {
     int studentsCount = 0;
-    public static final FilterLessThanStudentsCountCommand command = new FilterLessThanStudentsCountCommand(null);
+    public static final FilterLessThanStudentsCountCommand command = new FilterLessThanStudentsCountCommand();
 
-    private FilterLessThanStudentsCountCommand(Terminal terminal) {
-        setName("filter_less_than_students_count").setParentShell(terminal).setDescription(Phrases.getPhrase("FilterLessThanStudentsCountCommandDescription"));
+    private FilterLessThanStudentsCountCommand() {
+        setName("filter_less_than_students_count").setDescription(Phrases.getPhrase("FilterLessThanStudentsCountCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
         final int[] ind = new int[1];
-        getParentShell().getCollectionController().getManagedCollection().stream()
+        getParentShell().getParentTerminal().getCollectionController().getManagedCollection().stream()
                 .filter((elem) -> elem.getStudentsCount() < studentsCount).forEach((elem) -> {
-                    getParentShell().getOutputter().writeLine(String.format("\t%d. %s", ++ind[0], elem));
+                    getParentShell().getParentTerminal().getOutputter().writeLine(String.format("\t%d. %s", ++ind[0], elem));
                 });
     }
 

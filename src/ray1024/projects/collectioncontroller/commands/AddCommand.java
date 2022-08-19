@@ -20,7 +20,7 @@ public class AddCommand extends BaseCommand {
     @Override
     public void execute() throws RuntimeException {
         try {
-            getParentShell().getCollectionController().getManagedCollection().getVec().add(studyGroup);
+            getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
         } catch (Exception e) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

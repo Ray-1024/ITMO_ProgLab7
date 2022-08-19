@@ -8,16 +8,16 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  * Колекция хранится в формате XML
  */
 public class SaveCommand extends BaseCommand {
-    public static final SaveCommand command = new SaveCommand(null);
+    public static final SaveCommand command = new SaveCommand();
 
-    private SaveCommand(Terminal terminal) {
-        setName("save").setDescription(Phrases.getPhrase("SaveCommandDescription")).setParentShell(terminal);
+    private SaveCommand() {
+        setName("save").setDescription(Phrases.getPhrase("SaveCommandDescription"));
         CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() throws RuntimeException {
-        getParentShell().getCollectionController().saveCollection();
+        getParentShell().getParentTerminal().getCollectionController().saveCollection();
     }
 
     @Override

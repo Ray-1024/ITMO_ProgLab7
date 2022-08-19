@@ -10,10 +10,10 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
 public class UpdateByIDCommand extends BaseCommand {
     int updateID = -1;
     StudyGroup elem = new StudyGroup();
-    public static final UpdateByIDCommand command = new UpdateByIDCommand(null);
+    public static final UpdateByIDCommand command = new UpdateByIDCommand();
 
-    private UpdateByIDCommand(Terminal terminal) {
-        setName("update_by_id").setDescription(Phrases.getPhrase("UpdateByIdCommandDescription")).setParentShell(terminal);
+    private UpdateByIDCommand() {
+        setName("update_by_id").setDescription(Phrases.getPhrase("UpdateByIdCommandDescription"));
         CommandBuilder.registerCommand(this);
         stepsCount = elem.getStepsCount();
     }
@@ -21,10 +21,10 @@ public class UpdateByIDCommand extends BaseCommand {
     @Override
     public void execute() {
 
-        elem.setId(getParentShell().getCollectionController().getManagedCollection().stream().filter((elem) -> {
+        elem.setId(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> {
             return elem.getId() == updateID;
         }).findFirst().get().getId());
-        getParentShell().getCollectionController().getManagedCollection().getVec().replaceAll((i) -> {
+        getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().replaceAll((i) -> {
             if (i.getId() == elem.getId()) return elem;
             return i;
         });
