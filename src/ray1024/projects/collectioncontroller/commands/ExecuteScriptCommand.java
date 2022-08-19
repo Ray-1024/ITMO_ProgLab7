@@ -15,38 +15,33 @@ import java.util.Arrays;
  * При ошибке парсинга скрипта, он не будет выполнен, ни единой команды
  */
 public class ExecuteScriptCommand extends BaseCommand {
-    String scriptFilename = null;
+    private String scriptFilename;
+    public static final ExecuteScriptCommand command = new ExecuteScriptCommand();
 
-    public ExecuteScriptCommand(MicroShell _parentShell, String scriptFilename) {
-        super(_parentShell);
-        this.scriptFilename = scriptFilename;
+    public ExecuteScriptCommand() {
+        setName("execute_script").setDescription(Phrases.getPhrase("ExecuteScriptCommandDescription"));
+        CommandBuilder.registerCommand(this);
     }
 
     @Override
     public void execute() {
-        if (scriptFilename == null || parentShell == null || parentShell.getParentTerminal() == null) return;
-        try {
-            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(scriptFilename));
-            StringBuilder stringBuilder = new StringBuilder();
 
-            char[] buff = new char[1024];
-            int len = 0, cnt = 0;
-            do {
-                len = inputStreamReader.read(buff);
-                stringBuilder.append(new String(buff, 0, len));
-                ++cnt;
-                if (cnt > 99) throw new IllegalStateException();
-            } while (len == 1024);
-            inputStreamReader.close();
-            String[] ll = stringBuilder.toString().split("\n");
-            ArrayList<String> lines = new ArrayList<>(ll.length);
-            lines.addAll(Arrays.asList(ll));
-            ArrayList<BaseCommand> forExecute = CommandBuilder.parseScriptCommands(parentShell, lines);
-            parentShell.getParentTerminal().addAndStartMicroShell(forExecute);
-        } catch (IllegalStateException ex) {
-            System.out.println(Phrases.TooLongScript);
-        } catch (Exception ignored) {
-            System.out.println(Phrases.CantAccess);
-        }
+    }
+
+    @Override
+    public BaseCommand setArgs(String[] args) throws RuntimeException {
+        if (args.length != 2) throw new RuntimeException(Phrases.getPhrase("WrongCommandArgs"));
+        scriptFilename = args[1];
+        return this;
+    }
+
+    @Override
+    public void inputLine(String line) throws IllegalStateException {
+
+    }
+
+    @Override
+    public String getStepDescription() {
+        return "";
     }
 }
