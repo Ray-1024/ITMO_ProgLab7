@@ -19,10 +19,9 @@ public class HelpCommand extends BaseCommand {
     @Override
     public void execute() throws RuntimeException {
         try {
-            final int[] strNumber = {1};
+            final int[] strNumber = {0};
             CommandBuilder.getRegisteredCommandsStream().forEach((command) -> {
-                getParentShell().getOutputter().writeLine(String.format("%d. %s: %s", strNumber[0], command.getName(), command.getDescription()));
-                ++strNumber[0];
+                getParentShell().getWriter().println(String.format("%d. %s: %s", ++strNumber[0], command.getName(), command.getDescription()));
             });
         } catch (Throwable throwable) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));

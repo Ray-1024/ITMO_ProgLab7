@@ -30,8 +30,8 @@ public class PrintDescendingCommand extends BaseCommand {
 
         arr.sort(Comparator.comparing(coll::get));
         for (int i = coll.size() - 1; i >= 0; --i) {
-            System.out.print("    " + (coll.size() - i) + ". ");
-            System.out.println(coll.get(arr.get(i)));
+            getParentShell().getWriter().print("    " + (coll.size() - i) + ". ");
+            getParentShell().getWriter().println(coll.get(arr.get(i)));
         }
     }
 

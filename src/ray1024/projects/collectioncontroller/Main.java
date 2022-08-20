@@ -6,6 +6,11 @@ import ray1024.projects.collectioncontroller.tools.ConsoleInputter;
 import ray1024.projects.collectioncontroller.tools.ConsoleOutputter;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.Writer;
+import java.util.Scanner;
+
 /**
  * Главный красс создающий и запускающий Терминал
  *

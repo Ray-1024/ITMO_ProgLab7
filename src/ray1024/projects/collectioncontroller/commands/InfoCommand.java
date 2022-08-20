@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -9,6 +8,7 @@ import ray1024.projects.collectioncontroller.tools.Phrases;
  */
 public class InfoCommand extends BaseCommand {
     public static final InfoCommand command = new InfoCommand();
+
     private InfoCommand() {
         this.setName("info").setDescription(Phrases.getPhrase("InfoCommandDescription"));
         CommandBuilder.registerCommand(this);
@@ -17,7 +17,7 @@ public class InfoCommand extends BaseCommand {
     @Override
     public void execute() throws RuntimeException {
         try {
-            getParentShell().getParentTerminal().getOutputter().writeLine(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getCollectionInfo().toString());
+            getParentShell().getParentTerminal().getWriter().println(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getCollectionInfo().toString());
         } catch (Throwable ex) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

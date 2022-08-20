@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -16,7 +15,7 @@ public class ShowCommand extends BaseCommand {
 
     @Override
     public void execute() {
-        getParentShell().getParentTerminal().getOutputter().writeLine(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().toString());
+        getParentShell().getParentTerminal().getWriter().println(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().toString());
     }
 
     @Override

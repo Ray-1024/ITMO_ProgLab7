@@ -1,14 +1,13 @@
 package ray1024.projects.collectioncontroller.terminal;
 
-import ray1024.projects.collectioncontroller.commands.*;
 import ray1024.projects.collectioncontroller.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.interfaces.IInputter;
 import ray1024.projects.collectioncontroller.interfaces.IOutputter;
-import ray1024.projects.collectioncontroller.tools.ConsoleInputter;
-import ray1024.projects.collectioncontroller.tools.ConsoleOutputter;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Класс хранящий коллекцию и управляющий дочерними MicroShell'ами
@@ -21,12 +20,12 @@ public class Terminal implements Runnable {
     private ArrayList<MicroShell> microShells;
     private StudyGroupCollectionController collectionController;
 
-    private IInputter inputter = new ConsoleInputter();
-    private IOutputter outputter = new ConsoleOutputter();
+    private Scanner scanner = new Scanner(System.in);
+    private PrintStream writer = System.out;
 
 
-    public IOutputter getOutputter() {
-        return outputter;
+    public PrintStream getWriter() {
+        return writer;
     }
 
     public Terminal(IInputter iInputter, IOutputter iOutputter, String CollectionFilename) throws IllegalArgumentException {
@@ -35,9 +34,9 @@ public class Terminal implements Runnable {
         try {
             collectionController.loadCollectionFromFile();
         } catch (Exception e) {
-            outputter.writeLine(e.getMessage());
+            writer.println(e.getMessage());
         }
-        microShells.add(new MicroShell(this, inputter, outputter));
+        microShells.add(new MicroShell(this, scanner, writer));
     }
 
 

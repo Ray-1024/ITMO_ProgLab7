@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -20,7 +19,7 @@ public class FilterLessThanStudentsCountCommand extends BaseCommand {
         final int[] ind = new int[1];
         getParentShell().getParentTerminal().getCollectionController().getManagedCollection().stream()
                 .filter((elem) -> elem.getStudentsCount() < studentsCount).forEach((elem) -> {
-                    getParentShell().getParentTerminal().getOutputter().writeLine(String.format("\t%d. %s", ++ind[0], elem));
+                    getParentShell().getParentTerminal().getWriter().println(String.format("\t%d. %s", ++ind[0], elem));
                 });
     }
 
