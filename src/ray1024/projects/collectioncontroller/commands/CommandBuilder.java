@@ -26,8 +26,8 @@ public class CommandBuilder {
 
 
     public static BaseCommand parseInteractiveCommand(String line, MicroShell executor) throws IllegalStateException {
+        if ("".equals(line)) return null;
         String[] args = line.split(" ");
-        if (args.length == 0) return null;
         if (!commands.containsKey(args[0])) throw new IllegalStateException(Phrases.getPhrase("WrongCommandInLine"));
         BaseCommand prototype = commands.get(args[0]).setParentShell(executor).setArgs(args);
         prototype.reset();

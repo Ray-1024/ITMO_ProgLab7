@@ -77,6 +77,7 @@ public class Phrases {
             phrases.put("FilterStartsWithNameCommandDescription", "Показывает группы названия которых начинаются с аргумента команды.");
             phrases.put("TooManyMicroshells", "В текущем терминале слишком много исполнителей создание еще одного невозможно.");
             phrases.put("ExecuteScriptCommandDescription", "Выполняет скрипт с названием указанным в аргументе.");
+            phrases.put("Can'tFindScript", "Не удалось найти скрипт.");
         }
     }
 }

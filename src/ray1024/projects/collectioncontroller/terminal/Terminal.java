@@ -1,8 +1,6 @@
 package ray1024.projects.collectioncontroller.terminal;
 
 import ray1024.projects.collectioncontroller.controllers.StudyGroupCollectionController;
-import ray1024.projects.collectioncontroller.interfaces.IInputter;
-import ray1024.projects.collectioncontroller.interfaces.IOutputter;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.io.PrintStream;
@@ -20,15 +18,15 @@ public class Terminal implements Runnable {
     private ArrayList<MicroShell> microShells;
     private StudyGroupCollectionController collectionController;
 
-    private Scanner scanner = new Scanner(System.in);
-    private PrintStream writer = System.out;
+    private Scanner scanner;
+    private PrintStream writer;
 
 
     public PrintStream getWriter() {
         return writer;
     }
 
-    public Terminal(IInputter iInputter, IOutputter iOutputter, String CollectionFilename) throws IllegalArgumentException {
+    public Terminal(Scanner inputter, PrintStream outputter, String CollectionFilename) throws IllegalArgumentException {
         microShells = new ArrayList<>(microShellsLimit);
         collectionController = new StudyGroupCollectionController(CollectionFilename);
         try {
@@ -36,7 +34,9 @@ public class Terminal implements Runnable {
         } catch (Exception e) {
             writer.println(e.getMessage());
         }
-        microShells.add(new MicroShell(this, scanner, writer));
+        scanner = inputter;
+        writer = outputter;
+        microShells.add(new MicroShell(this, scanner, writer, true));
     }
 
 
@@ -52,6 +52,7 @@ public class Terminal implements Runnable {
         if (microShells.size() == microShellsLimit)
             throw new IllegalStateException(Phrases.getPhrase("TooManyMicroshells"));
         microShells.add(microShell);
+        microShell.run();
     }
 
     @Override

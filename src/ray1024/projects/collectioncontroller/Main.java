@@ -2,13 +2,8 @@ package ray1024.projects.collectioncontroller;
 
 import ray1024.projects.collectioncontroller.commands.*;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
-import ray1024.projects.collectioncontroller.tools.ConsoleInputter;
-import ray1024.projects.collectioncontroller.tools.ConsoleOutputter;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.Writer;
 import java.util.Scanner;
 
 /**
@@ -33,6 +28,7 @@ public class Main {
         ShowCommand.command.getName();
         ShuffleCommand.command.getName();
         UpdateByIDCommand.command.getName();
+        ExecuteScriptCommand.command.getName();
     }
 
     public static void main(String[] args) {
@@ -42,7 +38,7 @@ public class Main {
         } catch (RuntimeException ignored) {
             System.out.println(Phrases.getPhrase("EnvironmentVariableDoesn'tExist"));
         }
-        Terminal terminal = new Terminal(new ConsoleInputter(), new ConsoleOutputter(), filename);
+        Terminal terminal = new Terminal(new Scanner(System.in), System.out, filename);
         terminal.run();
     }
 

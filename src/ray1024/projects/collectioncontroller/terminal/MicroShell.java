@@ -2,13 +2,9 @@ package ray1024.projects.collectioncontroller.terminal;
 
 import ray1024.projects.collectioncontroller.commands.BaseCommand;
 import ray1024.projects.collectioncontroller.commands.CommandBuilder;
-import ray1024.projects.collectioncontroller.interfaces.IExecute;
-import ray1024.projects.collectioncontroller.interfaces.IInputter;
-import ray1024.projects.collectioncontroller.interfaces.IOutputter;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,44 +12,46 @@ import java.util.Scanner;
  */
 public class MicroShell implements Runnable {
     private final Terminal parentTerminal;
-    private Scanner scanner;
-    private PrintStream writer;
+    private final Scanner scanner;
+    private final PrintStream writer;
     private BaseCommand currentCommand;
+    private boolean isInteractive;
 
-    public MicroShell(Terminal parentTerminal, Scanner inputter, PrintStream outputter) {
+    public MicroShell(Terminal parentTerminal, Scanner inputter, PrintStream outputter, boolean IsInteractive) {
         this.parentTerminal = parentTerminal;
         if (inputter == null) throw new IllegalArgumentException(Phrases.getPhrase("InputterCan'tBeNullException"));
         this.scanner = inputter;
         if (outputter == null) throw new IllegalArgumentException(Phrases.getPhrase("OutputterCan'tBeNullException"));
         writer = outputter;
+        isInteractive = IsInteractive;
     }
 
     @Override
     public void run() {
         while (true) {
             if (currentCommand == null) {
-                writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
+                if (isInteractive) writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
                 try {
                     if (!scanner.hasNextLine()) break;
                     currentCommand = CommandBuilder.parseInteractiveCommand(scanner.nextLine(), this);
-                } catch (IllegalStateException illegalStateException) {
+                } catch (Throwable illegalStateException) {
                     writer.println(illegalStateException.getMessage());
                 }
                 continue;
             }
             if (!currentCommand.isObjectReady()) {
-                writer.println(currentCommand.getStepDescription());
+                if (isInteractive) writer.println(currentCommand.getStepDescription());
                 try {
                     if (!scanner.hasNextLine()) break;
                     currentCommand.inputLine(scanner.nextLine());
-                } catch (IllegalStateException illegalStateException) {
+                } catch (Throwable illegalStateException) {
                     writer.println(illegalStateException.getMessage());
                 }
                 continue;
             }
             try {
                 currentCommand.execute();
-            } catch (RuntimeException e) {
+            } catch (Throwable e) {
                 writer.println(e.getMessage());
             }
             currentCommand = null;

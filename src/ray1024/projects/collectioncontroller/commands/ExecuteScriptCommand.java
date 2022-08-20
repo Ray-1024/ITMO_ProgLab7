@@ -4,9 +4,11 @@ import ray1024.projects.collectioncontroller.terminal.MicroShell;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Команда запускающая на исполнение скрипт
@@ -25,7 +27,11 @@ public class ExecuteScriptCommand extends BaseCommand {
 
     @Override
     public void execute() {
-
+        try {
+            getParentShell().getParentTerminal().createMicroshell(new MicroShell(getParentShell().getParentTerminal(), new Scanner(new FileInputStream(scriptFilename)), System.out, false));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(Phrases.getPhrase("Can'tFindScript"));
+        }
     }
 
     @Override
