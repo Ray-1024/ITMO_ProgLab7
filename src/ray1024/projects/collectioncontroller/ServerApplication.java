@@ -11,7 +11,8 @@ import java.util.Scanner;
  *
  * @MyTag aloha
  */
-public class Main {
+public class ServerApplication {
+
     static {
         AddCommand.command.getName();
         AddIfMinCommand.command.getName();
@@ -31,6 +32,8 @@ public class Main {
         ExecuteScriptCommand.command.getName();
     }
 
+
+
     public static void main(String[] args) {
         String filename = null;
         try {
@@ -40,6 +43,7 @@ public class Main {
         }
         Terminal terminal = new Terminal(new Scanner(System.in), System.out, filename);
         terminal.run();
+
     }
 
 }

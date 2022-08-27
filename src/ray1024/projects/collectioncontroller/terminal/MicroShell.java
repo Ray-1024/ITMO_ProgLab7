@@ -3,8 +3,11 @@ package ray1024.projects.collectioncontroller.terminal;
 import ray1024.projects.collectioncontroller.commands.BaseCommand;
 import ray1024.projects.collectioncontroller.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.tools.Phrases;
+import sun.nio.ch.ChannelInputStream;
 
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.channels.Channel;
 import java.util.Scanner;
 
 /**
@@ -13,11 +16,12 @@ import java.util.Scanner;
 public class MicroShell implements Runnable {
     private final Terminal parentTerminal;
     private final Scanner scanner;
+    private final Channel inputChannel;
     private final PrintStream writer;
     private BaseCommand currentCommand;
     private boolean isInteractive;
 
-    public MicroShell(Terminal parentTerminal, Scanner inputter, PrintStream outputter, boolean IsInteractive) {
+    public MicroShell(Terminal parentTerminal, InputStream inputter, PrintStream outputter, boolean IsInteractive) {
         this.parentTerminal = parentTerminal;
         if (inputter == null) throw new IllegalArgumentException(Phrases.getPhrase("InputterCan'tBeNullException"));
         this.scanner = inputter;
