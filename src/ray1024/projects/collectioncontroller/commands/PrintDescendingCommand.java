@@ -2,7 +2,6 @@ package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.data.MyCollection;
 import ray1024.projects.collectioncontroller.data.StudyGroup;
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class PrintDescendingCommand extends BaseCommand {
 
     private PrintDescendingCommand() {
         setName("print_descending").setDescription(Phrases.getPhrase("PrintDescendingDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

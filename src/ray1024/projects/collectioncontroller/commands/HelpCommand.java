@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -13,14 +12,14 @@ public class HelpCommand extends BaseCommand {
 
     private HelpCommand() {
         setName("help").setDescription(Phrases.getPhrase("HelpCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override
     public void execute() throws RuntimeException {
         try {
             final int[] strNumber = {0};
-            CommandBuilder.getRegisteredCommandsStream().forEach((command) -> {
+            CommandRegister.getRegisteredCommandsStream().forEach((command) -> {
                 getParentShell().getWriter().println(String.format("%d. %s: %s", ++strNumber[0], command.getName(), command.getDescription()));
             });
         } catch (Throwable throwable) {

@@ -11,7 +11,7 @@ public class InfoCommand extends BaseCommand {
 
     private InfoCommand() {
         this.setName("info").setDescription(Phrases.getPhrase("InfoCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

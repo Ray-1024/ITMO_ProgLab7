@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.util.Collections;
@@ -13,7 +12,7 @@ public class ShuffleCommand extends BaseCommand {
 
     private ShuffleCommand() {
         setName("shuffle").setDescription(Phrases.getPhrase("ShuffleCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

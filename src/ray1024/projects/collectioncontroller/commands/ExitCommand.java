@@ -11,7 +11,7 @@ public class ExitCommand extends BaseCommand {
 
     private ExitCommand() {
         setName("exit").setDescription(Phrases.getPhrase("ExitCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

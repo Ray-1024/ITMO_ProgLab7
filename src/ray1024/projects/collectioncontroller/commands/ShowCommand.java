@@ -10,7 +10,7 @@ public class ShowCommand extends BaseCommand {
 
     private ShowCommand() {
         setName("show").setDescription(Phrases.getPhrase("ShowCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

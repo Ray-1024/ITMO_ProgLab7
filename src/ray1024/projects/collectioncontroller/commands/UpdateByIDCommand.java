@@ -1,7 +1,6 @@
 package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.data.StudyGroup;
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -14,7 +13,7 @@ public class UpdateByIDCommand extends BaseCommand {
 
     private UpdateByIDCommand() {
         setName("update_by_id").setDescription(Phrases.getPhrase("UpdateByIdCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
         stepsCount = elem.getStepsCount();
     }
 

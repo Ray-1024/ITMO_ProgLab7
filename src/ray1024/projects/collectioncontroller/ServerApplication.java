@@ -35,14 +35,15 @@ public class ServerApplication {
 
 
     public static void main(String[] args) {
-        String filename = null;
+        /*String filename = null;
         try {
             filename = System.getenv("CCFilename");
         } catch (RuntimeException ignored) {
             System.out.println(Phrases.getPhrase("EnvironmentVariableDoesn'tExist"));
         }
         Terminal terminal = new Terminal(new Scanner(System.in), System.out, filename);
-        terminal.run();
+        terminal.run();*/
+        System.out.println("Hello");
 
     }
 

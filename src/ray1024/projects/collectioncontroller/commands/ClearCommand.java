@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -11,7 +10,7 @@ public class ClearCommand extends BaseCommand {
 
     private ClearCommand() {
         this.setName("clear").setDescription(Phrases.getPhrase("ClearCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

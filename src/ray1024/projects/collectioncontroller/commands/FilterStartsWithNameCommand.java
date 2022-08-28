@@ -11,7 +11,7 @@ public class FilterStartsWithNameCommand extends BaseCommand {
 
     private FilterStartsWithNameCommand() {
         setName("filter_starts_with_name").setDescription(Phrases.getPhrase("FilterStartsWithNameCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

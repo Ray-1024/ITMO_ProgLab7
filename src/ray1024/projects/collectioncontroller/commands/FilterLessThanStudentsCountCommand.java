@@ -11,7 +11,7 @@ public class FilterLessThanStudentsCountCommand extends BaseCommand {
 
     private FilterLessThanStudentsCountCommand() {
         setName("filter_less_than_students_count").setDescription(Phrases.getPhrase("FilterLessThanStudentsCountCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

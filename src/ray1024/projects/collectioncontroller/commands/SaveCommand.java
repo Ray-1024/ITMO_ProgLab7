@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -12,7 +11,7 @@ public class SaveCommand extends BaseCommand {
 
     private SaveCommand() {
         setName("save").setDescription(Phrases.getPhrase("SaveCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

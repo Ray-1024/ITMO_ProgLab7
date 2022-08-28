@@ -13,7 +13,7 @@ public class AddCommand extends BaseCommand {
     private AddCommand() {
         setName("add").setDescription(Phrases.getPhrase("AddCommandDescription"));
         stepsCount = studyGroup.getStepsCount();
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
 

@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -13,7 +12,7 @@ public class RemoveByIDCommand extends BaseCommand {
 
     private RemoveByIDCommand() {
         setName("remove_by_id").setDescription(Phrases.getPhrase("RemoveByIdCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

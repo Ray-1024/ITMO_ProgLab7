@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.commands;
 
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -11,7 +10,7 @@ public class RemoveFirstCommand extends BaseCommand {
 
     private RemoveFirstCommand() {
         setName("remove_first").setDescription(Phrases.getPhrase("RemoveFirstCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
     }
 
     @Override

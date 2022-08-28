@@ -1,7 +1,6 @@
 package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.data.StudyGroup;
-import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 /**
@@ -15,7 +14,7 @@ public class AddIfMinCommand extends BaseCommand {
 
     private AddIfMinCommand() {
         this.setName("add_if_min").setDescription(Phrases.getPhrase("AddIfMinCommandDescription"));
-        CommandBuilder.registerCommand(this);
+        CommandRegister.registerCommand(this);
         stepsCount = studyGroup.getStepsCount();
     }
 
