@@ -2,27 +2,26 @@ package ray1024.projects.collectioncontroller.terminal;
 
 import ray1024.projects.collectioncontroller.commands.BaseCommand;
 import ray1024.projects.collectioncontroller.commands.CommandRegister;
+import ray1024.projects.collectioncontroller.interfaces.IInputSource;
+import ray1024.projects.collectioncontroller.interfaces.IOutputSource;
 import ray1024.projects.collectioncontroller.tools.Phrases;
-
-import java.io.PrintStream;
-import java.util.Scanner;
 
 /**
  * Класс предназначенный для исполнения команд из очереди, пока та не закончится
  */
 public class MicroShell implements Runnable {
     private final Terminal parentTerminal;
-    private final Scanner scanner;
-    private final PrintStream writer;
+    private final IInputSource reader;
+    private final IOutputSource writer;
     private BaseCommand currentCommand;
     private boolean isInteractive;
 
-    public MicroShell(Terminal parentTerminal, Scanner inputter, PrintStream outputter, boolean IsInteractive) {
+    public MicroShell(Terminal parentTerminal, IInputSource inputter, IOutputSource outputter, boolean IsInteractive) {
         this.parentTerminal = parentTerminal;
         if (inputter == null) throw new IllegalArgumentException(Phrases.getPhrase("InputterCan'tBeNullException"));
-        this.scanner = inputter;
+        this.reader = inputter;
         if (outputter == null) throw new IllegalArgumentException(Phrases.getPhrase("OutputterCan'tBeNullException"));
-        writer = outputter;
+        this.writer = outputter;
         isInteractive = IsInteractive;
     }
 
@@ -32,8 +31,9 @@ public class MicroShell implements Runnable {
             if (currentCommand == null) {
                 if (isInteractive) writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
                 try {
-                    if (!scanner.hasNextLine()) break;
-                    currentCommand = CommandRegister.parseInteractiveCommand(scanner.nextLine(), this);
+                    if (!reader.hasNextLine()) break;
+                    currentCommand = CommandRegister.getRegisteredCommandByName(reader.nextLine());
+                    if(currentCommand!=null)currentCommand.setParentShell(this);
                 } catch (Throwable illegalStateException) {
                     writer.println(illegalStateException.getMessage());
                 }
@@ -42,8 +42,8 @@ public class MicroShell implements Runnable {
             if (!currentCommand.isObjectReady()) {
                 if (isInteractive) writer.println(currentCommand.getStepDescription());
                 try {
-                    if (!scanner.hasNextLine()) break;
-                    currentCommand.inputLine(scanner.nextLine());
+                    if (!reader.hasNextLine()) break;
+                    currentCommand.inputLine(reader.nextLine());
                 } catch (Throwable illegalStateException) {
                     writer.println(illegalStateException.getMessage());
                 }
@@ -58,11 +58,11 @@ public class MicroShell implements Runnable {
         }
     }
 
-    public Scanner getScanner() {
-        return scanner;
+    public IInputSource getReader() {
+        return reader;
     }
 
-    public PrintStream getWriter() {
+    public IOutputSource getWriter() {
         return writer;
     }
 

@@ -6,7 +6,7 @@
     <string>elementsCount</string>
     <void method="set">
      <object idref="CollectionInfo0"/>
-     <int>3</int>
+     <int>5</int>
     </void>
    </void>
   </void>
@@ -48,7 +48,7 @@
       <string>2</string>
      </void>
      <void property="semesterEnum">
-      <object class="java.lang.Enum" method="valueOf">
+      <object class="java.lang.Enum" id="Semester0" method="valueOf">
        <class>ray1024.projects.collectioncontroller.data.Semester</class>
        <string>FIRST</string>
       </object>
@@ -59,23 +59,12 @@
     </object>
    </void>
    <void method="add">
-    <object class="ray1024.projects.collectioncontroller.data.StudyGroup" id="StudyGroup0">
+    <object class="ray1024.projects.collectioncontroller.data.StudyGroup">
      <void property="formOfEducation">
       <object class="java.lang.Enum" method="valueOf">
        <class>ray1024.projects.collectioncontroller.data.FormOfEducation</class>
        <string>EVENING_CLASSES</string>
       </object>
-     </void>
-     <void property="groupAdmin">
-      <void property="location">
-       <null/>
-      </void>
-      <void property="name">
-       <string>ADMIN</string>
-      </void>
-      <void property="weight">
-       <double>9.0</double>
-      </void>
      </void>
      <void property="id">
       <int>1</int>
@@ -91,6 +80,55 @@
      </void>
      <void property="studentsCount">
       <int>99</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ray1024.projects.collectioncontroller.data.StudyGroup">
+     <void property="groupAdmin">
+      <null/>
+     </void>
+     <void property="id">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>333</string>
+     </void>
+     <void property="semesterEnum">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>ray1024.projects.collectioncontroller.data.Semester</class>
+       <string>FIFTH</string>
+      </object>
+     </void>
+     <void property="studentsCount">
+      <int>3</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ray1024.projects.collectioncontroller.data.StudyGroup" id="StudyGroup0">
+     <void property="groupAdmin">
+      <void property="location">
+       <null/>
+      </void>
+      <void property="name">
+       <string>4</string>
+      </void>
+      <void property="weight">
+       <double>4.0</double>
+      </void>
+     </void>
+     <void property="id">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>4</string>
+     </void>
+     <void property="semesterEnum">
+      <object idref="Semester0"/>
+     </void>
+     <void property="studentsCount">
+      <int>4</int>
      </void>
     </object>
    </void>

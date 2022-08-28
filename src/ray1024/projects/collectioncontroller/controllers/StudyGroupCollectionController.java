@@ -36,7 +36,7 @@ public class StudyGroupCollectionController {
             xmlDecoder.close();
             inputStreamReader.close();
             for (StudyGroup studyGroup : managedCollection.getVec())
-                if (StudyGroup.getNextID() <= studyGroup.getId()) StudyGroup.setNextID(studyGroup.getId());
+                if (StudyGroup.getNextID() <= studyGroup.getId()) StudyGroup.setNextID(studyGroup.getId()+1);
         } catch (Throwable ex) {
             managedCollection = new MyCollection<>();
             throw new Exception(Phrases.getPhrase("CantLoadCollectionFromFile"));

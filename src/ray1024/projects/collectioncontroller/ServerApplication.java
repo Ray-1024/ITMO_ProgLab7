@@ -2,8 +2,15 @@ package ray1024.projects.collectioncontroller;
 
 import ray1024.projects.collectioncontroller.commands.*;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
+import ray1024.projects.collectioncontroller.tools.ConsoleSourceReader;
+import ray1024.projects.collectioncontroller.tools.ConsoleSourceWriter;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -35,15 +42,14 @@ public class ServerApplication {
 
 
     public static void main(String[] args) {
-        /*String filename = null;
+        String filename = null;
         try {
             filename = System.getenv("CCFilename");
         } catch (RuntimeException ignored) {
             System.out.println(Phrases.getPhrase("EnvironmentVariableDoesn'tExist"));
         }
-        Terminal terminal = new Terminal(new Scanner(System.in), System.out, filename);
-        terminal.run();*/
-        System.out.println("Hello");
+        Terminal terminal = new Terminal(new ConsoleSourceReader(), new ConsoleSourceWriter(), filename);
+        terminal.run();
 
     }
 

@@ -52,11 +52,7 @@ public abstract class BaseCommand extends SteppedInputObject implements IExecute
     }
 
     @Override
-    public BaseCommand clone() {
-        try {
-            return (BaseCommand) super.clone();
-        } catch (CloneNotSupportedException ignored) {
-            return null;
-        }
+    protected BaseCommand clone() throws CloneNotSupportedException {
+        return (BaseCommand) super.clone();
     }
 }

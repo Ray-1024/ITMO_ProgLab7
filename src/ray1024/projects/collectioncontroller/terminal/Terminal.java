@@ -1,6 +1,9 @@
 package ray1024.projects.collectioncontroller.terminal;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import ray1024.projects.collectioncontroller.controllers.StudyGroupCollectionController;
+import ray1024.projects.collectioncontroller.interfaces.IInputSource;
+import ray1024.projects.collectioncontroller.interfaces.IOutputSource;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.io.PrintStream;
@@ -18,15 +21,15 @@ public class Terminal implements Runnable {
     private ArrayList<MicroShell> microShells;
     private StudyGroupCollectionController collectionController;
 
-    private Scanner scanner;
-    private PrintStream writer;
+    private IInputSource reader;
+    private IOutputSource writer;
 
 
-    public PrintStream getWriter() {
+    public IOutputSource getWriter() {
         return writer;
     }
 
-    public Terminal(Scanner inputter, PrintStream outputter, String CollectionFilename) throws IllegalArgumentException {
+    public Terminal(IInputSource inputter, IOutputSource outputter, String CollectionFilename) throws IllegalArgumentException {
         microShells = new ArrayList<>(microShellsLimit);
         collectionController = new StudyGroupCollectionController(CollectionFilename);
         try {
@@ -34,9 +37,10 @@ public class Terminal implements Runnable {
         } catch (Exception e) {
             writer.println(e.getMessage());
         }
-        scanner = inputter;
+
+        reader = inputter;
         writer = outputter;
-        microShells.add(new MicroShell(this, scanner, writer, true));
+        microShells.add(new MicroShell(this, reader, writer, true));
     }
 
 

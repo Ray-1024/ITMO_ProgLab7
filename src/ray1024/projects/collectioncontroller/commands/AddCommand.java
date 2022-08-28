@@ -46,4 +46,5 @@ public class AddCommand extends BaseCommand {
         if (args == null || args.length != 1) throw new RuntimeException(Phrases.getPhrase("WrongCommandArgs"));
         return this;
     }
+
 }

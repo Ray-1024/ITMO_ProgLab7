@@ -25,13 +25,18 @@ public class CommandRegister {
     }
 
 
-    public static BaseCommand parseInteractiveCommand(String line, MicroShell executor) throws IllegalStateException {
+    public static BaseCommand getRegisteredCommandByName(String line) throws IllegalStateException {
         if ("".equals(line)) return null;
         String[] args = line.split(" ");
         if (!commands.containsKey(args[0])) throw new IllegalStateException(Phrases.getPhrase("WrongCommandInLine"));
-        BaseCommand prototype = commands.get(args[0]).setParentShell(executor).setArgs(args);
-        prototype.reset();
-        return prototype.clone();
+        BaseCommand prototype = null;
+        try {
+            prototype = commands.get(args[0]).clone().setArgs(args);
+        } catch (CloneNotSupportedException e) {
+            System.out.println("COMMAND_BUILDER_COMMAND_CLONE_NOT_SUPPORTED_EXEPTION");
+        }
+        if(prototype != null)prototype.reset();
+        return prototype;
     }
 
 }

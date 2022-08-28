@@ -42,9 +42,9 @@ public class MyCollection<T> implements Serializable {
         return vec.stream();
     }
 
-    public T get(int index) {
+    public String get(int index) {
         if (index < 0 || index >= vec.size()) return null;
-        return vec.get(index);
+        return (String) vec.get(index);
     }
 
     public int size() {
