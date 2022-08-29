@@ -13,23 +13,26 @@
   <void property="vec">
    <void method="add">
     <object class="ray1024.projects.collectioncontroller.data.StudyGroup">
-     <void property="groupAdmin">
-      <null/>
+     <void property="formOfEducation">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>ray1024.projects.collectioncontroller.data.FormOfEducation</class>
+       <string>EVENING_CLASSES</string>
+      </object>
      </void>
      <void property="id">
       <int>1</int>
      </void>
      <void property="name">
-      <string>1</string>
+      <string>P3117</string>
      </void>
      <void property="semesterEnum">
       <object class="java.lang.Enum" method="valueOf">
        <class>ray1024.projects.collectioncontroller.data.Semester</class>
-       <string>SIXTH</string>
+       <string>FOURTH</string>
       </object>
      </void>
      <void property="studentsCount">
-      <int>1</int>
+      <int>99</int>
      </void>
     </object>
    </void>
@@ -60,26 +63,39 @@
    </void>
    <void method="add">
     <object class="ray1024.projects.collectioncontroller.data.StudyGroup">
-     <void property="formOfEducation">
-      <object class="java.lang.Enum" method="valueOf">
-       <class>ray1024.projects.collectioncontroller.data.FormOfEducation</class>
-       <string>EVENING_CLASSES</string>
-      </object>
+     <void property="id">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>4</string>
+     </void>
+     <void property="semesterEnum">
+      <object idref="Semester0"/>
+     </void>
+     <void property="studentsCount">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ray1024.projects.collectioncontroller.data.StudyGroup">
+     <void property="groupAdmin">
+      <null/>
      </void>
      <void property="id">
       <int>1</int>
      </void>
      <void property="name">
-      <string>P3117</string>
+      <string>1</string>
      </void>
      <void property="semesterEnum">
       <object class="java.lang.Enum" method="valueOf">
        <class>ray1024.projects.collectioncontroller.data.Semester</class>
-       <string>FOURTH</string>
+       <string>SIXTH</string>
       </object>
      </void>
      <void property="studentsCount">
-      <int>99</int>
+      <int>1</int>
      </void>
     </object>
    </void>
@@ -102,33 +118,6 @@
      </void>
      <void property="studentsCount">
       <int>3</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="ray1024.projects.collectioncontroller.data.StudyGroup" id="StudyGroup0">
-     <void property="groupAdmin">
-      <void property="location">
-       <null/>
-      </void>
-      <void property="name">
-       <string>4</string>
-      </void>
-      <void property="weight">
-       <double>4.0</double>
-      </void>
-     </void>
-     <void property="id">
-      <int>1</int>
-     </void>
-     <void property="name">
-      <string>4</string>
-     </void>
-     <void property="semesterEnum">
-      <object idref="Semester0"/>
-     </void>
-     <void property="studentsCount">
-      <int>4</int>
      </void>
     </object>
    </void>

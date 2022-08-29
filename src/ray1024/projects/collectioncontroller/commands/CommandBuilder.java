@@ -17,6 +17,7 @@ public class CommandBuilder implements Tickable {
         this.reader = reader;
         if (writer == null) throw new IOException(Phrases.getPhrase("OutputSourceIsNull"));
         this.writer = writer;
+        writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
     }
 
     @Override
@@ -25,6 +26,8 @@ public class CommandBuilder implements Tickable {
             try {
                 if (!reader.hasNextLine()) return;
                 command = CommandRegister.getRegisteredCommandByName(reader.nextLine());
+                if (command == null) writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
+                else if (!command.isObjectReady()) writer.println(command.getStepDescription());
             } catch (IllegalStateException illegalStateException) {
                 writer.println(illegalStateException.getMessage());
             }
@@ -32,10 +35,11 @@ public class CommandBuilder implements Tickable {
             try {
                 if (!reader.hasNextLine()) return;
                 command.inputLine(reader.nextLine());
+                writer.println(command.getStepDescription());
             } catch (IllegalStateException illegalStateException) {
                 writer.println(illegalStateException.getMessage());
             }
-        }
+        } else writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
     }
 
     public BaseCommand getCommand() {
@@ -52,5 +56,6 @@ public class CommandBuilder implements Tickable {
 
     public void reset() {
         command = null;
+        writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
     }
 }

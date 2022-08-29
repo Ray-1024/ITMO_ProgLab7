@@ -5,10 +5,7 @@ import ray1024.projects.collectioncontroller.tools.ConsoleSourceWriter;
 import ray1024.projects.collectioncontroller.tools.FileSourceReader;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Команда запускающая на исполнение скрипт
@@ -28,7 +25,7 @@ public class ExecuteScriptCommand extends BaseCommand {
     @Override
     public void execute() {
         try {
-            getParentShell().getParentTerminal().createMicroshell(new MicroShell(getParentShell().getParentTerminal(), new CommandBuilder(new FileSourceReader(scriptFilename), new ConsoleSourceWriter()), false));
+            getParentShell().getParentTerminal().addMicroshell(new MicroShell(getParentShell().getParentTerminal(), new CommandBuilder(new FileSourceReader(scriptFilename), new ConsoleSourceWriter()), false));
         } catch (IOException e) {
             throw new RuntimeException(Phrases.getPhrase("Can'tFindScript"));
         }

@@ -51,7 +51,13 @@ public class ServerApplication {
             System.out.println(Phrases.getPhrase("EnvironmentVariableDoesn'tExist"));
         }
         Terminal terminal = new Terminal(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter(), filename);
-        terminal.run();
+        while (true) {
+            try {
+                terminal.tick();
+            } catch (IOException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 
 }

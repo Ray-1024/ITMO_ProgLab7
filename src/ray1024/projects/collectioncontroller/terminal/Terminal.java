@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.terminal;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import ray1024.projects.collectioncontroller.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.interfaces.IInputSource;
@@ -9,9 +8,7 @@ import ray1024.projects.collectioncontroller.interfaces.Tickable;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Класс хранящий коллекцию и управляющий дочерними MicroShell'ами
@@ -43,7 +40,11 @@ public class Terminal implements Tickable {
 
         reader = inputter;
         writer = outputter;
-        microShells.add(new MicroShell(this, new CommandBuilder(reader, writer), true));
+        try {
+            microShells.add(new MicroShell(this, new CommandBuilder(reader, writer), true));
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
 
@@ -55,7 +56,7 @@ public class Terminal implements Tickable {
         this.collectionController = collectionController;
     }
 
-    public void createMicroshell(MicroShell microShell) {
+    public void addMicroshell(MicroShell microShell) {
         if (microShells.size() == microShellsLimit)
             throw new IllegalStateException(Phrases.getPhrase("TooManyMicroshells"));
         microShells.add(microShell);
