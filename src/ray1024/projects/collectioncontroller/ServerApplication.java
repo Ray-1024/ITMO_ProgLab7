@@ -35,6 +35,12 @@ public class ServerApplication {
         UpdateByIDCommand.command.getName();
         ExecuteScriptCommand.command.getName();
     }
+    //  1.  microshell получает команду из commandBuilder который собирает команду по тактам из источника
+    //  2.
+    //
+    //
+    //
+    //
 
 
     public static void main(String[] args) {

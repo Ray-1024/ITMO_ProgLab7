@@ -1,81 +1,58 @@
 package ray1024.projects.collectioncontroller.terminal;
 
 import ray1024.projects.collectioncontroller.commands.BaseCommand;
+import ray1024.projects.collectioncontroller.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.commands.CommandRegister;
 import ray1024.projects.collectioncontroller.interfaces.IInputSource;
 import ray1024.projects.collectioncontroller.interfaces.IOutputSource;
+import ray1024.projects.collectioncontroller.interfaces.Tickable;
 import ray1024.projects.collectioncontroller.tools.Phrases;
+
+import java.io.IOException;
 
 /**
  * Класс предназначенный для исполнения команд из очереди, пока та не закончится
  */
-public class MicroShell implements Runnable {
+public class MicroShell implements Tickable {
     private final Terminal parentTerminal;
-    private final IInputSource reader;
-    private final IOutputSource writer;
-    private BaseCommand currentCommand;
+    private CommandBuilder commandBuilder;
     private boolean isInteractive;
+    private boolean isDone = false;
 
-    public MicroShell(Terminal parentTerminal, IInputSource inputter, IOutputSource outputter, boolean IsInteractive) {
+    public MicroShell(Terminal parentTerminal, CommandBuilder _commandBuilder, boolean IsInteractive) {
         this.parentTerminal = parentTerminal;
-        if (inputter == null) throw new IllegalArgumentException(Phrases.getPhrase("InputterCan'tBeNullException"));
-        this.reader = inputter;
-        if (outputter == null) throw new IllegalArgumentException(Phrases.getPhrase("OutputterCan'tBeNullException"));
-        this.writer = outputter;
+        if (_commandBuilder == null) throw new RuntimeException(Phrases.getPhrase(""));
+        commandBuilder = _commandBuilder;
         isInteractive = IsInteractive;
     }
 
     @Override
-    public void run() {
-        //if (isInteractive) writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
-        System.out.println("1");
-        while (true) {
-            if (currentCommand == null) {
-                try {
-                    if (!reader.hasNextLine()) continue;
-                    currentCommand = CommandRegister.getRegisteredCommandByName(reader.nextLine());
-                    if (currentCommand != null) currentCommand.setParentShell(this);
-                    System.out.println(currentCommand);
-                } catch (Throwable illegalStateException) {
-                    writer.println(illegalStateException.getMessage());
-                }
-                //if (isInteractive) writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
-                System.out.println("2");
-                continue;
-            }
-            if (!currentCommand.isObjectReady()) {
-                try {
-                    if (!reader.hasNextLine()) continue;
-                    if (isInteractive) {
-                        //writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
-                        System.out.println("3");
-                        writer.println(currentCommand.getStepDescription());
-                    }
-                    currentCommand.inputLine(reader.nextLine());
-                } catch (Throwable illegalStateException) {
-                    writer.println(illegalStateException.getMessage());
-                }
-                continue;
-            }
-            try {
-                currentCommand.execute();
-            } catch (Throwable e) {
-                writer.println(e.getMessage());
-            }
-            currentCommand = null;
+    public void tick() {
+        if (isDone) return;
+        try {
+            commandBuilder.tick();
+        } catch (IOException e) {
+            isDone = true;
+        }
+        if (commandBuilder.getCommand() != null) {
+            commandBuilder.getCommand().setParentShell(this).execute();
+            commandBuilder.reset();
         }
     }
 
     public IInputSource getReader() {
-        return reader;
+        return commandBuilder.getReader();
     }
 
     public IOutputSource getWriter() {
-        return writer;
+        return commandBuilder.getWriter();
     }
 
     public Terminal getParentTerminal() {
         return parentTerminal;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
 }

@@ -22,7 +22,7 @@ public final class NonBlockingConsoleSourceReader implements IInputSource {
     public String nextLine() {
         if (enterIndex == -1) return "";
         line = stringBuilder.substring(0, enterIndex);
-        stringBuilder.delete(0, enterIndex);
+        stringBuilder.delete(0, enterIndex + 1);
         right = 0;
         enterIndex = -1;
         return line;
