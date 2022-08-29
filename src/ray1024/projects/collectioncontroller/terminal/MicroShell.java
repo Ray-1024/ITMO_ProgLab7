@@ -27,22 +27,30 @@ public class MicroShell implements Runnable {
 
     @Override
     public void run() {
+        //if (isInteractive) writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
+        System.out.println("1");
         while (true) {
             if (currentCommand == null) {
-                if (isInteractive) writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
                 try {
-                    if (!reader.hasNextLine()) break;
+                    if (!reader.hasNextLine()) continue;
                     currentCommand = CommandRegister.getRegisteredCommandByName(reader.nextLine());
-                    if(currentCommand!=null)currentCommand.setParentShell(this);
+                    if (currentCommand != null) currentCommand.setParentShell(this);
+                    System.out.println(currentCommand);
                 } catch (Throwable illegalStateException) {
                     writer.println(illegalStateException.getMessage());
                 }
+                //if (isInteractive) writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
+                System.out.println("2");
                 continue;
             }
             if (!currentCommand.isObjectReady()) {
-                if (isInteractive) writer.println(currentCommand.getStepDescription());
                 try {
-                    if (!reader.hasNextLine()) break;
+                    if (!reader.hasNextLine()) continue;
+                    if (isInteractive) {
+                        //writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
+                        System.out.println("3");
+                        writer.println(currentCommand.getStepDescription());
+                    }
                     currentCommand.inputLine(reader.nextLine());
                 } catch (Throwable illegalStateException) {
                     writer.println(illegalStateException.getMessage());

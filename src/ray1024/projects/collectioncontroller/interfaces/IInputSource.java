@@ -1,6 +1,8 @@
 package ray1024.projects.collectioncontroller.interfaces;
 
+import java.io.IOException;
+
 public interface IInputSource {
-    String nextLine();
-    boolean hasNextLine();
+    String nextLine() throws IOException;
+    boolean hasNextLine() throws IOException;
 }

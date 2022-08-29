@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/CollectionController_jar</output-path>
     <root id="root">
       <element id="archive" name="CollectionController.jar">
-        <element id="module-output" name="CollectionController" />
+        <element id="module-output" name="Server" />
       </element>
     </root>
   </artifact>
