@@ -35,10 +35,12 @@ public class ServerApplication {
         UpdateByIDCommand.command.getName();
         ExecuteScriptCommand.command.getName();
     }
-    //  1.  microshell получает команду из commandBuilder который собирает команду по тактам из источника
-    //  2.
-    //
-    //
+    //  User class
+    //  Request class(type,command,user)
+    //  Response class(type,text_answer,server)
+    //  ConnectionAcceptor(nonblocking) + returns new User
+    //  Terminal for everyone of users
+    //  UsersManager(disconnect, connect)
     //
     //
 
