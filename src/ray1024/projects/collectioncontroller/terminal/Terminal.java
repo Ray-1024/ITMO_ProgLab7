@@ -1,11 +1,14 @@
 package ray1024.projects.collectioncontroller.terminal;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import ray1024.projects.collectioncontroller.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.interfaces.IInputSource;
 import ray1024.projects.collectioncontroller.interfaces.IOutputSource;
+import ray1024.projects.collectioncontroller.interfaces.Tickable;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +18,7 @@ import java.util.Scanner;
  * Так же занимается загрузкой и сохранением коллекции
  * Максимальное колличество исполняющихся Microshell'ов : 10
  */
-public class Terminal implements Runnable {
+public class Terminal implements Tickable {
     private static final int microShellsLimit = 10;
     private static final int MainShell = 0;
     private ArrayList<MicroShell> microShells;
@@ -40,7 +43,7 @@ public class Terminal implements Runnable {
 
         reader = inputter;
         writer = outputter;
-        microShells.add(new MicroShell(this, reader, writer, true));
+        microShells.add(new MicroShell(this, new CommandBuilder(reader, writer), true));
     }
 
 
@@ -56,11 +59,11 @@ public class Terminal implements Runnable {
         if (microShells.size() == microShellsLimit)
             throw new IllegalStateException(Phrases.getPhrase("TooManyMicroshells"));
         microShells.add(microShell);
-        microShell.run();
     }
 
     @Override
-    public void run() {
-        microShells.get(MainShell).run();
+    public void tick() throws IOException {
+        while (microShells.get(microShells.size() - 1).isDone()) microShells.remove(microShells.size() - 1);
+        microShells.get(microShells.size() - 1).tick();
     }
 }

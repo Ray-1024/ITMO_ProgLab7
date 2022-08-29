@@ -25,14 +25,14 @@ public class CommandBuilder implements Tickable {
             try {
                 if (!reader.hasNextLine()) return;
                 command = CommandRegister.getRegisteredCommandByName(reader.nextLine());
-            } catch (Throwable illegalStateException) {
+            } catch (IllegalStateException illegalStateException) {
                 writer.println(illegalStateException.getMessage());
             }
         } else if (!command.isObjectReady()) {
             try {
                 if (!reader.hasNextLine()) return;
                 command.inputLine(reader.nextLine());
-            } catch (Throwable illegalStateException) {
+            } catch (IllegalStateException illegalStateException) {
                 writer.println(illegalStateException.getMessage());
             }
         }

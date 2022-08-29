@@ -28,7 +28,7 @@ public class ExecuteScriptCommand extends BaseCommand {
     @Override
     public void execute() {
         try {
-            getParentShell().getParentTerminal().createMicroshell(new MicroShell(getParentShell().getParentTerminal(), new FileSourceReader(scriptFilename), new ConsoleSourceWriter(), false));
+            getParentShell().getParentTerminal().createMicroshell(new MicroShell(getParentShell().getParentTerminal(), new CommandBuilder(new FileSourceReader(scriptFilename), new ConsoleSourceWriter()), false));
         } catch (IOException e) {
             throw new RuntimeException(Phrases.getPhrase("Can'tFindScript"));
         }
