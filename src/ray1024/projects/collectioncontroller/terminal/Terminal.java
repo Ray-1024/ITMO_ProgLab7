@@ -29,15 +29,8 @@ public class Terminal implements Tickable {
         return writer;
     }
 
-    public Terminal(IInputSource inputter, IOutputSource outputter, String CollectionFilename) throws IllegalArgumentException {
+    public Terminal(IInputSource inputter, IOutputSource outputter) throws IllegalArgumentException {
         microShells = new ArrayList<>(microShellsLimit);
-        collectionController = new StudyGroupCollectionController(CollectionFilename);
-        try {
-            collectionController.loadCollectionFromFile();
-        } catch (Exception e) {
-            writer.println(e.getMessage());
-        }
-
         reader = inputter;
         writer = outputter;
         try {

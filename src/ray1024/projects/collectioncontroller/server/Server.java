@@ -1,0 +1,39 @@
+package ray1024.projects.collectioncontroller.server;
+
+import ray1024.projects.collectioncontroller.controllers.StudyGroupCollectionController;
+import ray1024.projects.collectioncontroller.controllers.UserManager;
+import ray1024.projects.collectioncontroller.data.User;
+import ray1024.projects.collectioncontroller.interfaces.IUserManager;
+import ray1024.projects.collectioncontroller.interfaces.Tickable;
+import ray1024.projects.collectioncontroller.terminal.Terminal;
+import ray1024.projects.collectioncontroller.tools.ConsoleSourceWriter;
+import ray1024.projects.collectioncontroller.tools.NonBlockingConsoleSourceReader;
+
+import java.io.IOException;
+
+public class Server implements Tickable {
+    private ConnectionAcceptor connectionAcceptor;
+    private IUserManager usersManager;
+    private Terminal serverTerminal;
+
+    public Server() {
+        connectionAcceptor = new ConnectionAcceptor();
+        usersManager = new UserManager();
+
+        try {
+            serverTerminal = new Terminal(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
+            serverTerminal.setCollectionController(new StudyGroupCollectionController(System.getenv("CCFilename")));
+            serverTerminal.getCollectionController().loadCollectionFromFile();
+        } catch (Exception e) {
+            serverTerminal.getWriter().println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void tick() throws IOException {
+        connectionAcceptor.tick();
+        if(connectionAcceptor.getNewConnection() != null){
+            usersManager.addUser(new User().set)
+        }
+    }
+}

@@ -46,13 +46,8 @@ public class ServerApplication {
 
 
     public static void main(String[] args) {
-        String filename = null;
-        try {
-            filename = System.getenv("CCFilename");
-        } catch (RuntimeException ignored) {
-            System.out.println(Phrases.getPhrase("EnvironmentVariableDoesn'tExist"));
-        }
-        Terminal terminal = new Terminal(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter(), filename);
+
+        Terminal terminal = new Terminal(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
         while (true) {
             try {
                 terminal.tick();

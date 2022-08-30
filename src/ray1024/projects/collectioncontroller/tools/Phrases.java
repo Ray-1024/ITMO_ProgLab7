@@ -80,7 +80,7 @@ public class Phrases {
             phrases.put("Can'tFindScript", "Не удалось найти скрипт.");
             phrases.put("InputSourceIsNull", "Источник входных данных не может быть null");
             phrases.put("OutputSourceIsNull", "Источник выходных данных не может быть null");
-
+            phrases.put("ServerCan'tStart", "При старте сервера произошла ошибка");
         }
     }
 }
