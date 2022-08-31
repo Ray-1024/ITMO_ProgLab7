@@ -5,14 +5,15 @@ import ray1024.projects.collectioncontroller.interfaces.IUserManager;
 import ray1024.projects.collectioncontroller.interfaces.Tickable;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 import java.util.stream.Stream;
 
-public class UserManager implements IUserManager, Tickable {
+public class UserManager implements IUserManager, Tickable, Serializable {
     private final HashMap<String, IUser> users = new HashMap<>();
-    private final Queue<IUser> unknowns = new LinkedList<>();
+    private final List<IUser> unknowns = new LinkedList<>();
 
     public UserManager() {
     }
@@ -38,6 +39,6 @@ public class UserManager implements IUserManager, Tickable {
 
     @Override
     public void tick() throws IOException {
-        
+
     }
 }

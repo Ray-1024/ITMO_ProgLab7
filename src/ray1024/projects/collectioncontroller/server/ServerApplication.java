@@ -1,13 +1,7 @@
-package ray1024.projects.collectioncontroller;
+package ray1024.projects.collectioncontroller.server;
 
 import ray1024.projects.collectioncontroller.commands.*;
-import ray1024.projects.collectioncontroller.interfaces.IInputSource;
 import ray1024.projects.collectioncontroller.server.Server;
-import ray1024.projects.collectioncontroller.terminal.Terminal;
-import ray1024.projects.collectioncontroller.tools.ConsoleSourceReader;
-import ray1024.projects.collectioncontroller.tools.NonBlockingConsoleSourceReader;
-import ray1024.projects.collectioncontroller.tools.ConsoleSourceWriter;
-import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.io.IOException;
 

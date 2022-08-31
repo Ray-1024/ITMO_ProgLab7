@@ -81,6 +81,9 @@ public class Phrases {
             phrases.put("InputSourceIsNull", "Источник входных данных не может быть null");
             phrases.put("OutputSourceIsNull", "Источник выходных данных не может быть null");
             phrases.put("ServerCan'tStart", "При старте сервера произошла ошибка");
+            phrases.put("ServerHasBeenStarted", "Сервер начал работу.");
+            phrases.put("ServerHasBeenStopped", "Сервер закончил работу.");
+            phrases.put("ClientHasBeenConnected", "Подключен новый клиент.");
         }
     }
 }

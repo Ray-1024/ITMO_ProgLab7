@@ -1,13 +1,14 @@
 package ray1024.projects.collectioncontroller.data;
 
 import ray1024.projects.collectioncontroller.interfaces.IUser;
-import ray1024.projects.collectioncontroller.interfaces.IUserManager;
+import ray1024.projects.collectioncontroller.interfaces.Tickable;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.net.Socket;
 
-public class User implements Serializable, IUser {
+public class User implements Serializable, IUser, Tickable {
     private String login;
     private String passwordHash;
     private Socket connection;
@@ -55,5 +56,10 @@ public class User implements Serializable, IUser {
     public IUser setTerminal(Terminal terminal) {
         this.terminal = terminal;
         return this;
+    }
+
+    @Override
+    public void tick() throws IOException {
+
     }
 }

@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class Server implements Tickable {
-    private ConnectionAcceptor connectionAcceptor;
-    private IUserManager usersManager;
+    private final ConnectionAcceptor connectionAcceptor;
+    private final IUserManager usersManager;
     private Terminal serverTerminal;
 
     public Server() {
