@@ -1,4 +1,4 @@
-package ray1024.projects.collectioncontroller.tools;
+package ray1024.projects.collectioncontroller.enums;
 
 public enum RequestType {
     REGISTRATION, EXECUTION_COMMAND, DISCONNECTION

@@ -5,14 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64ad19ee-ac90-4d5a-bae1-1d252618de2e" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/alllab.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/Saver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/ClientApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/Serializator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/ServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/controllers/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/controllers/UserManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/Coll.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/alllab.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/BaseCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/BaseCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/commands/ExecuteScriptCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/StudyGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/StudyGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/interfaces/IRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/interfaces/IRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/ConsoleSourceReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/readers/ConsoleSourceReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/ConsoleSourceWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/writers/ConsoleSourceWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/FileSourceReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/readers/FileSourceReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/NonBlockingConsoleSourceReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/readers/NonBlockingConsoleSourceReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/Phrases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/Phrases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/enums/RequestType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/ResponseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/enums/ResponseType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/tools/SteppedInputObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/data/SteppedInputObject.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,10 +93,7 @@
 }</component>
   <component name="RunManager" selected="Application.Server">
     <configuration name="Client" type="Application" factoryName="Application">
-      <envs>
-        <env name="CCFilename" value="Coll.xml" />
-      </envs>
-      <option name="MAIN_CLASS_NAME" value="ray1024.projects.collectioncontroller.server.ServerApplication" />
+      <option name="MAIN_CLASS_NAME" value="ray1024.projects.collectioncontroller.client.ClientApplication" />
       <module name="Server" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -403,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661944633555</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="1">
+      <created>1661951904397</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1661951904397</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

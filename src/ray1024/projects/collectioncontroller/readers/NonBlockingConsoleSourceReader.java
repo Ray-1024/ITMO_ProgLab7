@@ -1,4 +1,4 @@
-package ray1024.projects.collectioncontroller.tools;
+package ray1024.projects.collectioncontroller.readers;
 
 import ray1024.projects.collectioncontroller.interfaces.IInputSource;
 

@@ -1,8 +1,8 @@
 package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.terminal.MicroShell;
-import ray1024.projects.collectioncontroller.tools.ConsoleSourceWriter;
-import ray1024.projects.collectioncontroller.tools.FileSourceReader;
+import ray1024.projects.collectioncontroller.writers.ConsoleSourceWriter;
+import ray1024.projects.collectioncontroller.readers.FileSourceReader;
 import ray1024.projects.collectioncontroller.tools.Phrases;
 
 import java.io.IOException;

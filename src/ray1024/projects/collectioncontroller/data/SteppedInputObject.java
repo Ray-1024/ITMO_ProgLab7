@@ -1,4 +1,4 @@
-package ray1024.projects.collectioncontroller.tools;
+package ray1024.projects.collectioncontroller.data;
 
 import ray1024.projects.collectioncontroller.interfaces.ISteppedInput;
 

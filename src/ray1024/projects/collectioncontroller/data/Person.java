@@ -1,7 +1,6 @@
 package ray1024.projects.collectioncontroller.data;
 
 import ray1024.projects.collectioncontroller.tools.Phrases;
-import ray1024.projects.collectioncontroller.tools.SteppedInputObject;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package ray1024.projects.collectioncontroller.server;
+package ray1024.projects.collectioncontroller.client;
 
 import ray1024.projects.collectioncontroller.commands.*;
 
@@ -9,7 +9,7 @@ import java.io.IOException;
  *
  * @MyTag aloha
  */
-public class ServerApplication {
+public class ClientApplication {
 
     static {
         AddCommand.command.getName();
@@ -23,33 +23,21 @@ public class ServerApplication {
         PrintDescendingCommand.command.getName();
         RemoveByIDCommand.command.getName();
         RemoveFirstCommand.command.getName();
-        SaveCommand.command.getName();
         ShowCommand.command.getName();
         ShuffleCommand.command.getName();
         UpdateByIDCommand.command.getName();
         ExecuteScriptCommand.command.getName();
     }
-    //  User class
-    //  Request class(type,command,user)
-    //  Response class(type,text_answer,server)
-    //  ConnectionAcceptor(nonblocking) + returns new User
-    //  Terminal for everyone of users
-    //  UsersManager(disconnect, connect)
-    //
-    //
-
 
     public static void main(String[] args) {
-
-        Server server = new Server();
+        Client client = new Client();
         while (true) {
             try {
-                server.tick();
+                client.tick();
             } catch (IOException e) {
-                throw new RuntimeException(e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
-
     }
 
 }

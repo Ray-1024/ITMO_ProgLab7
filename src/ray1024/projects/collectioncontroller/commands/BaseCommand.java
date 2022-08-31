@@ -2,8 +2,7 @@ package ray1024.projects.collectioncontroller.commands;
 
 import ray1024.projects.collectioncontroller.interfaces.IExecute;
 import ray1024.projects.collectioncontroller.terminal.MicroShell;
-import ray1024.projects.collectioncontroller.terminal.Terminal;
-import ray1024.projects.collectioncontroller.tools.SteppedInputObject;
+import ray1024.projects.collectioncontroller.data.SteppedInputObject;
 
 import java.io.Serializable;
 

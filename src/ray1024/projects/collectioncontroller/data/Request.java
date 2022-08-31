@@ -3,7 +3,7 @@ package ray1024.projects.collectioncontroller.data;
 import ray1024.projects.collectioncontroller.commands.BaseCommand;
 import ray1024.projects.collectioncontroller.interfaces.IRequest;
 import ray1024.projects.collectioncontroller.interfaces.IUser;
-import ray1024.projects.collectioncontroller.tools.RequestType;
+import ray1024.projects.collectioncontroller.enums.RequestType;
 
 import java.io.Serializable;
 

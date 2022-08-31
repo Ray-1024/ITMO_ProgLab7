@@ -6,8 +6,8 @@ import ray1024.projects.collectioncontroller.data.User;
 import ray1024.projects.collectioncontroller.interfaces.IUserManager;
 import ray1024.projects.collectioncontroller.interfaces.Tickable;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
-import ray1024.projects.collectioncontroller.tools.ConsoleSourceWriter;
-import ray1024.projects.collectioncontroller.tools.NonBlockingConsoleSourceReader;
+import ray1024.projects.collectioncontroller.writers.ConsoleSourceWriter;
+import ray1024.projects.collectioncontroller.readers.NonBlockingConsoleSourceReader;
 
 import java.io.IOException;
 import java.net.Socket;

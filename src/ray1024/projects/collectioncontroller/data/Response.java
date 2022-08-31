@@ -1,6 +1,6 @@
 package ray1024.projects.collectioncontroller.data;
 
-import ray1024.projects.collectioncontroller.tools.ResponseType;
+import ray1024.projects.collectioncontroller.enums.ResponseType;
 
 import java.io.Serializable;
 
