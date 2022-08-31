@@ -10,6 +10,7 @@ import ray1024.projects.collectioncontroller.tools.ConsoleSourceWriter;
 import ray1024.projects.collectioncontroller.tools.NonBlockingConsoleSourceReader;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class Server implements Tickable {
     private ConnectionAcceptor connectionAcceptor;
@@ -31,9 +32,8 @@ public class Server implements Tickable {
 
     @Override
     public void tick() throws IOException {
-        connectionAcceptor.tick();
-        if(connectionAcceptor.getNewConnection() != null){
-            usersManager.addUser(new User().set)
-        }
+        Socket currConnect = connectionAcceptor.getNewConnection();
+        usersManager.addUser(new User().setConnection(currConnect));
+        serverTerminal.tick();
     }
 }

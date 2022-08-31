@@ -2,6 +2,7 @@ package ray1024.projects.collectioncontroller;
 
 import ray1024.projects.collectioncontroller.commands.*;
 import ray1024.projects.collectioncontroller.interfaces.IInputSource;
+import ray1024.projects.collectioncontroller.server.Server;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.tools.ConsoleSourceReader;
 import ray1024.projects.collectioncontroller.tools.NonBlockingConsoleSourceReader;
@@ -47,10 +48,10 @@ public class ServerApplication {
 
     public static void main(String[] args) {
 
-        Terminal terminal = new Terminal(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
+        Server server = new Server();
         while (true) {
             try {
-                terminal.tick();
+                server.tick();
             } catch (IOException e) {
                 throw new RuntimeException(e.getMessage());
             }

@@ -46,10 +46,12 @@ public class User implements Serializable, IUser {
         return this;
     }
 
+    @Override
     public Terminal getTerminal() {
         return terminal;
     }
 
+    @Override
     public IUser setTerminal(Terminal terminal) {
         this.terminal = terminal;
         return this;
