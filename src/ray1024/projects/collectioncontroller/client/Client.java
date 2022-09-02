@@ -2,9 +2,9 @@ package ray1024.projects.collectioncontroller.client;
 
 import ray1024.projects.collectioncontroller.commands.BaseCommand;
 import ray1024.projects.collectioncontroller.commands.CommandBuilder;
+import ray1024.projects.collectioncontroller.communicationtypes.RequestType;
 import ray1024.projects.collectioncontroller.data.Request;
 import ray1024.projects.collectioncontroller.data.User;
-import ray1024.projects.collectioncontroller.enums.RequestType;
 import ray1024.projects.collectioncontroller.interfaces.IRequest;
 import ray1024.projects.collectioncontroller.interfaces.IUser;
 import ray1024.projects.collectioncontroller.interfaces.Tickable;

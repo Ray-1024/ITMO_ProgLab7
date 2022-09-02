@@ -5,9 +5,9 @@ import ray1024.projects.collectioncontroller.controllers.UserManager;
 import ray1024.projects.collectioncontroller.data.User;
 import ray1024.projects.collectioncontroller.interfaces.IUserManager;
 import ray1024.projects.collectioncontroller.interfaces.Tickable;
+import ray1024.projects.collectioncontroller.readers.NonBlockingConsoleSourceReader;
 import ray1024.projects.collectioncontroller.terminal.Terminal;
 import ray1024.projects.collectioncontroller.writers.ConsoleSourceWriter;
-import ray1024.projects.collectioncontroller.readers.NonBlockingConsoleSourceReader;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -33,7 +33,7 @@ public class Server implements Tickable {
     @Override
     public void tick() throws IOException {
         Socket currConnect = connectionAcceptor.getNewConnection();
-        usersManager.addUser(new User().setConnection(currConnect));
+        if (currConnect != null) usersManager.addUser(new User().setConnection(currConnect));
         serverTerminal.tick();
     }
 }
