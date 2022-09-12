@@ -1,6 +1,7 @@
 package ray1024.projects.collectioncontroller.client;
 
 import ray1024.projects.collectioncontroller.general.commands.*;
+import ray1024.projects.collectioncontroller.general.readers.NonBlockingConsoleSourceReader;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,13 +32,23 @@ public class ClientApplication {
     }
 
     public static void main(String[] args) {
-        Client client = new Client();
+        /*Client client = new Client();
         while (true) {
             try {
                 client.tick();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 break;
+            }
+        }*/
+        NonBlockingConsoleSourceReader nonBlockingConsoleSourceReader = new NonBlockingConsoleSourceReader();
+        while (!nonBlockingConsoleSourceReader.isEOF()) {
+            try {
+                if (nonBlockingConsoleSourceReader.hasNextLine()) {
+                    System.out.println(nonBlockingConsoleSourceReader.nextLine());
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }

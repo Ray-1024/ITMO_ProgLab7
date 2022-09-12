@@ -20,8 +20,21 @@ public final class NonBlockingConsoleSourceReader implements IInputSource {
 
     @Override
     public String nextLine() {
-        if (eof) return "";
         if (enterIndex == -1) return "";
+        while (!eof) {
+            int cnt = 0;
+            try {
+                cnt = reader.read(buffer);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            if (cnt == 0) break;
+            if (cnt == -1) {
+                eof = true;
+                break;
+            }
+            stringBuilder.append(buffer, 0, cnt);
+        }
         line = stringBuilder.substring(0, enterIndex);
         stringBuilder.delete(0, enterIndex + 1);
         right = 0;
@@ -31,8 +44,7 @@ public final class NonBlockingConsoleSourceReader implements IInputSource {
 
     @Override
     public boolean hasNextLine() throws IOException {
-        if (eof) return false;
-        while (true) {
+        while (!eof) {
             int cnt = reader.read(buffer);
             if (cnt == 0) break;
             if (cnt == -1) {
