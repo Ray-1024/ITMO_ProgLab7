@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_345" class="java.beans.XMLDecoder">
- <object class="ray1024.projects.collectioncontroller.data.MyCollection" id="MyCollection0">
+ <object class="ray1024.projects.collectioncontroller.general.data.MyCollection" id="MyCollection0">
   <void id="CollectionInfo0" property="collectionInfo">
-   <void class="ray1024.projects.collectioncontroller.data.CollectionInfo" method="getField">
+   <void class="ray1024.projects.collectioncontroller.general.data.CollectionInfo" method="getField">
     <string>elementsCount</string>
     <void method="set">
      <object idref="CollectionInfo0"/>
@@ -12,10 +12,10 @@
   </void>
   <void property="vec">
    <void method="add">
-    <object class="ray1024.projects.collectioncontroller.data.StudyGroup">
+    <object class="ray1024.projects.collectioncontroller.general.data.StudyGroup">
      <void property="formOfEducation">
       <object class="java.lang.Enum" method="valueOf">
-       <class>ray1024.projects.collectioncontroller.data.FormOfEducation</class>
+       <class>ray1024.projects.collectioncontroller.general.data.FormOfEducation</class>
        <string>EVENING_CLASSES</string>
       </object>
      </void>
@@ -27,7 +27,7 @@
      </void>
      <void property="semesterEnum">
       <object class="java.lang.Enum" method="valueOf">
-       <class>ray1024.projects.collectioncontroller.data.Semester</class>
+       <class>ray1024.projects.collectioncontroller.general.data.Semester</class>
        <string>FOURTH</string>
       </object>
      </void>
@@ -37,10 +37,10 @@
     </object>
    </void>
    <void method="add">
-    <object class="ray1024.projects.collectioncontroller.data.StudyGroup">
+    <object class="ray1024.projects.collectioncontroller.general.data.StudyGroup">
      <void property="formOfEducation">
       <object class="java.lang.Enum" method="valueOf">
-       <class>ray1024.projects.collectioncontroller.data.FormOfEducation</class>
+       <class>ray1024.projects.collectioncontroller.general.data.FormOfEducation</class>
        <string>DISTANCE_EDUCATION</string>
       </object>
      </void>
@@ -52,7 +52,7 @@
      </void>
      <void property="semesterEnum">
       <object class="java.lang.Enum" id="Semester0" method="valueOf">
-       <class>ray1024.projects.collectioncontroller.data.Semester</class>
+       <class>ray1024.projects.collectioncontroller.general.data.Semester</class>
        <string>FIRST</string>
       </object>
      </void>
@@ -62,7 +62,7 @@
     </object>
    </void>
    <void method="add">
-    <object class="ray1024.projects.collectioncontroller.data.StudyGroup">
+    <object class="ray1024.projects.collectioncontroller.general.data.StudyGroup">
      <void property="id">
       <int>1</int>
      </void>
@@ -78,7 +78,7 @@
     </object>
    </void>
    <void method="add">
-    <object class="ray1024.projects.collectioncontroller.data.StudyGroup">
+    <object class="ray1024.projects.collectioncontroller.general.data.StudyGroup">
      <void property="groupAdmin">
       <null/>
      </void>
@@ -90,7 +90,7 @@
      </void>
      <void property="semesterEnum">
       <object class="java.lang.Enum" method="valueOf">
-       <class>ray1024.projects.collectioncontroller.data.Semester</class>
+       <class>ray1024.projects.collectioncontroller.general.data.Semester</class>
        <string>SIXTH</string>
       </object>
      </void>
@@ -100,7 +100,7 @@
     </object>
    </void>
    <void method="add">
-    <object class="ray1024.projects.collectioncontroller.data.StudyGroup">
+    <object class="ray1024.projects.collectioncontroller.general.data.StudyGroup">
      <void property="groupAdmin">
       <null/>
      </void>
@@ -112,7 +112,7 @@
      </void>
      <void property="semesterEnum">
       <object class="java.lang.Enum" method="valueOf">
-       <class>ray1024.projects.collectioncontroller.data.Semester</class>
+       <class>ray1024.projects.collectioncontroller.general.data.Semester</class>
        <string>FIFTH</string>
       </object>
      </void>

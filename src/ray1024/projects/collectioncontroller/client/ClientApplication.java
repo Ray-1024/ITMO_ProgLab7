@@ -1,6 +1,6 @@
 package ray1024.projects.collectioncontroller.client;
 
-import ray1024.projects.collectioncontroller.commands.*;
+import ray1024.projects.collectioncontroller.general.commands.*;
 
 import java.io.IOException;
 
@@ -28,7 +28,6 @@ public class ClientApplication {
         UpdateByIDCommand.command.getName();
         ExecuteScriptCommand.command.getName();
     }
-
     public static void main(String[] args) {
         Client client = new Client();
         while (true) {

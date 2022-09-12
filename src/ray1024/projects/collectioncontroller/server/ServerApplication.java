@@ -1,6 +1,6 @@
 package ray1024.projects.collectioncontroller.server;
 
-import ray1024.projects.collectioncontroller.commands.*;
+import ray1024.projects.collectioncontroller.general.commands.*;
 
 import java.io.IOException;
 

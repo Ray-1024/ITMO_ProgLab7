@@ -1,13 +1,13 @@
 package ray1024.projects.collectioncontroller.server;
 
-import ray1024.projects.collectioncontroller.controllers.StudyGroupCollectionController;
-import ray1024.projects.collectioncontroller.controllers.UserManager;
-import ray1024.projects.collectioncontroller.data.User;
-import ray1024.projects.collectioncontroller.interfaces.IUserManager;
-import ray1024.projects.collectioncontroller.interfaces.Tickable;
-import ray1024.projects.collectioncontroller.readers.NonBlockingConsoleSourceReader;
-import ray1024.projects.collectioncontroller.terminal.Terminal;
-import ray1024.projects.collectioncontroller.writers.ConsoleSourceWriter;
+import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
+import ray1024.projects.collectioncontroller.general.controllers.UserManager;
+import ray1024.projects.collectioncontroller.general.data.User;
+import ray1024.projects.collectioncontroller.general.interfaces.IUserManager;
+import ray1024.projects.collectioncontroller.general.interfaces.Tickable;
+import ray1024.projects.collectioncontroller.general.readers.NonBlockingConsoleSourceReader;
+import ray1024.projects.collectioncontroller.general.terminal.Terminal;
+import ray1024.projects.collectioncontroller.general.writers.ConsoleSourceWriter;
 
 import java.io.IOException;
 import java.net.Socket;

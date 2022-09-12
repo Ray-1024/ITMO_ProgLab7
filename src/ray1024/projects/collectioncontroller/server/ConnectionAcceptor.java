@@ -1,6 +1,6 @@
 package ray1024.projects.collectioncontroller.server;
 
-import ray1024.projects.collectioncontroller.tools.Phrases;
+import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
