@@ -21,4 +21,9 @@ public class ListSourceReader implements IInputSource {
     public boolean hasNextLine() throws IOException {
         return lines.size() > 0;
     }
+
+    @Override
+    public boolean isEOF() {
+        return lines.size() > 0;
+    }
 }

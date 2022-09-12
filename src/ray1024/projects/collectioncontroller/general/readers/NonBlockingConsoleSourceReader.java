@@ -15,10 +15,12 @@ public final class NonBlockingConsoleSourceReader implements IInputSource {
     private String line;
     private final char[] buffer = new char[BUFFER_SIZE];
     private int enterIndex = -1, right = 0;
+    private boolean eof = false;
 
 
     @Override
     public String nextLine() {
+        if (eof) return "";
         if (enterIndex == -1) return "";
         line = stringBuilder.substring(0, enterIndex);
         stringBuilder.delete(0, enterIndex + 1);
@@ -29,8 +31,14 @@ public final class NonBlockingConsoleSourceReader implements IInputSource {
 
     @Override
     public boolean hasNextLine() throws IOException {
-        while (reader.ready()) {
+        if (eof) return false;
+        while (true) {
             int cnt = reader.read(buffer);
+            if (cnt == 0) break;
+            if (cnt == -1) {
+                eof = true;
+                break;
+            }
             stringBuilder.append(buffer, 0, cnt);
         }
         if (enterIndex == -1) {
@@ -42,5 +50,10 @@ public final class NonBlockingConsoleSourceReader implements IInputSource {
         } else {
             return true;
         }
+    }
+
+    @Override
+    public boolean isEOF() {
+        return eof;
     }
 }

@@ -22,6 +22,7 @@ public class CommandBuilder implements ICommandBuilder {
 
     @Override
     public void tick() throws IOException {
+        if (reader.isEOF()) throw new IOException(Phrases.getPhrase("EndOfInputSource"));
         if (command == null) {
             try {
                 if (!reader.hasNextLine()) return;

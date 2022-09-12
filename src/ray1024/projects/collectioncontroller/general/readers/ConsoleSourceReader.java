@@ -17,4 +17,14 @@ public class ConsoleSourceReader implements IInputSource {
     public boolean hasNextLine() throws IOException {
         return scanner.hasNextLine();
     }
+
+    @Override
+    public boolean isEOF() {
+        try {
+            scanner.hasNextLine();
+            return false;
+        } catch (IllegalStateException illegalStateException) {
+            return true;
+        }
+    }
 }

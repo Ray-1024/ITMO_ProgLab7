@@ -87,6 +87,7 @@ public class Phrases {
             phrases.put("ClientCan'tStart", "Клиент не смог начать работу.");
             phrases.put("PleaseEnterLogin", "Пожалуйста введите логин:");
             phrases.put("PleaseEnterPassword", "Пожалуйста введите пароль:");
+            phrases.put("EndOfInputSource", "Источник ввода закрыт, дальнейшее считывание команд невозможно.");
         }
     }
 }

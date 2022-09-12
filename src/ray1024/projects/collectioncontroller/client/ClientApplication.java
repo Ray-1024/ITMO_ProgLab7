@@ -3,6 +3,7 @@ package ray1024.projects.collectioncontroller.client;
 import ray1024.projects.collectioncontroller.general.commands.*;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Главный красс создающий и запускающий Терминал
@@ -28,6 +29,7 @@ public class ClientApplication {
         UpdateByIDCommand.command.getName();
         ExecuteScriptCommand.command.getName();
     }
+
     public static void main(String[] args) {
         Client client = new Client();
         while (true) {
@@ -35,8 +37,8 @@ public class ClientApplication {
                 client.tick();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
+                break;
             }
         }
     }
-
 }

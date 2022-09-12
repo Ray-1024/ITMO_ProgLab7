@@ -19,21 +19,21 @@ import java.util.Scanner;
 public class Client implements Tickable {
 
     private final CommandBuilder commandBuilder;
-    private Socket socket;
     private IUser user;
 
     Client() {
         try {
-            commandBuilder = new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
-            socket = new Socket("localhost", 44147);
             user = new User();
             Scanner scanner = new Scanner(System.in);
             System.out.println(Phrases.getPhrase("PleaseEnterLogin"));
-            user.setLogin(scanner.nextLine());
+            if (scanner.hasNextLine())
+                user.setLogin(scanner.nextLine());
             System.out.println(Phrases.getPhrase("PleaseEnterPassword"));
-            user.setPassword(scanner.nextLine());
+            if (scanner.hasNextLine())
+                user.setPassword(scanner.nextLine());
             IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.REGISTRATION);
             System.out.println("<COOKING_REGISTRATION_REQUEST>");
+            commandBuilder = new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
         } catch (Throwable e) {
             throw new RuntimeException(Phrases.getPhrase("ClientCan'tStart"));
         }
@@ -46,6 +46,7 @@ public class Client implements Tickable {
         if (currCommand != null) {
             IRequest request = new Request().setCommand(currCommand).setRequestType(RequestType.EXECUTION_COMMAND);
             System.out.println("<COOKING_REQUEST(NOT YET)>");
+            commandBuilder.reset();
         }
     }
 }

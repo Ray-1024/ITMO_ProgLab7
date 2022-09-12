@@ -7,14 +7,11 @@ import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class StudyGroupCollectionController {
+public class StudyGroupCollectionController implements Serializable {
 
     private String collectionFilename = "Collection.xml";
     private MyCollection<StudyGroup> managedCollection;

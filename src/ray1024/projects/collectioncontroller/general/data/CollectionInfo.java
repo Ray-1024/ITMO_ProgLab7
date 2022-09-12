@@ -1,11 +1,12 @@
 package ray1024.projects.collectioncontroller.general.data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * Вспомогательный класс используемый для хранения информации о коллекции
  */
-public class CollectionInfo {
+public class CollectionInfo implements Serializable {
     public LocalDateTime initializationDateTime;
     public Class collectionElementType;
     public int elementsCount;

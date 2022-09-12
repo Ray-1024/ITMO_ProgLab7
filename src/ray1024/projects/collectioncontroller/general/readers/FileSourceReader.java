@@ -23,4 +23,14 @@ public final class FileSourceReader implements IInputSource {
     public boolean hasNextLine() {
         return scanner.hasNextLine();
     }
+
+    @Override
+    public boolean isEOF() {
+        try {
+            scanner.hasNextLine();
+            return false;
+        } catch (IllegalStateException illegalStateException) {
+            return true;
+        }
+    }
 }
