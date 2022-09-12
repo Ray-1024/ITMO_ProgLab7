@@ -1,13 +1,13 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
+import ray1024.projects.collectioncontroller.general.interfaces.ICommandBuilder;
 import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
 import ray1024.projects.collectioncontroller.general.interfaces.IOutputSource;
-import ray1024.projects.collectioncontroller.general.interfaces.Tickable;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 import java.io.IOException;
 
-public class CommandBuilder implements Tickable {
+public class CommandBuilder implements ICommandBuilder {
     private BaseCommand command;
     private IInputSource reader;
     private IOutputSource writer;
@@ -42,18 +42,22 @@ public class CommandBuilder implements Tickable {
         } else writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
     }
 
+    @Override
     public BaseCommand getCommand() {
         return command == null || !command.isObjectReady() ? null : command;
     }
 
+    @Override
     public IInputSource getReader() {
         return reader;
     }
 
+    @Override
     public IOutputSource getWriter() {
         return writer;
     }
 
+    @Override
     public void reset() {
         command = null;
         writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));

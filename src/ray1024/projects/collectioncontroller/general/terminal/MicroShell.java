@@ -1,6 +1,7 @@
 package ray1024.projects.collectioncontroller.general.terminal;
 
 import ray1024.projects.collectioncontroller.general.commands.CommandBuilder;
+import ray1024.projects.collectioncontroller.general.interfaces.ICommandBuilder;
 import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
 import ray1024.projects.collectioncontroller.general.interfaces.IOutputSource;
 import ray1024.projects.collectioncontroller.general.interfaces.Tickable;
@@ -13,11 +14,11 @@ import java.io.IOException;
  */
 public class MicroShell implements Tickable {
     private final Terminal parentTerminal;
-    private CommandBuilder commandBuilder;
+    private ICommandBuilder commandBuilder;
     private boolean isInteractive;
     private boolean isDone = false;
 
-    public MicroShell(Terminal parentTerminal, CommandBuilder _commandBuilder, boolean IsInteractive) {
+    public MicroShell(Terminal parentTerminal, ICommandBuilder _commandBuilder, boolean IsInteractive) {
         this.parentTerminal = parentTerminal;
         if (_commandBuilder == null) throw new RuntimeException(Phrases.getPhrase(""));
         commandBuilder = _commandBuilder;

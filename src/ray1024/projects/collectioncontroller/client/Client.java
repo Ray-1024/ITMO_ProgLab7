@@ -14,6 +14,7 @@ import ray1024.projects.collectioncontroller.general.writers.ConsoleSourceWriter
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Client implements Tickable {
 
@@ -26,9 +27,14 @@ public class Client implements Tickable {
             commandBuilder = new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
             socket = new Socket("localhost", 44147);
             user = new User();
+            Scanner scanner = new Scanner(System.in);
+            System.out.println(Phrases.getPhrase("PleaseEnterLogin"));
+            user.setLogin(scanner.nextLine());
+            System.out.println(Phrases.getPhrase("PleaseEnterPassword"));
+            user.setPassword(scanner.nextLine());
             IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.REGISTRATION);
             System.out.println("<COOKING_REGISTRATION_REQUEST>");
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new RuntimeException(Phrases.getPhrase("ClientCan'tStart"));
         }
     }

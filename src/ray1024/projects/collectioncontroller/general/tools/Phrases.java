@@ -85,6 +85,8 @@ public class Phrases {
             phrases.put("ServerHasBeenStopped", "Сервер закончил работу.");
             phrases.put("ClientHasBeenConnected", "Подключен новый клиент.");
             phrases.put("ClientCan'tStart", "Клиент не смог начать работу.");
+            phrases.put("PleaseEnterLogin", "Пожалуйста введите логин:");
+            phrases.put("PleaseEnterPassword", "Пожалуйста введите пароль:");
         }
     }
 }
