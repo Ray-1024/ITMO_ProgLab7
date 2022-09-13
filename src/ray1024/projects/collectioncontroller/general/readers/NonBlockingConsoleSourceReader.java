@@ -2,6 +2,7 @@ package ray1024.projects.collectioncontroller.general.readers;
 
 import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -21,19 +22,21 @@ public final class NonBlockingConsoleSourceReader implements IInputSource {
     @Override
     public String nextLine() {
         if (enterIndex == -1) return "";
-        while (!eof) {
+        while (true) {
+            try {
+                if (!(!eof && reader.ready())) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             int cnt = 0;
             try {
                 cnt = reader.read(buffer);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            if (cnt == 0) break;
-            if (cnt == -1) {
-                eof = true;
-                break;
-            }
-            stringBuilder.append(buffer, 0, cnt);
+            if (cnt > 0) stringBuilder.append(buffer, 0, cnt);
+            else if (cnt == -1) eof = true;
+            else break;
         }
         line = stringBuilder.substring(0, enterIndex);
         stringBuilder.delete(0, enterIndex + 1);
@@ -44,14 +47,11 @@ public final class NonBlockingConsoleSourceReader implements IInputSource {
 
     @Override
     public boolean hasNextLine() throws IOException {
-        while (!eof) {
+        while (!eof && reader.ready()) {
             int cnt = reader.read(buffer);
-            if (cnt == 0) break;
-            if (cnt == -1) {
-                eof = true;
-                break;
-            }
-            stringBuilder.append(buffer, 0, cnt);
+            if (cnt > 0) stringBuilder.append(buffer, 0, cnt);
+            else if (cnt == -1) eof = true;
+            else break;
         }
         if (enterIndex == -1) {
             for (enterIndex = right; enterIndex < stringBuilder.length(); ++enterIndex) {

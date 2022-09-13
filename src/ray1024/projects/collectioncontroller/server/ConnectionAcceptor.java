@@ -6,15 +6,16 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.channels.ServerSocketChannel;
 
 public class ConnectionAcceptor {
-    private final ServerSocket serverSocket;
+    private final ServerSocketChannel serverSocket;
 
     public ConnectionAcceptor() {
         try {
-            serverSocket = new ServerSocket();
+            serverSocket = ServerSocketChannel.open();
             serverSocket.bind(new InetSocketAddress("localhost", 44147));
-            serverSocket.setSoTimeout(1);
+            serverSocket.socket().setSoTimeout(1);
         } catch (IOException e) {
             throw new RuntimeException(Phrases.getPhrase("ServerCan'tStart"));
         }
@@ -22,7 +23,7 @@ public class ConnectionAcceptor {
 
     public Socket getNewConnection() {
         try {
-            return serverSocket.accept();
+            return serverSocket.accept().socket();
         } catch (IOException e) {
             return null;
         }

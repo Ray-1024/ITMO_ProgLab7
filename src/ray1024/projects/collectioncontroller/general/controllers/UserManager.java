@@ -28,7 +28,8 @@ public class UserManager implements IUserManager, Tickable, Serializable {
         if (user == null) return this;
         if ((user.getLogin() == null || user.getPasswordHash() == null) && user.getConnection() != null)
             unknowns.add(user);
-        else if (!users.containsKey(user.getLogin())) users.put(user.getLogin(), user);
+        else if (!users.containsKey(user.getLogin()) && user.getPasswordHash() != null)
+            users.put(user.getLogin(), user);
         return this;
     }
 

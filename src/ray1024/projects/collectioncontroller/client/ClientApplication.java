@@ -32,23 +32,13 @@ public class ClientApplication {
     }
 
     public static void main(String[] args) {
-        /*Client client = new Client();
+        Client client = new Client();
         while (true) {
             try {
                 client.tick();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 break;
-            }
-        }*/
-        NonBlockingConsoleSourceReader nonBlockingConsoleSourceReader = new NonBlockingConsoleSourceReader();
-        while (!nonBlockingConsoleSourceReader.isEOF()) {
-            try {
-                if (nonBlockingConsoleSourceReader.hasNextLine()) {
-                    System.out.println(nonBlockingConsoleSourceReader.nextLine());
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
         }
     }
