@@ -34,8 +34,9 @@ public class UserManager implements IUserManager, Tickable, Serializable {
             users.put(user.getLogin(), user);
         else {
             try {
-                user.getConnection().sendResponse(new Response().setResponseType(ResponseType.DISCONNECT));
+                users.get(user.getLogin()).setConnection(user.getConnection());
             } catch (Throwable ignored) {
+
             }
         }
         return this;

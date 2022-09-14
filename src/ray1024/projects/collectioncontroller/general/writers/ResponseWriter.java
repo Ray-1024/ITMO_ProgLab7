@@ -34,9 +34,11 @@ public class ResponseWriter implements IOutputSource {
     @Override
     public void flush() {
         try {
+            System.out.println("---RESPONSE WRITE---");
             response.setAnswer(stringBuilder.toString());
             connector.sendResponse(response);
             stringBuilder = new StringBuilder();
+            System.out.println("--------------------");
         } catch (Throwable ex) {
             System.out.println("---RESPONSE WRITER EXCEPTION");
         }

@@ -50,8 +50,10 @@ public class Client implements Tickable {
     @Override
     public void tick() {
         if (System.currentTimeMillis() - lastAnswerTime > 1000 * 60) {
-            System.out.println("---CONNECTION HAS BEEN CLOSED---");
+            System.out.println("---CONNECTION HAS BEEN CLOSED BECAUSE TOO LONG---");
             System.exit(0);
+        } else if (System.currentTimeMillis() - lastAnswerTime > 1000 * 60) {
+
         }
         commandBuilder.tick();
         BaseCommand currCommand = commandBuilder.getCommand();
@@ -64,7 +66,10 @@ public class Client implements Tickable {
         }
         IResponse response = connector.receiveResponse();
         if (response != null) {
+            lastAnswerTime = System.currentTimeMillis();
             System.out.println("---RESPONSE---");
+            System.out.println(response.getResponseType());
+            System.out.println("--------------");
             if (response.getResponseType() == ResponseType.ANSWER) {
                 commandBuilder.getWriter().println(response.getAnswer());
             } else if (response.getResponseType() == ResponseType.COLLECTION_UPDATE) {
@@ -73,7 +78,7 @@ public class Client implements Tickable {
                 commandBuilder.getWriter().println("---CONNECTION HAS BEEN CLOSED---");
                 System.exit(0);
             } else if (response.getResponseType() == ResponseType.I_AM_ALIVE) {
-                lastAnswerTime = System.currentTimeMillis();
+
             }
         }
     }

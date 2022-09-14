@@ -89,13 +89,20 @@ public class User implements IUser {
             if (request != null) {
                 System.out.println("---REQUEST---");
                 System.out.println(request.getRequestType());
+                if (request.getRequestType() == RequestType.EXECUTION_COMMAND)
+                    System.out.println(request.getCommand().getName());
+                System.out.println("-------------");
                 lastAccessTime = System.currentTimeMillis();
                 if (request.getRequestType() == RequestType.EXECUTION_COMMAND) {
                     terminal.getMainMicroshell().getCommandBuilder().addCommand(request.getCommand());
+                    lastAccessTime = System.currentTimeMillis();
                 }
             }
-            if (System.currentTimeMillis() - lastResponseTime > 50 * 1000)
+            if (System.currentTimeMillis() - lastResponseTime > 10 * 1000) {
                 connection.sendResponse(new Response().setResponseType(ResponseType.I_AM_ALIVE));
+                lastResponseTime = System.currentTimeMillis();
+            }
+
             terminal.tick();
         } catch (Throwable ignored) {
         }

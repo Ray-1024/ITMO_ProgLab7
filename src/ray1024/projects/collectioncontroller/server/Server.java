@@ -44,7 +44,7 @@ public class Server implements Tickable {
     @Override
     public void tick() {
         IConnector currConnect = connectionAcceptor.getNewConnection();
-        if (currConnect != null) {
+        while (currConnect != null) {
             try {
                 System.out.println("---NEW CONNECTION---");
                 Terminal userTerminal = new Terminal(
@@ -60,7 +60,7 @@ public class Server implements Tickable {
                 System.out.println(e.getMessage());
                 System.exit(0);
             }
-
+            currConnect = connectionAcceptor.getNewConnection();
         }
         usersManager.tick();
         serverTerminal.tick();

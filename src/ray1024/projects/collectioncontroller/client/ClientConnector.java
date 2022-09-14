@@ -16,10 +16,13 @@ import java.nio.channels.SocketChannel;
 public class ClientConnector implements IConnector {
     private final Socket socket;
     private final SocketChannel socketChannel;
-    private final ByteBuffer sizeBuffer;
-    private ByteBuffer objectBuffer;
+    private final ByteBuffer sizeBufferIn;
+    private final ByteBuffer sizeBufferOut;
+    private ByteBuffer objectBufferIn;
+    private ByteBuffer objectBufferOut;
 
-    private int objectSize;
+    private int objectSizeIn;
+    private int objectSizeOut;
 
     public ClientConnector(InetAddress serverAddress, int port) {
         try {
@@ -34,23 +37,23 @@ public class ClientConnector implements IConnector {
         } catch (IOException e) {
             throw new RuntimeException("CONNECTOR_SOCKET_SET_BLOCKING_ERROR");
         }
-        sizeBuffer = ByteBuffer.allocate(4);
-        objectSize = -1;
-        sizeBuffer.clear();
+        sizeBufferIn = ByteBuffer.allocate(4).clear();
+        sizeBufferOut = ByteBuffer.allocate(4).clear();
+        objectSizeIn = -1;
+        objectSizeOut = -1;
     }
 
     @Override
     public IConnector sendRequest(IRequest request) {
         try {
             byte[] buff = Serializer.serialize(request);
-            objectSize = buff.length;
-            sizeBuffer.clear();
-            sizeBuffer.putInt(objectSize);
+            objectSizeOut = buff.length;
+            sizeBufferOut.clear();
+            sizeBufferOut.putInt(objectSizeOut);
             ByteBuffer byteBuffer = ByteBuffer.wrap(buff);
-            sizeBuffer.clear();
-            socketChannel.write(sizeBuffer);
+            sizeBufferOut.clear();
+            socketChannel.write(sizeBufferOut);
             socketChannel.write(byteBuffer);
-            sizeBuffer.clear();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -65,28 +68,30 @@ public class ClientConnector implements IConnector {
     @Override
     public IResponse receiveResponse() {
         try {
-            if (sizeBuffer.remaining() == 0) {
-                if (objectSize == -1) {
-                    sizeBuffer.clear();
-                    objectSize = sizeBuffer.getInt();
-                    if (objectSize > 0 && (objectBuffer == null || objectSize > objectBuffer.capacity()))
-                        objectBuffer = ByteBuffer.allocate(objectSize);
+            if (sizeBufferIn.remaining() == 0) {
+                if (objectSizeIn == -1) {
+                    sizeBufferIn.clear();
+                    objectSizeIn = sizeBufferIn.getInt();
+                    if (objectSizeIn > 0)
+                        objectBufferIn = ByteBuffer.allocate(objectSizeIn);
+                    objectBufferIn.clear();
                 }
-                if (objectBuffer.remaining() > 0) socketChannel.read(objectBuffer);
-                if (objectBuffer.remaining() == 0) {
+                if (objectBufferIn.remaining() > 0) socketChannel.read(objectBufferIn);
+                if (objectBufferIn.remaining() == 0) {
                     try {
-                        sizeBuffer.clear();
-                        objectSize = -1;
-                        objectBuffer.clear();
-                        return (IResponse) Serializer.deserialize(objectBuffer.array());
+                        sizeBufferIn.clear();
+                        objectSizeIn = -1;
+                        objectBufferIn.clear();
+                        byte[] arr = objectBufferIn.array();
+                        return (IResponse) Serializer.deserialize(objectBufferIn.array());
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
                 }
             } else {
-                socketChannel.read(sizeBuffer);
-                if (objectBuffer != null) objectBuffer.clear();
-                objectSize = -1;
+                socketChannel.read(sizeBufferIn);
+                if (objectBufferIn != null) objectBufferIn.clear();
+                objectSizeIn = -1;
             }
             return null;
         } catch (IOException e) {

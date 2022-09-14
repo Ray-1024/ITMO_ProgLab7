@@ -60,12 +60,14 @@ public class Terminal implements Tickable {
     public void tick() {
         try {
             if (microShells.size() == 0) return;
-            while (microShells.size() > 0 && microShells.get(microShells.size() - 1).isDone())
+            while (microShells.size() > 1 && microShells.get(microShells.size() - 1).isDone())
                 microShells.remove(microShells.size() - 1);
             if (microShells.size() == 0) return;
             microShells.get(microShells.size() - 1).tick();
         } catch (Throwable ex) {
+            System.out.println("---TERMINAL EXCEPTION---");
             System.out.println(ex.getMessage());
+            System.out.println("------------------------");
         }
     }
 }

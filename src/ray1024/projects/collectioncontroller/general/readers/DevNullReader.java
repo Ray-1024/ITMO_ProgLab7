@@ -5,7 +5,7 @@ import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
 public class DevNullReader implements IInputSource {
     @Override
     public String nextLine() {
-        return "";
+        return null;
     }
 
     @Override
