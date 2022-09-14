@@ -1,5 +1,7 @@
 package ray1024.projects.collectioncontroller.general.controllers;
 
+import ray1024.projects.collectioncontroller.general.communication.Response;
+import ray1024.projects.collectioncontroller.general.communication.ResponseType;
 import ray1024.projects.collectioncontroller.general.interfaces.IUser;
 import ray1024.projects.collectioncontroller.general.interfaces.IUserManager;
 import ray1024.projects.collectioncontroller.general.interfaces.Tickable;
@@ -20,7 +22,7 @@ public class UserManager implements IUserManager, Tickable, Serializable {
 
     @Override
     public boolean isRegistred(IUser user) {
-        return user != null && users.get(user.getLogin()).getPasswordHash().equals(user.getPasswordHash());
+        return user != null && users.get(user.getLogin()) != null && users.get(user.getLogin()).getPasswordHash().equals(user.getPasswordHash());
     }
 
     @Override
@@ -30,6 +32,12 @@ public class UserManager implements IUserManager, Tickable, Serializable {
             unknowns.add(user);
         else if (!users.containsKey(user.getLogin()) && user.getPasswordHash() != null)
             users.put(user.getLogin(), user);
+        else {
+            try {
+                user.getConnection().sendResponse(new Response().setResponseType(ResponseType.DISCONNECT));
+            } catch (Throwable ignored) {
+            }
+        }
         return this;
     }
 
@@ -39,7 +47,18 @@ public class UserManager implements IUserManager, Tickable, Serializable {
     }
 
     @Override
-    public void tick() throws IOException {
-
+    public void tick() {
+        List<IUser> forDel = new LinkedList<>();
+        for (IUser user : unknowns) {
+            user.tick();
+            if (user.getLogin() != null && user.getPasswordHash() != null && !users.containsKey(user.getLogin()) && user.getPasswordHash() != null) {
+                users.put(user.getLogin(), user);
+                forDel.add(user);
+            }
+        }
+        unknowns.removeAll(forDel);
+        for (IUser user : users.values()) {
+            user.tick();
+        }
     }
 }

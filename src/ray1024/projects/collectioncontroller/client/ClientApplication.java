@@ -32,14 +32,14 @@ public class ClientApplication {
     }
 
     public static void main(String[] args) {
-        Client client = new Client();
-        while (true) {
-            try {
+        try {
+            Client client = new Client();
+            while (true) {
                 client.tick();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-                break;
             }
+        } catch (Throwable e) {
+            System.out.println(e.getMessage());
         }
+
     }
 }

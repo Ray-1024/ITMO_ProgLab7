@@ -7,8 +7,6 @@ import ray1024.projects.collectioncontroller.general.interfaces.IResponse;
 import ray1024.projects.collectioncontroller.general.tools.Serializer;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
@@ -16,10 +14,12 @@ import java.nio.channels.SocketChannel;
 public class ServerConnector implements IConnector {
     private final Socket socket;
     private final SocketChannel socketChannel;
-    private final ByteBuffer sizeBuffer;
-    private ByteBuffer objectBuffer;
-
-    private int objectSize;
+    private final ByteBuffer sizeBufferIn;
+    private ByteBuffer objectBufferIn;
+    private final ByteBuffer sizeBufferOut;
+    private ByteBuffer objectBufferOut;
+    private int objectSizeIn;
+    private int objectSizeOut;
 
     public ServerConnector(Socket socket) {
         this.socket = socket;
@@ -29,9 +29,10 @@ public class ServerConnector implements IConnector {
         } catch (IOException e) {
             throw new RuntimeException("CONNECTOR_SOCKET_SET_BLOCKING_ERROR");
         }
-        sizeBuffer = ByteBuffer.allocate(4);
-        objectSize = -1;
-        sizeBuffer.clear();
+        sizeBufferIn = ByteBuffer.allocate(4).clear();
+        objectSizeIn = -1;
+        sizeBufferOut = ByteBuffer.allocate(4).clear();
+        objectSizeOut = -1;
     }
 
     @Override
@@ -42,28 +43,30 @@ public class ServerConnector implements IConnector {
     @Override
     public IRequest receiveRequest() {
         try {
-            if (sizeBuffer.remaining() == 0) {
-                if (objectSize == -1) {
-                    sizeBuffer.clear();
-                    objectSize = sizeBuffer.getInt();
-                    if (objectSize > 0 && (objectBuffer == null || objectSize > objectBuffer.capacity()))
-                        objectBuffer = ByteBuffer.allocate(objectSize);
+            if (sizeBufferIn.remaining() == 0) {
+                if (objectSizeIn == -1) {
+                    sizeBufferIn.clear();
+                    objectSizeIn = sizeBufferIn.getInt();
+                    if (objectSizeIn > 0)
+                        objectBufferIn = ByteBuffer.allocate(objectSizeIn);
+                    objectBufferIn.clear();
                 }
-                if (objectBuffer.remaining() > 0) socketChannel.read(objectBuffer);
-                if (objectBuffer.remaining() == 0) {
+                if (objectBufferIn.remaining() > 0) socketChannel.read(objectBufferIn);
+                if (objectBufferIn.remaining() == 0) {
                     try {
-                        sizeBuffer.clear();
-                        objectSize = -1;
-                        objectBuffer.clear();
-                        return (IRequest) Serializer.deserialize(objectBuffer.array());
+                        sizeBufferIn.clear();
+                        objectSizeIn = -1;
+                        objectBufferIn.clear();
+                        byte[] arr = objectBufferIn.array();
+                        return (IRequest) Serializer.deserialize(objectBufferIn.array());
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
                 }
             } else {
-                socketChannel.read(sizeBuffer);
-                if (objectBuffer != null) objectBuffer.clear();
-                objectSize = -1;
+                socketChannel.read(sizeBufferIn);
+                if (objectBufferIn != null) objectBufferIn.clear();
+                objectSizeIn = -1;
             }
             return null;
         } catch (IOException e) {
@@ -80,14 +83,13 @@ public class ServerConnector implements IConnector {
     public IConnector sendResponse(IResponse response) {
         try {
             byte[] buff = Serializer.serialize(response);
-            objectSize = buff.length;
-            sizeBuffer.clear();
-            sizeBuffer.putInt(objectSize);
+            objectSizeOut = buff.length;
+            sizeBufferOut.clear();
+            sizeBufferOut.putInt(objectSizeOut);
             ByteBuffer byteBuffer = ByteBuffer.wrap(buff);
-            sizeBuffer.clear();
-            socketChannel.write(sizeBuffer);
+            sizeBufferOut.clear();
+            socketChannel.write(sizeBufferOut);
             socketChannel.write(byteBuffer);
-            sizeBuffer.clear();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

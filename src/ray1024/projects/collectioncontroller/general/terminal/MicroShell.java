@@ -1,22 +1,18 @@
 package ray1024.projects.collectioncontroller.general.terminal;
 
-import ray1024.projects.collectioncontroller.general.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.general.interfaces.ICommandBuilder;
 import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
 import ray1024.projects.collectioncontroller.general.interfaces.IOutputSource;
 import ray1024.projects.collectioncontroller.general.interfaces.Tickable;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
-import java.io.IOException;
-
 /**
  * Класс предназначенный для исполнения команд из очереди, пока та не закончится
  */
 public class MicroShell implements Tickable {
     private final Terminal parentTerminal;
-    private ICommandBuilder commandBuilder;
-    private boolean isInteractive;
-    private boolean isDone = false;
+    private final ICommandBuilder commandBuilder;
+    private final boolean isInteractive;
 
     public MicroShell(Terminal parentTerminal, ICommandBuilder _commandBuilder, boolean IsInteractive) {
         this.parentTerminal = parentTerminal;
@@ -25,17 +21,20 @@ public class MicroShell implements Tickable {
         isInteractive = IsInteractive;
     }
 
+    public ICommandBuilder getCommandBuilder() {
+        return commandBuilder;
+    }
+
     @Override
     public void tick() {
-        if (isDone) return;
         try {
+            if (commandBuilder.isDone()) return;
             commandBuilder.tick();
-        } catch (IOException e) {
-            isDone = true;
-        }
-        if (commandBuilder.getCommand() != null) {
-            commandBuilder.getCommand().setParentShell(this).execute();
-            commandBuilder.reset();
+            if (commandBuilder.getCommand() != null) {
+                commandBuilder.getCommand().setParentShell(this).execute();
+                commandBuilder.reset();
+            }
+        } catch (Throwable ignored) {
         }
     }
 
@@ -52,6 +51,10 @@ public class MicroShell implements Tickable {
     }
 
     public boolean isDone() {
-        return isDone;
+        try {
+            return commandBuilder.isDone();
+        } catch (Throwable ex) {
+            return true;
+        }
     }
 }

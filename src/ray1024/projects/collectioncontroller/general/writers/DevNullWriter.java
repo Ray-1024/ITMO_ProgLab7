@@ -9,7 +9,13 @@ public class DevNullWriter implements IOutputSource {
     }
 
     @Override
+    public void flush() {
+
+    }
+
+    @Override
     public void print(String line) {
+
 
     }
 }

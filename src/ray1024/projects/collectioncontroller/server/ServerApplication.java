@@ -32,14 +32,13 @@ public class ServerApplication {
 
 
     public static void main(String[] args) {
-
-        Server server = new Server();
-        while (true) {
-            try {
+        try {
+            Server server = new Server();
+            while (true) {
                 server.tick();
-            } catch (IOException e) {
-                throw new RuntimeException(e.getMessage());
             }
+        } catch (Throwable e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 

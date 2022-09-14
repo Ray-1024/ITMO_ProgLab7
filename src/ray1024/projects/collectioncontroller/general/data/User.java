@@ -1,26 +1,44 @@
 package ray1024.projects.collectioncontroller.general.data;
 
+import ray1024.projects.collectioncontroller.general.communication.RequestType;
+import ray1024.projects.collectioncontroller.general.communication.Response;
+import ray1024.projects.collectioncontroller.general.communication.ResponseType;
+import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
+import ray1024.projects.collectioncontroller.general.interfaces.IRequest;
 import ray1024.projects.collectioncontroller.general.interfaces.IUser;
-import ray1024.projects.collectioncontroller.general.interfaces.Tickable;
 import ray1024.projects.collectioncontroller.general.terminal.Terminal;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.net.Socket;
-
-public class User implements Serializable, IUser, Tickable {
+public class User implements IUser {
     private String login;
-    private String passwordHash;
-    private Socket connection;
+    private String password;
+    private IConnector connection;
     private Terminal terminal;
+    private long lastAccessTime;
+    private long lastResponseTime;
+
+    public User() {
+        lastAccessTime = System.currentTimeMillis();
+        lastResponseTime = System.currentTimeMillis();
+    }
 
     @Override
-    public Socket getConnection() {
+    public long getLastAccessTime() {
+        return lastAccessTime;
+    }
+
+    @Override
+    public IUser setLastAccessTime(long lastAccessTime) {
+        this.lastAccessTime = lastAccessTime;
+        return this;
+    }
+
+    @Override
+    public IConnector getConnection() {
         return connection;
     }
 
     @Override
-    public User setConnection(Socket connection) {
+    public User setConnection(IConnector connection) {
         this.connection = connection;
         return this;
     }
@@ -38,12 +56,12 @@ public class User implements Serializable, IUser, Tickable {
 
     @Override
     public String getPasswordHash() {
-        return passwordHash;
+        return password;
     }
 
     @Override
     public User setPassword(String passwordHash) {
-        this.passwordHash = passwordHash;
+        this.password = passwordHash;
         return this;
     }
 
@@ -59,7 +77,27 @@ public class User implements Serializable, IUser, Tickable {
     }
 
     @Override
-    public void tick() throws IOException {
+    public void tick() {
+        try {
 
+            if (System.currentTimeMillis() - lastAccessTime > 60 * 1000) {
+                connection.sendResponse(new Response().setResponseType(ResponseType.DISCONNECT));
+                return;
+            }
+            IRequest request = connection.receiveRequest();
+
+            if (request != null) {
+                System.out.println("---REQUEST---");
+                System.out.println(request.getRequestType());
+                lastAccessTime = System.currentTimeMillis();
+                if (request.getRequestType() == RequestType.EXECUTION_COMMAND) {
+                    terminal.getMainMicroshell().getCommandBuilder().addCommand(request.getCommand());
+                }
+            }
+            if (System.currentTimeMillis() - lastResponseTime > 50 * 1000)
+                connection.sendResponse(new Response().setResponseType(ResponseType.I_AM_ALIVE));
+            terminal.tick();
+        } catch (Throwable ignored) {
+        }
     }
 }

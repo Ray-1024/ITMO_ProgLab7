@@ -1,5 +1,7 @@
 package ray1024.projects.collectioncontroller.general.communication;
 
+import ray1024.projects.collectioncontroller.general.data.MyCollection;
+import ray1024.projects.collectioncontroller.general.data.StudyGroup;
 import ray1024.projects.collectioncontroller.general.interfaces.IResponse;
 
 import java.io.Serializable;
@@ -7,8 +9,10 @@ import java.io.Serializable;
 public class Response implements Serializable, IResponse {
     private ResponseType responseType;
     private String answer;
+    private MyCollection<StudyGroup> collection;
 
     public Response() {
+        collection = null;
     }
 
 
@@ -32,5 +36,16 @@ public class Response implements Serializable, IResponse {
     public Response setAnswer(String answer) {
         this.answer = answer;
         return this;
+    }
+
+    @Override
+    public IResponse setCollection(MyCollection<StudyGroup> collection) {
+        this.collection = collection;
+        return this;
+    }
+
+    @Override
+    public MyCollection<StudyGroup> getCollection() {
+        return collection;
     }
 }

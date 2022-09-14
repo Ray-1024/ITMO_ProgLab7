@@ -21,8 +21,8 @@ public class CommandBuilder implements ICommandBuilder {
     }
 
     @Override
-    public void tick() throws IOException {
-        if (reader.isEOF()) throw new IOException(Phrases.getPhrase("EndOfInputSource"));
+    public void tick() {
+        if (reader.isEOF()) return;
         if (command == null) {
             try {
                 if (!reader.hasNextLine()) return;
@@ -49,6 +49,12 @@ public class CommandBuilder implements ICommandBuilder {
     }
 
     @Override
+    public ICommandBuilder addCommand(BaseCommand command) {
+        this.command = command;
+        return this;
+    }
+
+    @Override
     public IInputSource getReader() {
         return reader;
     }
@@ -59,8 +65,14 @@ public class CommandBuilder implements ICommandBuilder {
     }
 
     @Override
+    public boolean isDone() {
+        return reader.isEOF();
+    }
+
+    @Override
     public void reset() {
         command = null;
+        writer.flush();
         writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
     }
 }

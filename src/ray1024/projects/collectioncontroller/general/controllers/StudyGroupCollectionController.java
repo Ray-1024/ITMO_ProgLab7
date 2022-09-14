@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 
 public class StudyGroupCollectionController implements Serializable {
 
-    private String collectionFilename = "Collection.xml";
+    private String collectionFilename;
     private MyCollection<StudyGroup> managedCollection;
 
     public MyCollection<StudyGroup> getManagedCollection() {
@@ -22,7 +22,8 @@ public class StudyGroupCollectionController implements Serializable {
 
     public StudyGroupCollectionController(String collectionFilename) {
         this.collectionFilename = collectionFilename;
-
+        if (collectionFilename == null)
+            managedCollection = new MyCollection<>();
     }
 
     public void loadCollectionFromFile() throws Exception {
@@ -33,7 +34,7 @@ public class StudyGroupCollectionController implements Serializable {
             xmlDecoder.close();
             inputStreamReader.close();
             for (StudyGroup studyGroup : managedCollection.getVec())
-                if (StudyGroup.getNextID() <= studyGroup.getId()) StudyGroup.setNextID(studyGroup.getId()+1);
+                if (StudyGroup.getNextID() <= studyGroup.getId()) StudyGroup.setNextID(studyGroup.getId() + 1);
         } catch (Throwable ex) {
             managedCollection = new MyCollection<>();
             throw new Exception(Phrases.getPhrase("CantLoadCollectionFromFile"));
@@ -49,6 +50,10 @@ public class StudyGroupCollectionController implements Serializable {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(Phrases.getPhrase("CantSaveCollectionToFile"));
         }
+    }
+
+    public void setManagedCollection(MyCollection<StudyGroup> managedCollection) {
+        this.managedCollection = managedCollection;
     }
 
 }

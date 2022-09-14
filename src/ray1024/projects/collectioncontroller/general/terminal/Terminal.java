@@ -2,6 +2,7 @@ package ray1024.projects.collectioncontroller.general.terminal;
 
 import ray1024.projects.collectioncontroller.general.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
+import ray1024.projects.collectioncontroller.general.interfaces.ICommandBuilder;
 import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
 import ray1024.projects.collectioncontroller.general.interfaces.IOutputSource;
 import ray1024.projects.collectioncontroller.general.interfaces.Tickable;
@@ -20,33 +21,33 @@ public class Terminal implements Tickable {
     private static final int MainShell = 0;
     private ArrayList<MicroShell> microShells;
     private StudyGroupCollectionController collectionController;
-
-    private IInputSource reader;
-    private IOutputSource writer;
+    private ICommandBuilder commandBuilder;
 
 
     public IOutputSource getWriter() {
-        return writer;
+        return commandBuilder.getWriter();
     }
 
-    public Terminal(IInputSource inputter, IOutputSource outputter) throws IllegalArgumentException {
+    public Terminal(ICommandBuilder commandBuilder) {
+        this.commandBuilder = commandBuilder;
         microShells = new ArrayList<>(microShellsLimit);
-        reader = inputter;
-        writer = outputter;
         try {
-            microShells.add(new MicroShell(this, new CommandBuilder(reader, writer), true));
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            microShells.add(new MicroShell(this, commandBuilder, true));
+        } catch (Throwable ignored) {
         }
     }
-
 
     public StudyGroupCollectionController getCollectionController() {
         return collectionController;
     }
 
-    public void setCollectionController(StudyGroupCollectionController collectionController) {
+    public MicroShell getMainMicroshell() {
+        return microShells.get(MainShell);
+    }
+
+    public Terminal setCollectionController(StudyGroupCollectionController collectionController) {
         this.collectionController = collectionController;
+        return this;
     }
 
     public void addMicroshell(MicroShell microShell) {
@@ -56,8 +57,15 @@ public class Terminal implements Tickable {
     }
 
     @Override
-    public void tick() throws IOException {
-        while (microShells.get(microShells.size() - 1).isDone()) microShells.remove(microShells.size() - 1);
-        microShells.get(microShells.size() - 1).tick();
+    public void tick() {
+        try {
+            if (microShells.size() == 0) return;
+            while (microShells.size() > 0 && microShells.get(microShells.size() - 1).isDone())
+                microShells.remove(microShells.size() - 1);
+            if (microShells.size() == 0) return;
+            microShells.get(microShells.size() - 1).tick();
+        } catch (Throwable ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

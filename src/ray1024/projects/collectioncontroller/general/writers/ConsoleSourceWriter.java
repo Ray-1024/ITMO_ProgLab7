@@ -12,4 +12,9 @@ public final class ConsoleSourceWriter implements IOutputSource {
     public void print(String line) {
         System.out.print(line);
     }
+
+    @Override
+    public void flush() {
+
+    }
 }

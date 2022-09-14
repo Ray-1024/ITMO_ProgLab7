@@ -1,5 +1,6 @@
 package ray1024.projects.collectioncontroller.server;
 
+import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 import java.io.IOException;
@@ -21,9 +22,9 @@ public class ConnectionAcceptor {
         }
     }
 
-    public Socket getNewConnection() {
+    public IConnector getNewConnection() {
         try {
-            return serverSocket.accept().socket();
+            return new ServerConnector(serverSocket.accept().socket());
         } catch (Throwable e) {
             return null;
         }
