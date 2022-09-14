@@ -7,5 +7,5 @@ public interface IConnector {
 
     IResponse receiveResponse();
 
-    IConnector sendResponse();
+    IConnector sendResponse(IResponse response);
 }

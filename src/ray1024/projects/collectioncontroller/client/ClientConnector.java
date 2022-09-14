@@ -95,7 +95,8 @@ public class ClientConnector implements IConnector {
     }
 
     @Override
-    public IConnector sendResponse() {
-        return null;
+    public IConnector sendResponse(IResponse response) {
+        return this;
     }
+
 }

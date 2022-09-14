@@ -29,14 +29,6 @@ public class ServerApplication {
         UpdateByIDCommand.command.getName();
         ExecuteScriptCommand.command.getName();
     }
-    //  User class
-    //  Request class(type,command,user)
-    //  Response class(type,text_answer,server)
-    //  ConnectionAcceptor(nonblocking) + returns new User
-    //  Terminal for everyone of users
-    //  UsersManager(disconnect, connect)
-    //
-    //
 
 
     public static void main(String[] args) {
@@ -49,29 +41,6 @@ public class ServerApplication {
                 throw new RuntimeException(e.getMessage());
             }
         }
-        /*try {
-            ConnectionAcceptor connectionAcceptor = new ConnectionAcceptor();
-            IConnector client = new Connector(InetAddress.getByName("localhost"), 44147);
-            client.sendRequestToServer(new Request().setRequestType(RequestType.DISCONNECTION));
-            IConnector server = null;
-            Socket socket;
-            while (true) {
-                if (server == null) {
-                    socket = connectionAcceptor.getNewConnection();
-                    if (socket != null) server = new Connector(socket);
-                } else {
-                    IRequest request = server.receiveRequestFromClient();
-                    if (request != null) {
-                        System.out.println("---REQUEST---");
-                        System.out.println("TYPE: " + request.getRequestType());
-                        System.out.println("-----END-----");
-                    }
-                }
-            }
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
-*/
     }
 
 }

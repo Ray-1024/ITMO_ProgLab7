@@ -41,7 +41,7 @@ public class Server implements Tickable {
         if (currConnect != null) {
             //usersManager.addUser(new User().setConnection(currConnect));
             System.out.println("NEW_CONNECTION:" + currConnect);
-            tempConnector = new ClientConnector(currConnect);
+            tempConnector = new ServerConnector(currConnect);
         }
         if (tempConnector != null) {
             IRequest request = tempConnector.receiveRequest();

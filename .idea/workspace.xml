@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64ad19ee-ac90-4d5a-bae1-1d252618de2e" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/ClientConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/RequestType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/ResponseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/ResponseType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/SteppedInputObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/SteppedInputObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/StudyGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/StudyGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/ClientConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/ClientConnector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/interfaces/IConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/interfaces/IConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/tools/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/tools/Serializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerConnector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,14 +115,7 @@
       <workItem from="1663077973926" duration="12000" />
       <workItem from="1663078511967" duration="1190000" />
       <workItem from="1663100731781" duration="14000" />
-      <workItem from="1663145024449" duration="10986000" />
-    </task>
-    <task id="LOCAL-00003" summary="1">
-      <created>1657989567896</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1657989567896</updated>
+      <workItem from="1663145024449" duration="11955000" />
     </task>
     <task id="LOCAL-00004" summary="1">
       <created>1657989631423</created>
@@ -468,7 +453,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663151867289</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="1">
+      <created>1663171384080</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1663171384080</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
