@@ -1,6 +1,6 @@
-package ray1024.projects.collectioncontroller.general.communication;
+package ray1024.projects.collectioncontroller.server;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
 import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
 import ray1024.projects.collectioncontroller.general.interfaces.IRequest;
 import ray1024.projects.collectioncontroller.general.interfaces.IResponse;
@@ -12,9 +12,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
-import java.util.Arrays;
 
-public class Connector implements IConnector {
+public class ServerConnector implements IConnector {
     private final Socket socket;
     private final SocketChannel socketChannel;
     private final ByteBuffer sizeBuffer;
@@ -22,7 +21,7 @@ public class Connector implements IConnector {
 
     private int objectSize;
 
-    public Connector(InetAddress serverAddress, int port) {
+    public ServerConnector(InetAddress serverAddress, int port) {
         try {
             socket = SocketChannel.open().socket();
             socket.connect(new InetSocketAddress(serverAddress, port));
@@ -40,7 +39,7 @@ public class Connector implements IConnector {
         sizeBuffer.clear();
     }
 
-    public Connector(Socket socket) {
+    public ServerConnector(Socket socket) {
         this.socket = socket;
         socketChannel = socket.getChannel();
         try {
@@ -54,19 +53,12 @@ public class Connector implements IConnector {
     }
 
     @Override
-    public IConnector sendRequestToServer(IRequest request) {
+    public IConnector sendRequest(IRequest request) {
         try {
             byte[] buff = Serializer.serialize(request);
             objectSize = buff.length;
             sizeBuffer.clear();
             sizeBuffer.putInt(objectSize);
-
-            /*System.out.println("---SIZE_REQUEST---");
-            System.out.println("SIZE: " + objectSize);
-            System.out.println(Arrays.toString(sizeBuffer.array()));
-            System.out.println(Arrays.toString(buff));
-            System.out.println("------------------");*/
-
             ByteBuffer byteBuffer = ByteBuffer.wrap(buff);
             sizeBuffer.clear();
             socketChannel.write(sizeBuffer);
@@ -79,15 +71,12 @@ public class Connector implements IConnector {
     }
 
     @Override
-    public IRequest receiveRequestFromClient() {
+    public IRequest receiveRequest() {
         try {
             if (sizeBuffer.remaining() == 0) {
                 if (objectSize == -1) {
                     sizeBuffer.clear();
                     objectSize = sizeBuffer.getInt();
-                    /*System.out.println("---REQUEST_SIZE---");
-                    System.out.println(objectSize);
-                    System.out.println("------------------");*/
                     if (objectSize > 0 && (objectBuffer == null || objectSize > objectBuffer.capacity()))
                         objectBuffer = ByteBuffer.allocate(objectSize);
                 }
@@ -114,7 +103,12 @@ public class Connector implements IConnector {
     }
 
     @Override
-    public IResponse receiveResponseFromServer() {
+    public IResponse receiveResponse() {
+        return null;
+    }
+
+    @Override
+    public IConnector sendResponse() {
         return null;
     }
 }

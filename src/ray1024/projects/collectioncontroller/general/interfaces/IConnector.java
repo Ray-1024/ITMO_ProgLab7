@@ -1,9 +1,11 @@
 package ray1024.projects.collectioncontroller.general.interfaces;
 
 public interface IConnector {
-    IConnector sendRequestToServer(IRequest request);
+    IConnector sendRequest(IRequest request);
 
-    IRequest receiveRequestFromClient();
+    IRequest receiveRequest();
 
-    IResponse receiveResponseFromServer();
+    IResponse receiveResponse();
+
+    IConnector sendResponse();
 }

@@ -1,17 +1,8 @@
 package ray1024.projects.collectioncontroller.server;
 
 import ray1024.projects.collectioncontroller.general.commands.*;
-import ray1024.projects.collectioncontroller.general.communication.Connector;
-import ray1024.projects.collectioncontroller.general.communication.Request;
-import ray1024.projects.collectioncontroller.general.communication.RequestType;
-import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
-import ray1024.projects.collectioncontroller.general.interfaces.IRequest;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.nio.channels.SocketChannel;
 
 /**
  * Главный красс создающий и запускающий Терминал

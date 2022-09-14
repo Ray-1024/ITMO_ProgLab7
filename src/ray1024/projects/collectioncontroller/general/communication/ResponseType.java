@@ -1,5 +1,5 @@
 package ray1024.projects.collectioncontroller.general.communication;
 
 public enum ResponseType {
-    SUCCESS, FAILURE
+    ANSWER, COLLECTION_UPDATE
 }

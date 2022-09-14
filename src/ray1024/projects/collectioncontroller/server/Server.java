@@ -1,6 +1,7 @@
 package ray1024.projects.collectioncontroller.server;
 
-import ray1024.projects.collectioncontroller.general.communication.Connector;
+import ray1024.projects.collectioncontroller.client.ClientConnector;
+import ray1024.projects.collectioncontroller.general.communication.RequestType;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.general.controllers.UserManager;
 import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
@@ -39,19 +40,22 @@ public class Server implements Tickable {
         Socket currConnect = connectionAcceptor.getNewConnection();
         if (currConnect != null) {
             //usersManager.addUser(new User().setConnection(currConnect));
-            System.out.println("NEW_CONNECTION:" + currConnect.toString());
-            tempConnector = new Connector(currConnect);
+            System.out.println("NEW_CONNECTION:" + currConnect);
+            tempConnector = new ClientConnector(currConnect);
         }
         if (tempConnector != null) {
-            //System.out.println("TEMPCONNECTOR_NOT_NULL");
-            IRequest request = tempConnector.receiveRequestFromClient();
+            IRequest request = tempConnector.receiveRequest();
             if (request != null) {
-                // System.out.println("REQUEST_NOT_NULL");
                 System.out.println(request.getRequestType());
+                if (request.getRequestType() == RequestType.CONNECTION) {
+                    System.out.println("Login: " + request.getUser().getLogin());
+                    System.out.println("PasswordHash: " + request.getUser().getPasswordHash());
+                }
+                if (request.getRequestType() == RequestType.EXECUTION_COMMAND)
+                    System.out.println(request.getCommand().getName());
                 request = null;
             }
         }
-        //System.out.println("TERMINAL_TICK");
         serverTerminal.tick();
     }
 }

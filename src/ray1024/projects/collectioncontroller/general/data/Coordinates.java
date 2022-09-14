@@ -2,12 +2,13 @@ package ray1024.projects.collectioncontroller.general.data;
 
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Класс представляющий координаты в 2-мерном пространстве
  */
-public class Coordinates extends SteppedInputObject {
+public class Coordinates extends SteppedInputObject implements Serializable {
 
     private float x; //Максимальное значение поля: 948
     private Integer y; //Значение поля должно быть больше -544, Поле не может быть null

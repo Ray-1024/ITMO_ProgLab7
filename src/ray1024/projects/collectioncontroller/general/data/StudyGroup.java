@@ -2,6 +2,7 @@ package ray1024.projects.collectioncontroller.general.data;
 
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**

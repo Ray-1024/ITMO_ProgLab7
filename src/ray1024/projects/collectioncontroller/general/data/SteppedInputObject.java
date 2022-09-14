@@ -2,7 +2,9 @@ package ray1024.projects.collectioncontroller.general.data;
 
 import ray1024.projects.collectioncontroller.general.interfaces.ISteppedInput;
 
-public abstract class SteppedInputObject implements ISteppedInput {
+import java.io.Serializable;
+
+public abstract class SteppedInputObject implements ISteppedInput, Serializable {
     protected int currentStep = 0;
     protected int stepsCount = 0;
 
