@@ -1,5 +1,6 @@
-package ray1024.projects.collectioncontroller.client;
+package ray1024.projects.collectioncontroller.general.communication;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
 import ray1024.projects.collectioncontroller.general.interfaces.IRequest;
 import ray1024.projects.collectioncontroller.general.interfaces.IResponse;
@@ -11,11 +12,13 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.util.Arrays;
 
 public class Connector implements IConnector {
-    private Socket socket;
-    private SocketChannel socketChannel;
-    private ByteBuffer sizeBuffer, objectBuffer;
+    private final Socket socket;
+    private final SocketChannel socketChannel;
+    private final ByteBuffer sizeBuffer;
+    private ByteBuffer objectBuffer;
 
     private int objectSize;
 
@@ -30,19 +33,24 @@ public class Connector implements IConnector {
         try {
             socketChannel.configureBlocking(false);
         } catch (IOException e) {
-            throw new RuntimeException("SOCKET_CONNECTOR_BLOCKING_ERROR");
+            throw new RuntimeException("CONNECTOR_SOCKET_SET_BLOCKING_ERROR");
         }
         sizeBuffer = ByteBuffer.allocate(4);
         objectSize = -1;
+        sizeBuffer.clear();
     }
 
-    public Connector(Socket socket) throws IOException {
+    public Connector(Socket socket) {
         this.socket = socket;
         socketChannel = socket.getChannel();
-        socketChannel.configureBlocking(false);
+        try {
+            socketChannel.configureBlocking(false);
+        } catch (IOException e) {
+            throw new RuntimeException("CONNECTOR_SOCKET_SET_BLOCKING_ERROR");
+        }
         sizeBuffer = ByteBuffer.allocate(4);
         objectSize = -1;
-        sizeBuffer.position(0);
+        sizeBuffer.clear();
     }
 
     @Override
@@ -50,8 +58,19 @@ public class Connector implements IConnector {
         try {
             byte[] buff = Serializer.serialize(request);
             objectSize = buff.length;
-            socketChannel.write(sizeBuffer.putInt(objectSize));
-            socketChannel.write(ByteBuffer.wrap(buff));
+            sizeBuffer.clear();
+            sizeBuffer.putInt(objectSize);
+
+            /*System.out.println("---SIZE_REQUEST---");
+            System.out.println("SIZE: " + objectSize);
+            System.out.println(Arrays.toString(sizeBuffer.array()));
+            System.out.println(Arrays.toString(buff));
+            System.out.println("------------------");*/
+
+            ByteBuffer byteBuffer = ByteBuffer.wrap(buff);
+            sizeBuffer.clear();
+            socketChannel.write(sizeBuffer);
+            socketChannel.write(byteBuffer);
             sizeBuffer.clear();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -62,56 +81,40 @@ public class Connector implements IConnector {
     @Override
     public IRequest receiveRequestFromClient() {
         try {
-            if (sizeBuffer.position() == sizeBuffer.capacity()) {
+            if (sizeBuffer.remaining() == 0) {
                 if (objectSize == -1) {
+                    sizeBuffer.clear();
                     objectSize = sizeBuffer.getInt();
-                    if (objectBuffer == null || objectSize > objectBuffer.capacity())
+                    /*System.out.println("---REQUEST_SIZE---");
+                    System.out.println(objectSize);
+                    System.out.println("------------------");*/
+                    if (objectSize > 0 && (objectBuffer == null || objectSize > objectBuffer.capacity()))
                         objectBuffer = ByteBuffer.allocate(objectSize);
                 }
-                if (objectBuffer.position() < objectBuffer.capacity()) socketChannel.read(objectBuffer);
-                if (objectBuffer.position() == objectBuffer.capacity()) {
+                if (objectBuffer.remaining() > 0) socketChannel.read(objectBuffer);
+                if (objectBuffer.remaining() == 0) {
                     try {
+                        sizeBuffer.clear();
+                        objectSize = -1;
+                        objectBuffer.clear();
                         return (IRequest) Serializer.deserialize(objectBuffer.array());
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
                 }
-                return null;
             } else {
                 socketChannel.read(sizeBuffer);
                 if (objectBuffer != null) objectBuffer.clear();
-                return null;
+                objectSize = -1;
             }
+            return null;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return null;
         }
     }
 
     @Override
     public IResponse receiveResponseFromServer() {
-        try {
-            if (sizeBuffer.position() == sizeBuffer.capacity()) {
-                if (objectSize == -1) {
-                    objectSize = sizeBuffer.getInt();
-                    if (objectBuffer == null || objectSize > objectBuffer.capacity())
-                        objectBuffer = ByteBuffer.allocate(objectSize);
-                }
-                if (objectBuffer.position() < objectBuffer.capacity()) socketChannel.read(objectBuffer);
-                if (objectBuffer.position() == objectBuffer.capacity()) {
-                    try {
-                        return (IResponse) Serializer.deserialize(objectBuffer.array());
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                return null;
-            } else {
-                socketChannel.read(sizeBuffer);
-                objectBuffer.clear();
-                return null;
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return null;
     }
 }

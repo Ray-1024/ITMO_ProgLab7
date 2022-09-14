@@ -9,12 +9,12 @@ public class ConsoleSourceReader implements IInputSource {
     private Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String nextLine() throws IOException {
+    public String nextLine() {
         return scanner.nextLine();
     }
 
     @Override
-    public boolean hasNextLine() throws IOException {
+    public boolean hasNextLine() {
         return scanner.hasNextLine();
     }
 

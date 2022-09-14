@@ -46,9 +46,19 @@ public final class NonBlockingConsoleSourceReader implements IInputSource {
     }
 
     @Override
-    public boolean hasNextLine() throws IOException {
-        while (!eof && reader.ready()) {
-            int cnt = reader.read(buffer);
+    public boolean hasNextLine() {
+        while (true) {
+            try {
+                if (!(!eof && reader.ready())) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            int cnt = 0;
+            try {
+                cnt = reader.read(buffer);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             if (cnt > 0) stringBuilder.append(buffer, 0, cnt);
             else if (cnt == -1) eof = true;
             else break;

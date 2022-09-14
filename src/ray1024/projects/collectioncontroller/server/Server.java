@@ -1,9 +1,8 @@
 package ray1024.projects.collectioncontroller.server;
 
-import ray1024.projects.collectioncontroller.client.Connector;
+import ray1024.projects.collectioncontroller.general.communication.Connector;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.general.controllers.UserManager;
-import ray1024.projects.collectioncontroller.general.data.User;
 import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
 import ray1024.projects.collectioncontroller.general.interfaces.IRequest;
 import ray1024.projects.collectioncontroller.general.interfaces.IUserManager;
@@ -44,14 +43,15 @@ public class Server implements Tickable {
             tempConnector = new Connector(currConnect);
         }
         if (tempConnector != null) {
-            System.out.println("TEMPCONNECTOR_NOT_NULL");
+            //System.out.println("TEMPCONNECTOR_NOT_NULL");
             IRequest request = tempConnector.receiveRequestFromClient();
             if (request != null) {
-                System.out.println("REQUEST_NOT_NULL");
+                // System.out.println("REQUEST_NOT_NULL");
                 System.out.println(request.getRequestType());
+                request = null;
             }
         }
-        System.out.println("TERMINAL_TICK");
+        //System.out.println("TERMINAL_TICK");
         serverTerminal.tick();
     }
 }

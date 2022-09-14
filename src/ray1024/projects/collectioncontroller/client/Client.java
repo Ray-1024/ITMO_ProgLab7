@@ -2,8 +2,9 @@ package ray1024.projects.collectioncontroller.client;
 
 import ray1024.projects.collectioncontroller.general.commands.BaseCommand;
 import ray1024.projects.collectioncontroller.general.commands.CommandBuilder;
-import ray1024.projects.collectioncontroller.general.communicationtypes.RequestType;
-import ray1024.projects.collectioncontroller.general.data.Request;
+import ray1024.projects.collectioncontroller.general.communication.Connector;
+import ray1024.projects.collectioncontroller.general.communication.RequestType;
+import ray1024.projects.collectioncontroller.general.communication.Request;
 import ray1024.projects.collectioncontroller.general.data.User;
 import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
 import ray1024.projects.collectioncontroller.general.interfaces.IRequest;
@@ -15,7 +16,6 @@ import ray1024.projects.collectioncontroller.general.writers.ConsoleSourceWriter
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Client implements Tickable {
@@ -35,7 +35,7 @@ public class Client implements Tickable {
             commandBuilder = new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
             connector = new Connector(InetAddress.getByName("localhost"), 44147);
             IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.REGISTRATION);
-            System.out.println("<COOKING_REGISTRATION_REQUEST>");
+            //System.out.println("<COOKING_REGISTRATION_REQUEST>");
             connector.sendRequestToServer(registrationRequest);
         } catch (Throwable e) {
             for (StackTraceElement i : e.getStackTrace())

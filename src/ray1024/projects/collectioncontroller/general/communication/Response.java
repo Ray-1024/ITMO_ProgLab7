@@ -1,6 +1,5 @@
-package ray1024.projects.collectioncontroller.general.data;
+package ray1024.projects.collectioncontroller.general.communication;
 
-import ray1024.projects.collectioncontroller.general.communicationtypes.ResponseType;
 import ray1024.projects.collectioncontroller.general.interfaces.IResponse;
 
 import java.io.Serializable;

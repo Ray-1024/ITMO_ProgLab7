@@ -13,8 +13,8 @@ public class ConnectionAcceptor {
 
     public ConnectionAcceptor() {
         try {
-            serverSocket = ServerSocketChannel.open();
-            serverSocket.bind(new InetSocketAddress("localhost", 44147));
+            serverSocket = ServerSocketChannel.open().bind(new InetSocketAddress("localhost", 44147));
+            serverSocket.configureBlocking(false);
             serverSocket.socket().setSoTimeout(1);
         } catch (IOException e) {
             throw new RuntimeException(Phrases.getPhrase("ServerCan'tStart"));
@@ -24,7 +24,7 @@ public class ConnectionAcceptor {
     public Socket getNewConnection() {
         try {
             return serverSocket.accept().socket();
-        } catch (IOException e) {
+        } catch (Throwable e) {
             return null;
         }
     }

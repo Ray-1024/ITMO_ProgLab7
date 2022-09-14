@@ -13,12 +13,12 @@ public class ListSourceReader implements IInputSource {
     }
 
     @Override
-    public String nextLine() throws IOException {
+    public String nextLine() {
         return lines.poll();
     }
 
     @Override
-    public boolean hasNextLine() throws IOException {
+    public boolean hasNextLine() {
         return lines.size() > 0;
     }
 
