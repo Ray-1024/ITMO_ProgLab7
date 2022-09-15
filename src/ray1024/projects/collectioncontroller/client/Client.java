@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class Client implements Tickable {
 
-    private final CommandBuilder commandBuilder;
+    private CommandBuilder commandBuilder;
     private IConnector connector;
     private StudyGroupCollectionController collectionController;
     private IUser user;
@@ -40,10 +40,8 @@ public class Client implements Tickable {
             lastAnswerTime = System.currentTimeMillis();
             lastReConnectTime = System.currentTimeMillis();
         } catch (Throwable e) {
-            for (StackTraceElement i : e.getStackTrace())
-                System.out.println(i.toString());
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
+            System.out.println("SERVER DOESN'T EXIST");
+            System.exit(0);
         }
     }
 

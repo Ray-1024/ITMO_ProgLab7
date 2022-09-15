@@ -21,17 +21,15 @@ public class CommandBuilder implements ICommandBuilder {
         this.terminal = terminal;
     }
 
-    public CommandBuilder(IInputSource reader, IOutputSource writer) throws IOException {
-        if (reader == null) throw new IOException(Phrases.getPhrase("InputSourceIsNull"));
+    public CommandBuilder(IInputSource reader, IOutputSource writer) {
         this.reader = reader;
-        if (writer == null) throw new IOException(Phrases.getPhrase("OutputSourceIsNull"));
         this.writer = writer;
         writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
     }
 
     @Override
     public void tick() {
-        if (reader.isEOF()) return;
+        if (reader.isEOF() || reader == null || writer == null) return;
         if (command == null) {
             try {
                 if (!reader.hasNextLine()) return;
@@ -75,13 +73,16 @@ public class CommandBuilder implements ICommandBuilder {
 
     @Override
     public boolean isDone() {
-        return reader.isEOF();
+        return reader == null || reader.isEOF();
     }
 
     @Override
     public void reset() {
-        command = null;
-        writer.flush();
-        writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
+        try {
+            command = null;
+            writer.flush();
+            writer.println(Phrases.getPhrase("TerminalWaitNewCommand"));
+        } catch (Throwable ignored) {
+        }
     }
 }
