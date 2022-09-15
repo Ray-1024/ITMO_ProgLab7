@@ -20,14 +20,14 @@ public class AddIfMinCommand extends BaseCommand {
 
 
     @Override
-    public void execute() throws RuntimeException {
+    public void execute() {
         try {
             if (getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> {
                 return i.compareTo(studyGroup) > 0;
             }))
                 getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
         } catch (Exception e) {
-            throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
+            getParentShell().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));
         }
     }
 
@@ -48,7 +48,8 @@ public class AddIfMinCommand extends BaseCommand {
 
     @Override
     public BaseCommand setArgs(String[] args) throws RuntimeException {
-        if (args == null || args.length != 1) throw new RuntimeException(Phrases.getPhrase("WrongCommandArgs"));
+        if (args == null || args.length != 1)
+            getParentShell().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
         return this;
     }
 }

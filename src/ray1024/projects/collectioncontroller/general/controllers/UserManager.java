@@ -14,10 +14,12 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class UserManager implements IUserManager, Tickable, Serializable {
-    private final HashMap<String, IUser> users = new HashMap<>();
-    private final List<IUser> unknowns = new LinkedList<>();
+    private final HashMap<String, IUser> users;
+    transient private final List<IUser> unknowns;
 
     public UserManager() {
+        users = new HashMap<>();
+        unknowns = new LinkedList<>();
     }
 
     @Override
@@ -32,7 +34,7 @@ public class UserManager implements IUserManager, Tickable, Serializable {
             unknowns.add(user);
         else if (!users.containsKey(user.getLogin()) && user.getPasswordHash() != null)
             users.put(user.getLogin(), user);
-        else {
+        else if (isRegistred(user)) {
             try {
                 users.get(user.getLogin()).setConnection(user.getConnection());
             } catch (Throwable ignored) {

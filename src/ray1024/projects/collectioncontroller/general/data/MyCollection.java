@@ -59,4 +59,5 @@ public class MyCollection<T> implements Serializable {
         }
         return stringBuilder.toString();
     }
+
 }

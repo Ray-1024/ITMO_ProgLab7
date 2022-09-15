@@ -19,7 +19,7 @@ import java.util.LinkedList;
  * При ошибке парсинга скрипта, он не будет выполнен, ни единой команды
  */
 public class ExecuteScriptCommand extends BaseCommand {
-    private String scriptFilename;
+    private String scriptFilename = "...";
     public static final ExecuteScriptCommand command = new ExecuteScriptCommand();
     private CommandBuilder scriptCommandBuilder;
 
@@ -30,15 +30,25 @@ public class ExecuteScriptCommand extends BaseCommand {
 
     @Override
     public void execute() {
-        getParentShell().getParentTerminal().addMicroshell(new MicroShell(getParentShell().getParentTerminal(), scriptCommandBuilder, false));
+        try {
+            if ("...".equals(scriptFilename))
+                getParentShell().getWriter().println(Phrases.getPhrase("UnsupportedScriptLevel"));
+            getParentShell().getParentTerminal().addMicroshell(new MicroShell(getParentShell().getParentTerminal(), scriptCommandBuilder, false));
+        } catch (Throwable ignored) {
+
+        }
     }
 
     @Override
     public BaseCommand setArgs(String[] args) throws RuntimeException {
-        if (args.length != 2) throw new RuntimeException(Phrases.getPhrase("WrongCommandArgs"));
-        scriptFilename = args[1];
         try {
+            if (args.length != 2) throw new RuntimeException(Phrases.getPhrase("WrongCommandArgs"));
+            scriptFilename = args[1];
             scriptCommandBuilder = new CommandBuilder(new ListSourceReader(new LinkedList<>(Files.readAllLines(Paths.get(scriptFilename)))), new DevNullWriter());
+            while (!scriptCommandBuilder.isDone()) {
+                getParentShell().getParentTerminal()
+            }
+            currentStep = -1;
         } catch (Throwable ex) {
             throw new RuntimeException("Can'tFindScript");
         }

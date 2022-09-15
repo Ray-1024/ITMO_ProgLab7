@@ -18,11 +18,11 @@ public class AddCommand extends BaseCommand {
 
 
     @Override
-    public void execute() throws RuntimeException {
+    public void execute() {
         try {
             getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
         } catch (Exception e) {
-            throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
+            getParentShell().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));
         }
     }
 
@@ -43,7 +43,12 @@ public class AddCommand extends BaseCommand {
 
     @Override
     public BaseCommand setArgs(String[] args) {
-        if (args == null || args.length != 1) throw new RuntimeException(Phrases.getPhrase("WrongCommandArgs"));
+        try {
+            if (args == null || args.length != 1)
+                getParentShell().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
+        } catch (Throwable ex) {
+
+        }
         return this;
     }
 

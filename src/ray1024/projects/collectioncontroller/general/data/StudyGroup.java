@@ -103,7 +103,7 @@ public class StudyGroup extends SteppedInputObject implements Comparable<StudyGr
     @Override
     public int compareTo(StudyGroup o) {
         if (this.equals(o)) return 0;
-        return this.name.compareTo(o.name);
+        return this.studentsCount - o.studentsCount;
     }
 
     public static int getNextID() {

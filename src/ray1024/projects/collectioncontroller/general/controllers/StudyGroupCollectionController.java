@@ -10,6 +10,7 @@ import java.beans.XMLEncoder;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Comparator;
 
 public class StudyGroupCollectionController implements Serializable {
 
@@ -24,6 +25,10 @@ public class StudyGroupCollectionController implements Serializable {
         this.collectionFilename = collectionFilename;
         if (collectionFilename == null)
             managedCollection = new MyCollection<>();
+    }
+
+    public void sortManagedCollection() {
+        managedCollection.getVec().sort(Comparator.naturalOrder());
     }
 
     public void loadCollectionFromFile() throws Exception {

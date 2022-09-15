@@ -54,8 +54,7 @@ public class ClientConnector implements IConnector {
             sizeBufferOut.clear();
             socketChannel.write(sizeBufferOut);
             socketChannel.write(byteBuffer);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (IOException ignored) {
         }
         return this;
     }
@@ -72,8 +71,7 @@ public class ClientConnector implements IConnector {
                 if (objectSizeIn == -1) {
                     sizeBufferIn.clear();
                     objectSizeIn = sizeBufferIn.getInt();
-                    if (objectSizeIn > 0)
-                        objectBufferIn = ByteBuffer.allocate(objectSizeIn);
+                    if (objectSizeIn > 0) objectBufferIn = ByteBuffer.allocate(objectSizeIn);
                     objectBufferIn.clear();
                 }
                 if (objectBufferIn.remaining() > 0) socketChannel.read(objectBufferIn);

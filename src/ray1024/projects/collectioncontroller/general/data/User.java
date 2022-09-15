@@ -15,10 +15,22 @@ public class User implements IUser {
     private Terminal terminal;
     private long lastAccessTime;
     private long lastResponseTime;
+    private long lastUpdateTime;
+    private boolean isActive;
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     public User() {
         lastAccessTime = System.currentTimeMillis();
         lastResponseTime = System.currentTimeMillis();
+        lastUpdateTime = System.currentTimeMillis();
+        isActive = true;
     }
 
     @Override
@@ -79,8 +91,9 @@ public class User implements IUser {
     @Override
     public void tick() {
         try {
-
+            if (!isActive) return;
             if (System.currentTimeMillis() - lastAccessTime > 60 * 1000) {
+                isActive = false;
                 connection.sendResponse(new Response().setResponseType(ResponseType.DISCONNECT));
                 return;
             }
@@ -102,7 +115,11 @@ public class User implements IUser {
                 connection.sendResponse(new Response().setResponseType(ResponseType.I_AM_ALIVE));
                 lastResponseTime = System.currentTimeMillis();
             }
-
+            if (System.currentTimeMillis() - lastUpdateTime > 30 * 1000) {
+                terminal.getCollectionController().sortManagedCollection();
+                connection.sendResponse(new Response().setResponseType(ResponseType.COLLECTION_UPDATE).setCollection(terminal.getCollectionController().getManagedCollection()));
+                lastUpdateTime = System.currentTimeMillis();
+            }
             terminal.tick();
         } catch (Throwable ignored) {
         }

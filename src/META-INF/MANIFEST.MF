@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
-Main-Class: ray1024.projects.collectioncontroller.server.ServerApplication
+Main-Class: ray1024.projects.collectioncontroller.server.ServerApplicati
+ on
 

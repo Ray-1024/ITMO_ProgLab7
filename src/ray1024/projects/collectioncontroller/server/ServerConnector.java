@@ -90,8 +90,7 @@ public class ServerConnector implements IConnector {
             sizeBufferOut.clear();
             socketChannel.write(sizeBufferOut);
             socketChannel.write(byteBuffer);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (IOException ignored) {
         }
         return this;
     }

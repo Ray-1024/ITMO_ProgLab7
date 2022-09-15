@@ -88,6 +88,7 @@ public class Phrases {
             phrases.put("PleaseEnterLogin", "Пожалуйста введите логин:");
             phrases.put("PleaseEnterPassword", "Пожалуйста введите пароль:");
             phrases.put("EndOfInputSource", "Источник ввода закрыт, дальнейшее считывание команд невозможно.");
+            phrases.put("UnsupportedScriptLevel", "Исполнение вложенных скриптов пока недоступно.");
         }
     }
 }
