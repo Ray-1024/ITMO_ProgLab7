@@ -24,7 +24,14 @@ public class User implements IUser {
 
     @Override
     public void setActive(boolean active) {
+
         isActive = active;
+        if (!active) {
+            try {
+                connection.sendResponse(new Response().setResponseType(ResponseType.DISCONNECT));
+            } catch (Throwable ignored) {
+            }
+        }
     }
 
     public User() {
