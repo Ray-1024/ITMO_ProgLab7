@@ -24,6 +24,6 @@ public class ListSourceReader implements IInputSource {
 
     @Override
     public boolean isEOF() {
-        return lines.size() > 0;
+        return lines.size() == 0;
     }
 }

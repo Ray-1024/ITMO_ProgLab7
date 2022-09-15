@@ -3,6 +3,7 @@ package ray1024.projects.collectioncontroller.general.commands;
 import ray1024.projects.collectioncontroller.general.interfaces.ICommandBuilder;
 import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
 import ray1024.projects.collectioncontroller.general.interfaces.IOutputSource;
+import ray1024.projects.collectioncontroller.general.terminal.Terminal;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 import java.io.IOException;
@@ -11,6 +12,15 @@ public class CommandBuilder implements ICommandBuilder {
     private BaseCommand command;
     private IInputSource reader;
     private IOutputSource writer;
+    private Terminal terminal;
+
+    public Terminal getTerminal() {
+        return terminal;
+    }
+
+    public void setTerminal(Terminal terminal) {
+        this.terminal = terminal;
+    }
 
     public CommandBuilder(IInputSource reader, IOutputSource writer) throws IOException {
         if (reader == null) throw new IOException(Phrases.getPhrase("InputSourceIsNull"));

@@ -5,10 +5,7 @@ import ray1024.projects.collectioncontroller.general.communication.RequestType;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.general.controllers.UserManager;
 import ray1024.projects.collectioncontroller.general.data.User;
-import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
-import ray1024.projects.collectioncontroller.general.interfaces.IRequest;
-import ray1024.projects.collectioncontroller.general.interfaces.IUserManager;
-import ray1024.projects.collectioncontroller.general.interfaces.Tickable;
+import ray1024.projects.collectioncontroller.general.interfaces.*;
 import ray1024.projects.collectioncontroller.general.readers.DevNullReader;
 import ray1024.projects.collectioncontroller.general.readers.NonBlockingConsoleSourceReader;
 import ray1024.projects.collectioncontroller.general.terminal.Terminal;
@@ -71,7 +68,9 @@ public class Server implements Tickable {
             try {
                 System.out.println("---NEW CONNECTION---");
                 Terminal userTerminal = new Terminal(new CommandBuilder(new DevNullReader(), new ResponseWriter(currConnect))).setCollectionController(serverTerminal.getCollectionController());
-                usersManager.addUser(new User().setConnection(currConnect).setLastAccessTime(System.currentTimeMillis()).setTerminal(userTerminal));
+                IUser user = new User();
+                userTerminal.setMaster(user);
+                usersManager.addUser(user.setConnection(currConnect).setLastAccessTime(System.currentTimeMillis()).setTerminal(userTerminal));
             } catch (Throwable e) {
                 System.out.println(e.getMessage());
                 saveUsers(usersFilename);

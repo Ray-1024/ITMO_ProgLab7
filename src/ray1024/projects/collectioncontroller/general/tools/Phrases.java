@@ -77,7 +77,7 @@ public class Phrases {
             phrases.put("FilterStartsWithNameCommandDescription", "Показывает группы названия которых начинаются с аргумента команды.");
             phrases.put("TooManyMicroshells", "В текущем терминале слишком много исполнителей создание еще одного невозможно.");
             phrases.put("ExecuteScriptCommandDescription", "Выполняет скрипт с названием указанным в аргументе.");
-            phrases.put("Can'tFindScript", "Не удалось найти скрипт.");
+            phrases.put("Can'tFindScript", "Не удалось разобрать скрипт на команды, возможно скрипт вызывает другие скрипты или не существует");
             phrases.put("InputSourceIsNull", "Источник входных данных не может быть null");
             phrases.put("OutputSourceIsNull", "Источник выходных данных не может быть null");
             phrases.put("ServerCan'tStart", "При старте сервера произошла ошибка");

@@ -2,10 +2,7 @@ package ray1024.projects.collectioncontroller.general.terminal;
 
 import ray1024.projects.collectioncontroller.general.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
-import ray1024.projects.collectioncontroller.general.interfaces.ICommandBuilder;
-import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
-import ray1024.projects.collectioncontroller.general.interfaces.IOutputSource;
-import ray1024.projects.collectioncontroller.general.interfaces.Tickable;
+import ray1024.projects.collectioncontroller.general.interfaces.*;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 import java.io.IOException;
@@ -22,7 +19,15 @@ public class Terminal implements Tickable {
     private ArrayList<MicroShell> microShells;
     private StudyGroupCollectionController collectionController;
     private ICommandBuilder commandBuilder;
+    private IUser master;
 
+    public IUser getMaster() {
+        return master;
+    }
+
+    public void setMaster(IUser master) {
+        this.master = master;
+    }
 
     public IOutputSource getWriter() {
         return commandBuilder.getWriter();

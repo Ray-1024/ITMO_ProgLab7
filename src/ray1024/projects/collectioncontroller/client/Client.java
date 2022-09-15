@@ -24,6 +24,7 @@ public class Client implements Tickable {
     private StudyGroupCollectionController collectionController;
     private IUser user;
     private long lastAnswerTime;
+    private long lastReConnectTime;
 
     Client() {
         try {
@@ -39,6 +40,7 @@ public class Client implements Tickable {
             IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.CONNECTION);
             connector.sendRequest(registrationRequest);
             lastAnswerTime = System.currentTimeMillis();
+            lastReConnectTime = System.currentTimeMillis();
         } catch (Throwable e) {
             for (StackTraceElement i : e.getStackTrace())
                 System.out.println(i.toString());
@@ -52,8 +54,15 @@ public class Client implements Tickable {
         if (System.currentTimeMillis() - lastAnswerTime > 1000 * 60) {
             System.out.println("---CONNECTION HAS BEEN CLOSED BECAUSE TOO LONG---");
             System.exit(0);
-        } else if (System.currentTimeMillis() - lastAnswerTime > 1000 * 60) {
+        } else if (System.currentTimeMillis() - lastAnswerTime > 1000 * 10 && System.currentTimeMillis() - lastReConnectTime > 1000) {
+            try {
+                connector = new ClientConnector(InetAddress.getByName("localhost"), 44147);
+                IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.CONNECTION);
+                connector.sendRequest(registrationRequest);
+                lastReConnectTime = System.currentTimeMillis();
+            } catch (Throwable ignored) {
 
+            }
         }
         commandBuilder.tick();
         BaseCommand currCommand = commandBuilder.getCommand();

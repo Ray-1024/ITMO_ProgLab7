@@ -109,6 +109,10 @@ public class User implements IUser {
                 if (request.getRequestType() == RequestType.EXECUTION_COMMAND) {
                     terminal.getMainMicroshell().getCommandBuilder().addCommand(request.getCommand());
                     lastAccessTime = System.currentTimeMillis();
+                } else if (request.getRequestType() == RequestType.CONNECTION) {
+                    lastAccessTime = System.currentTimeMillis();
+                    connection.sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer("RECONNECT"));
+                    lastResponseTime = System.currentTimeMillis();
                 }
             }
             if (System.currentTimeMillis() - lastResponseTime > 10 * 1000) {
