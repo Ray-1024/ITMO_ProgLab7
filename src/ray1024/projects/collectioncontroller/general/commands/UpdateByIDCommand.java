@@ -31,6 +31,7 @@ public class UpdateByIDCommand extends BaseCommand {
 
     @Override
     public BaseCommand setArgs(String[] args) throws RuntimeException {
+        elem = new StudyGroup();
         if (args != null && args.length == 2) {
             try {
                 updateID = Integer.parseInt(args[1]);

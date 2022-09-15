@@ -28,9 +28,12 @@ public class StudyGroup extends SteppedInputObject implements Comparable<StudyGr
         creationDate = LocalDateTime.now();
         name = "EmptyName";
         coordinates = Coordinates.emptyCoordinates;
+        currentStep = 0;
+        coordinates.reset();
         studentsCount = 0;
         formOfEducation = null;
         groupAdmin = Person.emptyPerson;
+        groupAdmin.reset();
         stepsCount = 6 + Coordinates.emptyCoordinates.getStepsCount() + Person.emptyPerson.getStepsCount();
     }
 

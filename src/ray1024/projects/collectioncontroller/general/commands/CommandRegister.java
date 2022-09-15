@@ -34,7 +34,7 @@ public class CommandRegister {
         } catch (CloneNotSupportedException e) {
             System.out.println("COMMAND_BUILDER_COMMAND_CLONE_NOT_SUPPORTED_EXEPTION");
         }
-        if(prototype != null)prototype.reset();
+        if (prototype != null) prototype.reset();
         return prototype;
     }
 

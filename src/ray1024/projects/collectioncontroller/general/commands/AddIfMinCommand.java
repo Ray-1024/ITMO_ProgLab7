@@ -8,7 +8,7 @@ import ray1024.projects.collectioncontroller.general.tools.Phrases;
  * Т.к сортировка по умолчанию сравнивает группы по названию, то добавляет элемент если название его группы лексикографически меньше любого другого названия групп из коллекции
  */
 public class AddIfMinCommand extends BaseCommand {
-    private final StudyGroup studyGroup = new StudyGroup();
+    private StudyGroup studyGroup = new StudyGroup();
 
     public static final AddIfMinCommand command = new AddIfMinCommand();
 
@@ -22,6 +22,8 @@ public class AddIfMinCommand extends BaseCommand {
     @Override
     public void execute() {
         try {
+            studyGroup.setId(StudyGroup.getNextID());
+            StudyGroup.setNextID(StudyGroup.getNextID() + 1);
             if (getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> {
                 return i.compareTo(studyGroup) > 0;
             }))
@@ -48,8 +50,15 @@ public class AddIfMinCommand extends BaseCommand {
 
     @Override
     public BaseCommand setArgs(String[] args) throws RuntimeException {
+        studyGroup = new StudyGroup();
         if (args == null || args.length != 1)
             getParentShell().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
         return this;
+    }
+
+    @Override
+    public void reset() {
+        currentStep = 0;
+        studyGroup = new StudyGroup();
     }
 }

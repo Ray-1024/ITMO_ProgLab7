@@ -7,7 +7,7 @@ import ray1024.projects.collectioncontroller.general.tools.Phrases;
  * Команда добавляет в коллекцию элемент
  */
 public class AddCommand extends BaseCommand {
-    private final StudyGroup studyGroup = new StudyGroup();
+    private StudyGroup studyGroup = new StudyGroup();
     public static final AddCommand command = new AddCommand();
 
     private AddCommand() {
@@ -20,6 +20,8 @@ public class AddCommand extends BaseCommand {
     @Override
     public void execute() {
         try {
+            studyGroup.setId(StudyGroup.getNextID());
+            StudyGroup.setNextID(StudyGroup.getNextID() + 1);
             getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
         } catch (Exception e) {
             getParentShell().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));
@@ -44,6 +46,7 @@ public class AddCommand extends BaseCommand {
     @Override
     public BaseCommand setArgs(String[] args) {
         try {
+            studyGroup = new StudyGroup();
             if (args == null || args.length != 1)
                 getParentShell().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
         } catch (Throwable ex) {
@@ -52,4 +55,9 @@ public class AddCommand extends BaseCommand {
         return this;
     }
 
+    @Override
+    public void reset() {
+        currentStep = 0;
+        studyGroup = new StudyGroup();
+    }
 }
