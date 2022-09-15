@@ -47,7 +47,7 @@ public class StudyGroupCollectionController implements Serializable {
     }
 
     public void saveCollection() throws RuntimeException {
-        if (collectionFilename == null) return;
+        if (collectionFilename == null) collectionFilename = "Coll.xml";
         try {
             XMLEncoder xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(collectionFilename)));
             xmlEncoder.writeObject(managedCollection);

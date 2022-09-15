@@ -15,8 +15,11 @@ public class SaveCommand extends BaseCommand {
     }
 
     @Override
-    public void execute() throws RuntimeException {
-        getParentShell().getParentTerminal().getCollectionController().saveCollection();
+    public void execute() {
+        try {
+            getParentShell().getParentTerminal().getCollectionController().saveCollection();
+        } catch (Throwable ignored) {
+        }
     }
 
     @Override
