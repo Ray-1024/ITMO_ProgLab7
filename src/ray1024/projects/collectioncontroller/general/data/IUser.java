@@ -26,4 +26,8 @@ public interface IUser extends Tickable, Serializable {
     IUser setLastAccessTime(long lastAccessTime);
 
     long getLastAccessTime();
+
+    boolean isActive();
+
+    void setActive(boolean newState);
 }

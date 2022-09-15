@@ -49,6 +49,15 @@ public class ExecuteScriptCommand extends BaseCommand {
                 getParentShell().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
             }
             scriptFilename = args[1];
+            try {
+                long sz = Files.size(Paths.get(scriptFilename));
+                if (sz > 1024 * 1024) {
+                    getParentShell().getWriter().println(Phrases.getPhrase("TooLongScript"));
+                }
+            } catch (Throwable ex) {
+                System.out.println(Phrases.getPhrase("TooLongScript"));
+                return this;
+            }
             scriptText = new LinkedList<>(Files.readAllLines(Paths.get(scriptFilename)));
             if (scriptText.stream().anyMatch((line) -> line.startsWith(command.getName()))) {
                 getParentShell().getWriter().println(Phrases.getPhrase("UnsupportedScriptLevel"));

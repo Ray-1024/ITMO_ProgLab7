@@ -66,7 +66,7 @@ public class Phrases {
             phrases.put("AddIfMinCommandDescription", "Добавляет новый элемент в коллекцию, если он меньше любого элемента коллекции/");
             phrases.put("ExitCommandDescription", "Завершает программу без сохранения коллекции.");
             phrases.put("ShowCommandDescription", "Показывает коллекцию.");
-            phrases.put("SaveCommandDescription", "Сохраняет коллекцию в файл.");
+            phrases.put("SaveCommandDescription", "Сохраняет коллекцию в файл(Недоступна пользователю).");
             phrases.put("RemoveFirstCommandDescription", "Удаляет первый элемент коллекции.");
             phrases.put("ShuffleCommandDescription", "Случайным образом меняет местами элементы коллекции.");
             phrases.put("PrintDescendingDescription", "Выводит коллекцию в лексикографическом порядке не меняя ее.");
@@ -89,6 +89,7 @@ public class Phrases {
             phrases.put("PleaseEnterPassword", "Пожалуйста введите пароль:");
             phrases.put("EndOfInputSource", "Источник ввода закрыт, дальнейшее считывание команд невозможно.");
             phrases.put("UnsupportedScriptLevel", "Исполнение вложенных скриптов пока недоступно.");
+            phrases.put("TooLongScript", "Для запуска больших скриптов необходима Pro версия лабы.");
         }
     }
 }

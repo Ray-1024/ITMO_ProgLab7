@@ -17,10 +17,12 @@ public class User implements IUser {
     private long lastUpdateTime;
     private boolean isActive;
 
+    @Override
     public boolean isActive() {
         return isActive;
     }
 
+    @Override
     public void setActive(boolean active) {
         isActive = active;
     }
@@ -99,6 +101,14 @@ public class User implements IUser {
             IRequest request = connection.receiveRequest();
 
             if (request != null) {
+                if (getLogin() != null && getPasswordHash() != null && request.getRequestType() != RequestType.CONNECTION && isActive) {
+                    isActive = false;
+                    try {
+                        connection.sendResponse(new Response().setResponseType(ResponseType.DISCONNECT));
+                    } catch (Throwable ignored) {
+                    }
+                    return;
+                }
                 System.out.println("---REQUEST---");
                 System.out.println(request.getRequestType());
                 if (request.getRequestType() == RequestType.EXECUTION_COMMAND)

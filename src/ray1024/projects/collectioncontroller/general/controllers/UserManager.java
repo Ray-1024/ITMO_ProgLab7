@@ -50,10 +50,11 @@ public class UserManager implements IUserManager, Tickable, Serializable {
         List<IUser> forDel = new LinkedList<>();
         for (IUser user : unknowns) {
             user.tick();
-            if (user.getLogin() != null && user.getPasswordHash() != null && !users.containsKey(user.getLogin()) && user.getPasswordHash() != null) {
+            if (user.getLogin() != null && user.getPasswordHash() != null && (!users.containsKey(user.getLogin()) || !users.get(user.getLogin()).isActive()) && user.getPasswordHash() != null) {
                 users.put(user.getLogin(), user);
                 forDel.add(user);
             }
+            if (!user.isActive()) forDel.add(user);
         }
         unknowns.removeAll(forDel);
         for (IUser user : users.values()) {
