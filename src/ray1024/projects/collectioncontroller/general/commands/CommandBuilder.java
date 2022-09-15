@@ -1,8 +1,7 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
-import ray1024.projects.collectioncontroller.general.interfaces.ICommandBuilder;
-import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
-import ray1024.projects.collectioncontroller.general.interfaces.IOutputSource;
+import ray1024.projects.collectioncontroller.general.readers.IInputSource;
+import ray1024.projects.collectioncontroller.general.writers.IOutputSource;
 import ray1024.projects.collectioncontroller.general.terminal.Terminal;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 

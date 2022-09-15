@@ -2,9 +2,8 @@ package ray1024.projects.collectioncontroller.general.writers;
 
 import ray1024.projects.collectioncontroller.general.communication.Response;
 import ray1024.projects.collectioncontroller.general.communication.ResponseType;
-import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
-import ray1024.projects.collectioncontroller.general.interfaces.IOutputSource;
-import ray1024.projects.collectioncontroller.general.interfaces.IResponse;
+import ray1024.projects.collectioncontroller.general.communication.IConnector;
+import ray1024.projects.collectioncontroller.general.communication.IResponse;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 public class ResponseWriter implements IOutputSource {

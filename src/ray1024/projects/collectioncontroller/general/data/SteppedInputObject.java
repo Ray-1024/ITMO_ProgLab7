@@ -1,6 +1,6 @@
 package ray1024.projects.collectioncontroller.general.data;
 
-import ray1024.projects.collectioncontroller.general.interfaces.ISteppedInput;
+import ray1024.projects.collectioncontroller.general.tools.ISteppedInput;
 
 import java.io.Serializable;
 

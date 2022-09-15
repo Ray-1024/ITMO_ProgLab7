@@ -1,8 +1,5 @@
 package ray1024.projects.collectioncontroller.general.readers;
 
-import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;

@@ -1,9 +1,7 @@
 package ray1024.projects.collectioncontroller.general.communication;
 
 import ray1024.projects.collectioncontroller.general.commands.BaseCommand;
-import ray1024.projects.collectioncontroller.general.interfaces.IRequest;
-import ray1024.projects.collectioncontroller.general.interfaces.IUser;
-import ray1024.projects.collectioncontroller.general.communication.RequestType;
+import ray1024.projects.collectioncontroller.general.data.IUser;
 
 import java.io.Serializable;
 

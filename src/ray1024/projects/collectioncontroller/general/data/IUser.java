@@ -1,7 +1,8 @@
-package ray1024.projects.collectioncontroller.general.interfaces;
+package ray1024.projects.collectioncontroller.general.data;
 
-import ray1024.projects.collectioncontroller.general.data.User;
+import ray1024.projects.collectioncontroller.general.communication.IConnector;
 import ray1024.projects.collectioncontroller.general.terminal.Terminal;
+import ray1024.projects.collectioncontroller.general.tools.Tickable;
 
 import java.io.Serializable;
 

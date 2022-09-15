@@ -3,17 +3,15 @@ package ray1024.projects.collectioncontroller.client;
 import ray1024.projects.collectioncontroller.general.commands.BaseCommand;
 import ray1024.projects.collectioncontroller.general.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.general.commands.ExitCommand;
-import ray1024.projects.collectioncontroller.general.communication.RequestType;
-import ray1024.projects.collectioncontroller.general.communication.Request;
-import ray1024.projects.collectioncontroller.general.communication.ResponseType;
+import ray1024.projects.collectioncontroller.general.communication.*;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
+import ray1024.projects.collectioncontroller.general.data.IUser;
 import ray1024.projects.collectioncontroller.general.data.User;
-import ray1024.projects.collectioncontroller.general.interfaces.*;
 import ray1024.projects.collectioncontroller.general.readers.NonBlockingConsoleSourceReader;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
+import ray1024.projects.collectioncontroller.general.tools.Tickable;
 import ray1024.projects.collectioncontroller.general.writers.ConsoleSourceWriter;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Scanner;
 

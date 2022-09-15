@@ -1,7 +1,5 @@
 package ray1024.projects.collectioncontroller.general.readers;
 
-import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

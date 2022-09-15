@@ -2,7 +2,6 @@ package ray1024.projects.collectioncontroller.general.communication;
 
 import ray1024.projects.collectioncontroller.general.data.MyCollection;
 import ray1024.projects.collectioncontroller.general.data.StudyGroup;
-import ray1024.projects.collectioncontroller.general.interfaces.IResponse;
 
 import java.io.Serializable;
 

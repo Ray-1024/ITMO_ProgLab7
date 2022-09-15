@@ -1,7 +1,5 @@
 package ray1024.projects.collectioncontroller.general.readers;
 
-import ray1024.projects.collectioncontroller.general.interfaces.IInputSource;
-
 public class DevNullReader implements IInputSource {
     @Override
     public String nextLine() {

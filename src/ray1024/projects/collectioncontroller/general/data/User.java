@@ -3,9 +3,8 @@ package ray1024.projects.collectioncontroller.general.data;
 import ray1024.projects.collectioncontroller.general.communication.RequestType;
 import ray1024.projects.collectioncontroller.general.communication.Response;
 import ray1024.projects.collectioncontroller.general.communication.ResponseType;
-import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
-import ray1024.projects.collectioncontroller.general.interfaces.IRequest;
-import ray1024.projects.collectioncontroller.general.interfaces.IUser;
+import ray1024.projects.collectioncontroller.general.communication.IConnector;
+import ray1024.projects.collectioncontroller.general.communication.IRequest;
 import ray1024.projects.collectioncontroller.general.terminal.Terminal;
 
 public class User implements IUser {

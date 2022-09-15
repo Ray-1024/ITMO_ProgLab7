@@ -1,6 +1,6 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
-import ray1024.projects.collectioncontroller.general.interfaces.IExecute;
+import ray1024.projects.collectioncontroller.general.tools.IExecute;
 import ray1024.projects.collectioncontroller.general.terminal.MicroShell;
 import ray1024.projects.collectioncontroller.general.data.SteppedInputObject;
 

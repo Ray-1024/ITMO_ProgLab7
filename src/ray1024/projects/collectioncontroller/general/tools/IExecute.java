@@ -1,4 +1,4 @@
-package ray1024.projects.collectioncontroller.general.interfaces;
+package ray1024.projects.collectioncontroller.general.tools;
 
 /**
  * Интерфейс используемый всеми исполняемыми командами для выполнения кода команд

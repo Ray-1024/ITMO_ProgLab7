@@ -1,4 +1,4 @@
-package ray1024.projects.collectioncontroller.general.interfaces;
+package ray1024.projects.collectioncontroller.general.tools;
 
 import java.io.IOException;
 

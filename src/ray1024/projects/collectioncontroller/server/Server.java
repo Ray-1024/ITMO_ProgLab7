@@ -1,23 +1,21 @@
 package ray1024.projects.collectioncontroller.server;
 
 import ray1024.projects.collectioncontroller.general.commands.CommandBuilder;
-import ray1024.projects.collectioncontroller.general.communication.RequestType;
+import ray1024.projects.collectioncontroller.general.communication.IConnector;
+import ray1024.projects.collectioncontroller.general.controllers.IUserManager;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.general.controllers.UserManager;
+import ray1024.projects.collectioncontroller.general.data.IUser;
 import ray1024.projects.collectioncontroller.general.data.User;
-import ray1024.projects.collectioncontroller.general.interfaces.*;
 import ray1024.projects.collectioncontroller.general.readers.DevNullReader;
 import ray1024.projects.collectioncontroller.general.readers.NonBlockingConsoleSourceReader;
 import ray1024.projects.collectioncontroller.general.terminal.Terminal;
 import ray1024.projects.collectioncontroller.general.tools.Serializer;
+import ray1024.projects.collectioncontroller.general.tools.Tickable;
 import ray1024.projects.collectioncontroller.general.writers.ConsoleSourceWriter;
-import ray1024.projects.collectioncontroller.general.writers.DevNullWriter;
 import ray1024.projects.collectioncontroller.general.writers.ResponseWriter;
 
-import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Server implements Tickable {

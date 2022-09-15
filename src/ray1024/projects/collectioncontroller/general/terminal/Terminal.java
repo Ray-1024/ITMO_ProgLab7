@@ -1,11 +1,12 @@
 package ray1024.projects.collectioncontroller.general.terminal;
 
-import ray1024.projects.collectioncontroller.general.commands.CommandBuilder;
+import ray1024.projects.collectioncontroller.general.commands.ICommandBuilder;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
-import ray1024.projects.collectioncontroller.general.interfaces.*;
+import ray1024.projects.collectioncontroller.general.data.IUser;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
+import ray1024.projects.collectioncontroller.general.tools.Tickable;
+import ray1024.projects.collectioncontroller.general.writers.IOutputSource;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**

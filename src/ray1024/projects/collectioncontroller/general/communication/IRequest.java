@@ -1,7 +1,7 @@
-package ray1024.projects.collectioncontroller.general.interfaces;
+package ray1024.projects.collectioncontroller.general.communication;
 
 import ray1024.projects.collectioncontroller.general.commands.BaseCommand;
-import ray1024.projects.collectioncontroller.general.communication.RequestType;
+import ray1024.projects.collectioncontroller.general.data.IUser;
 
 public interface IRequest {
     public RequestType getRequestType();

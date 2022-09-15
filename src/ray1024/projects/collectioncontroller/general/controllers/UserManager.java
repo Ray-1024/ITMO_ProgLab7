@@ -1,12 +1,8 @@
 package ray1024.projects.collectioncontroller.general.controllers;
 
-import ray1024.projects.collectioncontroller.general.communication.Response;
-import ray1024.projects.collectioncontroller.general.communication.ResponseType;
-import ray1024.projects.collectioncontroller.general.interfaces.IUser;
-import ray1024.projects.collectioncontroller.general.interfaces.IUserManager;
-import ray1024.projects.collectioncontroller.general.interfaces.Tickable;
+import ray1024.projects.collectioncontroller.general.data.IUser;
+import ray1024.projects.collectioncontroller.general.tools.Tickable;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;

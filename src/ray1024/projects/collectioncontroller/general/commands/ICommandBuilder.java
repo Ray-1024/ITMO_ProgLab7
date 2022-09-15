@@ -1,6 +1,8 @@
-package ray1024.projects.collectioncontroller.general.interfaces;
+package ray1024.projects.collectioncontroller.general.commands;
 
-import ray1024.projects.collectioncontroller.general.commands.BaseCommand;
+import ray1024.projects.collectioncontroller.general.readers.IInputSource;
+import ray1024.projects.collectioncontroller.general.tools.Tickable;
+import ray1024.projects.collectioncontroller.general.writers.IOutputSource;
 
 import java.io.Serializable;
 

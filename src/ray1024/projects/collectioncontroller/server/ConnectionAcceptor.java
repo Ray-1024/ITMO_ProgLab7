@@ -1,12 +1,10 @@
 package ray1024.projects.collectioncontroller.server;
 
-import ray1024.projects.collectioncontroller.general.interfaces.IConnector;
+import ray1024.projects.collectioncontroller.general.communication.IConnector;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.nio.channels.ServerSocketChannel;
 
 public class ConnectionAcceptor {
