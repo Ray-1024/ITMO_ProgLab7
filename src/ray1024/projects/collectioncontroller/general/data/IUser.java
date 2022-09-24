@@ -6,18 +6,10 @@ import ray1024.projects.collectioncontroller.general.tools.Tickable;
 
 import java.io.Serializable;
 
-public interface IUser extends Tickable, Serializable {
+public interface IUser extends Tickable, Serializable, IUserInfo {
     IConnector getConnection();
 
     User setConnection(IConnector connection);
-
-    String getLogin();
-
-    IUser setLogin(String login);
-
-    String getPasswordHash();
-
-    IUser setPassword(String password);
 
     Terminal getTerminal();
 

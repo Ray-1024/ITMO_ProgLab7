@@ -8,4 +8,6 @@ public interface IConnector {
     IResponse receiveResponse();
 
     IConnector sendResponse(IResponse response);
+
+    boolean isConnected();
 }

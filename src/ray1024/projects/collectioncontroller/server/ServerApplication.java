@@ -3,6 +3,7 @@ package ray1024.projects.collectioncontroller.server;
 import ray1024.projects.collectioncontroller.general.commands.*;
 
 import java.io.IOException;
+import java.sql.*;
 
 /**
  * Главный красс создающий и запускающий Терминал
@@ -40,6 +41,15 @@ public class ServerApplication {
                 System.out.println(e.getMessage());
             }
         }
+
+        /*try {
+
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/studs", "postgres", "zh159sm212140");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }*/
+
     }
 
 }

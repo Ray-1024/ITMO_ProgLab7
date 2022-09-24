@@ -2,13 +2,14 @@ package ray1024.projects.collectioncontroller.general.communication;
 
 import ray1024.projects.collectioncontroller.general.commands.BaseCommand;
 import ray1024.projects.collectioncontroller.general.data.IUser;
+import ray1024.projects.collectioncontroller.general.data.IUserInfo;
 
 import java.io.Serializable;
 
 public class Request implements Serializable, IRequest {
     private RequestType requestType;
     private BaseCommand command;
-    private IUser user;
+    private IUserInfo user;
 
     public Request() {
     }
@@ -36,12 +37,12 @@ public class Request implements Serializable, IRequest {
     }
 
     @Override
-    public IUser getUser() {
+    public IUserInfo getUserInfo() {
         return user;
     }
 
     @Override
-    public IRequest setUser(IUser user) {
+    public IRequest setUser(IUserInfo user) {
         this.user = user;
         return this;
     }

@@ -20,15 +20,15 @@ public class UserManager implements IUserManager, Tickable, Serializable {
 
     @Override
     public boolean isRegistred(IUser user) {
-        return user != null && users.get(user.getLogin()) != null && users.get(user.getLogin()).getPasswordHash().equals(user.getPasswordHash());
+        return user != null && users.get(user.getLogin()) != null && users.get(user.getLogin()).getPassword().equals(user.getPassword());
     }
 
     @Override
     public IUserManager addUser(IUser user) {
         if (user == null) return this;
-        if ((user.getLogin() == null || user.getPasswordHash() == null) && user.getConnection() != null)
+        if ((user.getLogin() == null || user.getPassword() == null) && user.getConnection() != null)
             unknowns.add(user);
-        else if (!users.containsKey(user.getLogin()) && user.getPasswordHash() != null)
+        else if (!users.containsKey(user.getLogin()) && user.getPassword() != null)
             users.put(user.getLogin(), user);
         else if (isRegistred(user)) {
             try {
@@ -51,7 +51,7 @@ public class UserManager implements IUserManager, Tickable, Serializable {
         for (IUser user : unknowns) {
             user.tick();
             if (!user.isActive()) forDel.add(user);
-            else if (user.getLogin() != null && user.getPasswordHash() != null && (!users.containsKey(user.getLogin()) || !users.get(user.getLogin()).isActive()) && user.getPasswordHash() != null) {
+            else if (user.getLogin() != null && user.getPassword() != null && (!users.containsKey(user.getLogin()) || !users.get(user.getLogin()).isActive()) && user.getPassword() != null) {
                 users.put(user.getLogin(), user);
                 forDel.add(user);
             } else if (users.containsKey(user.getLogin())) {

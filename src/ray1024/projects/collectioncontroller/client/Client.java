@@ -73,16 +73,10 @@ public class Client implements Tickable {
         IResponse response = connector.receiveResponse();
         if (response != null) {
             lastAnswerTime = System.currentTimeMillis();
-            /*System.out.println("---RESPONSE---");
-            System.out.println(response.getResponseType());
-            System.out.println("--------------");*/
             if (response.getResponseType() == ResponseType.ANSWER) {
                 commandBuilder.getWriter().println(response.getAnswer());
             } else if (response.getResponseType() == ResponseType.COLLECTION_UPDATE) {
                 collectionController.setManagedCollection(response.getCollection());
-                //System.out.println("---COLLECTION UPDATED---");
-                //System.out.println(collectionController.getManagedCollection().getVec());
-                //System.out.println("------------------------");
             } else if (response.getResponseType() == ResponseType.DISCONNECT) {
                 commandBuilder.getWriter().println("---CONNECTION HAS BEEN CLOSED---");
                 System.exit(0);

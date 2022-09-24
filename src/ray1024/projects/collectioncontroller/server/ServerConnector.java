@@ -17,7 +17,6 @@ public class ServerConnector implements IConnector {
     private final ByteBuffer sizeBufferIn;
     private ByteBuffer objectBufferIn;
     private final ByteBuffer sizeBufferOut;
-    private ByteBuffer objectBufferOut;
     private int objectSizeIn;
     private int objectSizeOut;
 
@@ -93,5 +92,10 @@ public class ServerConnector implements IConnector {
         } catch (IOException ignored) {
         }
         return this;
+    }
+
+    @Override
+    public boolean isConnected() {
+        return socket.isConnected();
     }
 }

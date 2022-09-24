@@ -102,4 +102,9 @@ public class ClientConnector implements IConnector {
         return this;
     }
 
+    @Override
+    public boolean isConnected() {
+        return socket.isConnected();
+    }
+
 }

@@ -75,7 +75,7 @@ public class User implements IUser {
     }
 
     @Override
-    public String getPasswordHash() {
+    public String getPassword() {
         return password;
     }
 
@@ -108,7 +108,7 @@ public class User implements IUser {
             IRequest request = connection.receiveRequest();
 
             if (request != null) {
-                if (getLogin() != null && getPasswordHash() != null && request.getRequestType() != RequestType.CONNECTION && isActive) {
+                if (getLogin() != null && getPassword() != null && request.getRequestType() != RequestType.CONNECTION && isActive) {
                     isActive = false;
                     try {
                         connection.sendResponse(new Response().setResponseType(ResponseType.DISCONNECT));
