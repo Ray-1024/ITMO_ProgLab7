@@ -4,23 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64ad19ee-ac90-4d5a-bae1-1d252618de2e" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_5_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/META-INF/java/sql/Driver/postgresql-42.5.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/IUserInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ConnectionManager.java" afterDir="false" />
+    <list default="true" id="64ad19ee-ac90-4d5a-bae1-1d252618de2e" name="Changes" comment="prePostgreSQL">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/ClientConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/ClientConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/commands/ShowCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/IConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/IConnector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/IRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/IRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/communication/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/controllers/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/controllers/UserManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/IUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/IUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/IUserInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ConnectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerConnector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,23 +62,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/skovo/OneDrive/Документы/MyProjects/Java/Lab5_CollectionController/META-INF/java/sql/Driver/postgresql-42.5.0.jar",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/skovo/OneDrive/Документы/MyProjects/Java/Lab5_CollectionController/META-INF/java/sql/Driver/postgresql-42.5.0.jar&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\skovo\OneDrive\Документы\MyProjects\Java\Lab5_CollectionController\src\META-INF" />
@@ -156,14 +146,8 @@
       <workItem from="1663675885138" duration="6000" />
       <workItem from="1663867985007" duration="3647000" />
       <workItem from="1663950143030" duration="262000" />
-      <workItem from="1663958553260" duration="7256000" />
-    </task>
-    <task id="LOCAL-00017" summary="1">
-      <created>1658940296442</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1658940296442</updated>
+      <workItem from="1663958553260" duration="15825000" />
+      <workItem from="1664050653403" duration="7000" />
     </task>
     <task id="LOCAL-00018" summary="1">
       <created>1659091838332</created>
@@ -501,7 +485,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663240275713</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="prePostgreSQL">
+      <created>1664019217053</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1664019217053</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +534,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1" />
+    <MESSAGE value="prePostgreSQL" />
+    <option name="LAST_COMMIT_MESSAGE" value="prePostgreSQL" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,7 +1,7 @@
 package ray1024.projects.collectioncontroller.general.communication;
 
 import ray1024.projects.collectioncontroller.general.commands.BaseCommand;
-import ray1024.projects.collectioncontroller.general.data.IUserInfo;
+import ray1024.projects.collectioncontroller.general.data.IUser;
 
 public interface IRequest {
     public RequestType getRequestType();
@@ -12,7 +12,7 @@ public interface IRequest {
 
     public IRequest setCommand(BaseCommand command);
 
-    public IUserInfo getUserInfo();
+    public IUser getUser();
 
-    public IRequest setUser(IUserInfo user);
+    public IRequest setUser(IUser user);
 }

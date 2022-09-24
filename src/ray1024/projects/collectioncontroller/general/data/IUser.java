@@ -6,7 +6,7 @@ import ray1024.projects.collectioncontroller.general.tools.Tickable;
 
 import java.io.Serializable;
 
-public interface IUser extends Tickable, Serializable, IUserInfo {
+public interface IUser extends Tickable, Serializable {
     IConnector getConnection();
 
     User setConnection(IConnector connection);
@@ -22,4 +22,13 @@ public interface IUser extends Tickable, Serializable, IUserInfo {
     boolean isActive();
 
     void setActive(boolean newState);
+
+    IUser setLogin(String login);
+
+    IUser setPassword(String password);
+
+    String getLogin();
+
+    String getPassword();
+
 }

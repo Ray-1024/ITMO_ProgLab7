@@ -20,7 +20,10 @@ public class ServerConnector implements IConnector {
     private int objectSizeIn;
     private int objectSizeOut;
 
+    private long lastActionTime;
+
     public ServerConnector(Socket socket) {
+        lastActionTime = System.currentTimeMillis();
         this.socket = socket;
         socketChannel = socket.getChannel();
         try {
@@ -42,12 +45,12 @@ public class ServerConnector implements IConnector {
     @Override
     public IRequest receiveRequest() {
         try {
+            if (!isConnected()) return null;
             if (sizeBufferIn.remaining() == 0) {
                 if (objectSizeIn == -1) {
                     sizeBufferIn.clear();
                     objectSizeIn = sizeBufferIn.getInt();
-                    if (objectSizeIn > 0)
-                        objectBufferIn = ByteBuffer.allocate(objectSizeIn);
+                    if (objectSizeIn > 0) objectBufferIn = ByteBuffer.allocate(objectSizeIn);
                     objectBufferIn.clear();
                 }
                 if (objectBufferIn.remaining() > 0) socketChannel.read(objectBufferIn);
@@ -57,6 +60,7 @@ public class ServerConnector implements IConnector {
                         objectSizeIn = -1;
                         objectBufferIn.clear();
                         byte[] arr = objectBufferIn.array();
+                        lastActionTime = System.currentTimeMillis();
                         return (IRequest) Serializer.deserialize(objectBufferIn.array());
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
@@ -81,6 +85,7 @@ public class ServerConnector implements IConnector {
     @Override
     public IConnector sendResponse(IResponse response) {
         try {
+            if (!isConnected()) return this;
             byte[] buff = Serializer.serialize(response);
             objectSizeOut = buff.length;
             sizeBufferOut.clear();
@@ -89,6 +94,7 @@ public class ServerConnector implements IConnector {
             sizeBufferOut.clear();
             socketChannel.write(sizeBufferOut);
             socketChannel.write(byteBuffer);
+            lastActionTime = System.currentTimeMillis();
         } catch (IOException ignored) {
         }
         return this;
@@ -96,6 +102,12 @@ public class ServerConnector implements IConnector {
 
     @Override
     public boolean isConnected() {
+        if (System.currentTimeMillis() - lastActionTime > 60000) {
+            try {
+                socket.close();
+            } catch (IOException ignored) {
+            }
+        }
         return socket.isConnected();
     }
 }
