@@ -101,7 +101,7 @@ public class ServerConnector implements IConnector {
     }
 
     @Override
-    public boolean isConnected() {
+    public synchronized boolean isConnected() {
         if (System.currentTimeMillis() - lastActionTime > 60000) {
             try {
                 socket.close();
@@ -112,7 +112,7 @@ public class ServerConnector implements IConnector {
     }
 
     @Override
-    public void disconnect() {
+    public synchronized void disconnect() {
         try {
             socket.close();
         } catch (Throwable ignored) {

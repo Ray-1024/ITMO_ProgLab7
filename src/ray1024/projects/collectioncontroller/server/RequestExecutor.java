@@ -17,7 +17,7 @@ public class RequestExecutor {
     }
 
     public synchronized void execute(IRequest request, IConnector connector) {
-        if (request == null) return;
+        if (request == null || connector == null) return;
         try {
             switch (request.getRequestType()) {
                 case REGISTRATION -> {

@@ -18,7 +18,7 @@ public class ResponseSender {
     public void sendResponse(IResponse response, IConnector connector) {
         try {
             cachedThreadPool.execute(() -> {
-                server.getResponseSender().sendResponse(response, connector);
+                connector.sendResponse(response);
             });
         } catch (Throwable ignored) {
         }
