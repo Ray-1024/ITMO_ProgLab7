@@ -20,7 +20,7 @@ public class HelpCommand extends BaseCommand {
         try {
             final int[] strNumber = {0};
             CommandRegister.getRegisteredCommandsStream().forEach((command) -> {
-                getParentShell().getWriter().println(String.format("%d. %s: %s", ++strNumber[0], command.getName(), command.getDescription()));
+                getTerminal().getWriter().println(String.format("%d. %s: %s", ++strNumber[0], command.getName(), command.getDescription()));
             });
         } catch (Throwable throwable) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));

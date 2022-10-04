@@ -19,7 +19,8 @@ public class UserManager implements IUserManager {
 
     @Override
     public IUserManager addUser(IUser user) {
-
+        if (user == null) return this;
+        if (!isRegistered(user.getLogin())) users.put(user.getLogin(), user);
         return this;
     }
 

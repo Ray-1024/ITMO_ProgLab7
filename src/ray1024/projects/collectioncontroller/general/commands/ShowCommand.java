@@ -2,8 +2,6 @@ package ray1024.projects.collectioncontroller.general.commands;
 
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
-import java.util.stream.Collectors;
-
 /**
  * Показывает все элементы коллекции
  */
@@ -17,10 +15,10 @@ public class ShowCommand extends BaseCommand {
 
     @Override
     public void run() {
-        //getParentShell().getParentTerminal().getWriter().println(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().toString());
+        //getParentShell().getWriter().println(getParentShell().getCollectionController().getManagedCollection().toString());
         int[] ind = new int[1];
-        getParentShell().getParentTerminal().getCollectionController().getManagedCollection().stream().forEach((elem -> {
-            getParentShell().getParentTerminal().getWriter().println((++ind[0]) + elem.toString());
+        getTerminal().getCollectionController().getManagedCollection().stream().forEach((elem -> {
+            getTerminal().getWriter().println((++ind[0]) + elem.toString());
         }));
     }
 

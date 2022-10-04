@@ -15,7 +15,7 @@ public class RemoveFirstCommand extends BaseCommand {
 
     @Override
     public void run() {
-        getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().remove(0);
+        getTerminal().getCollectionController().getManagedCollection().getVec().remove(0);
     }
 
     @Override

@@ -17,9 +17,9 @@ public class FilterLessThanStudentsCountCommand extends BaseCommand {
     @Override
     public void run() {
         final int[] ind = new int[1];
-        getParentShell().getParentTerminal().getCollectionController().getManagedCollection().stream()
+        getTerminal().getCollectionController().getManagedCollection().stream()
                 .filter((elem) -> elem.getStudentsCount() < studentsCount).forEach((elem) -> {
-                    getParentShell().getParentTerminal().getWriter().println(String.format("\t%d. %s", ++ind[0], elem));
+                    getTerminal().getWriter().println(String.format("\t%d. %s", ++ind[0], elem));
                 });
     }
 

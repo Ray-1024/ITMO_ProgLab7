@@ -22,9 +22,9 @@ public class AddCommand extends BaseCommand {
         try {
             studyGroup.setId(StudyGroup.getNextID());
             StudyGroup.setNextID(StudyGroup.getNextID() + 1);
-            getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
+            getTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
         } catch (Exception e) {
-            getParentShell().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));
+            getTerminal().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));
         }
     }
 
@@ -48,9 +48,8 @@ public class AddCommand extends BaseCommand {
         try {
             studyGroup = new StudyGroup();
             if (args == null || args.length != 1)
-                getParentShell().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
-        } catch (Throwable ex) {
-
+                getTerminal().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
+        } catch (Throwable ignored) {
         }
         return this;
     }

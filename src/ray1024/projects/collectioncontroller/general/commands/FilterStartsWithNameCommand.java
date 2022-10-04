@@ -17,8 +17,8 @@ public class FilterStartsWithNameCommand extends BaseCommand {
     @Override
     public void run() {
         final int[] ind = new int[1];
-        getParentShell().getParentTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> elem.getName().startsWith(name)).forEach((elem) -> {
-            getParentShell().getParentTerminal().getWriter().println(String.format("    %d. %s", ++ind[0], elem));
+        getTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> elem.getName().startsWith(name)).forEach((elem) -> {
+            getTerminal().getWriter().println(String.format("    %d. %s", ++ind[0], elem));
         });
     }
 

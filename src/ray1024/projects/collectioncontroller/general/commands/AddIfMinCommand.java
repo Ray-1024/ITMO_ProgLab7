@@ -24,12 +24,12 @@ public class AddIfMinCommand extends BaseCommand {
         try {
             studyGroup.setId(StudyGroup.getNextID());
             StudyGroup.setNextID(StudyGroup.getNextID() + 1);
-            if (getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> {
+            if (getTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> {
                 return i.compareTo(studyGroup) > 0;
             }))
-                getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
+                getTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
         } catch (Exception e) {
-            getParentShell().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));
+            getTerminal().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));
         }
     }
 
@@ -52,7 +52,7 @@ public class AddIfMinCommand extends BaseCommand {
     public BaseCommand setArgs(String[] args) throws RuntimeException {
         studyGroup = new StudyGroup();
         if (args == null || args.length != 1)
-            getParentShell().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
+            getTerminal().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
         return this;
     }
 

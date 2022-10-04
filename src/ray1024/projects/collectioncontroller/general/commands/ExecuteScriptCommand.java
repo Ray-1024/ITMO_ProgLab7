@@ -27,8 +27,14 @@ public class ExecuteScriptCommand extends BaseCommand {
     @Override
     public void run() {
         try {
-            scriptCommandBuilder = new CommandBuilder(new ListSourceReader(scriptText), getParentShell().getWriter());
-            getParentShell().getParentTerminal().addMicroshell(new MicroShell(getParentShell().getParentTerminal(), scriptCommandBuilder, false));
+            scriptCommandBuilder = new CommandBuilder(new ListSourceReader(scriptText), getTerminal().getWriter());
+            while (!scriptCommandBuilder.isDone()) {
+                scriptCommandBuilder.tick();
+                if (scriptCommandBuilder.getCommand() != null) {
+                    getTerminal().execute(scriptCommandBuilder.getCommand());
+                    scriptCommandBuilder.reset();
+                }
+            }
         } catch (Throwable ignored) {
         }
     }
@@ -37,13 +43,13 @@ public class ExecuteScriptCommand extends BaseCommand {
     public BaseCommand setArgs(String[] args) {
         try {
             if (args.length != 2) {
-                getParentShell().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
+                getTerminal().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
             }
             scriptFilename = args[1];
             try {
                 long sz = Files.size(Paths.get(scriptFilename));
                 if (sz > 1024 * 1024) {
-                    getParentShell().getWriter().println(Phrases.getPhrase("TooLongScript"));
+                    getTerminal().getWriter().println(Phrases.getPhrase("TooLongScript"));
                 }
             } catch (Throwable ex) {
                 System.out.println(Phrases.getPhrase("TooLongScript"));
@@ -51,12 +57,12 @@ public class ExecuteScriptCommand extends BaseCommand {
             }
             scriptText = new LinkedList<>(Files.readAllLines(Paths.get(scriptFilename)));
             if (scriptText.stream().anyMatch((line) -> line.startsWith(command.getName()))) {
-                getParentShell().getWriter().println(Phrases.getPhrase("UnsupportedScriptLevel"));
+                getTerminal().getWriter().println(Phrases.getPhrase("UnsupportedScriptLevel"));
                 scriptText = null;
                 return this;
             }
         } catch (Throwable ex) {
-            getParentShell().getWriter().println(Phrases.getPhrase("Can'tFindScript"));
+            getTerminal().getWriter().println(Phrases.getPhrase("Can'tFindScript"));
         }
         return this;
     }

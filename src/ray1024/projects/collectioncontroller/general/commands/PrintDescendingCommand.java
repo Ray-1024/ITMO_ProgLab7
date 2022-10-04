@@ -23,14 +23,14 @@ public class PrintDescendingCommand extends BaseCommand {
     public void run() {
 
 
-        MyCollection<StudyGroup> coll = getParentShell().getParentTerminal().getCollectionController().getManagedCollection();
+        MyCollection<StudyGroup> coll = getTerminal().getCollectionController().getManagedCollection();
         ArrayList<Integer> arr = new ArrayList<>(coll.size());
         for (int i = 0; i < coll.size(); ++i) arr.add(i);
 
         arr.sort(Comparator.comparing(coll::get));
         for (int i = coll.size() - 1; i >= 0; --i) {
-            getParentShell().getWriter().print("    " + (coll.size() - i) + ". ");
-            getParentShell().getWriter().println(coll.get(arr.get(i)));
+            getTerminal().getWriter().print("    " + (coll.size() - i) + ". ");
+            getTerminal().getWriter().println(coll.get(arr.get(i)));
         }
     }
 

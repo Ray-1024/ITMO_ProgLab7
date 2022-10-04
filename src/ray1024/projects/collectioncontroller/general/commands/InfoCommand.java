@@ -17,7 +17,7 @@ public class InfoCommand extends BaseCommand {
     @Override
     public void run() throws RuntimeException {
         try {
-            getParentShell().getParentTerminal().getWriter().println(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getCollectionInfo().toString());
+            getTerminal().getWriter().println(getTerminal().getCollectionController().getManagedCollection().getCollectionInfo().toString());
         } catch (Throwable ex) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

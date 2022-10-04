@@ -1,6 +1,7 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
 import ray1024.projects.collectioncontroller.general.data.SteppedInputObject;
+import ray1024.projects.collectioncontroller.general.terminal.Terminal;
 
 import java.io.Serializable;
 
@@ -11,7 +12,7 @@ public abstract class BaseCommand extends SteppedInputObject implements Runnable
 
     private String name = "BaseCommand";
     private String description = "Base command";
-    private MicroShell parentShell = null;
+    private Terminal terminal = null;
 
     public BaseCommand() {
         stepsCount = 0;
@@ -39,12 +40,12 @@ public abstract class BaseCommand extends SteppedInputObject implements Runnable
         return description;
     }
 
-    public MicroShell getParentShell() {
-        return parentShell;
+    public Terminal getTerminal() {
+        return terminal;
     }
 
-    public BaseCommand setParentShell(MicroShell parentShell) {
-        this.parentShell = parentShell;
+    public BaseCommand setTerminal(Terminal terminal) {
+        this.terminal = terminal;
         return this;
     }
 
