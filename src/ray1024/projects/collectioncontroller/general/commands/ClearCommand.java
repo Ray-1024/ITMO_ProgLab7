@@ -14,7 +14,7 @@ public class ClearCommand extends BaseCommand {
     }
 
     @Override
-    public void execute() throws RuntimeException {
+    public void run() throws RuntimeException {
         try {
             getParentShell().getParentTerminal().getCollectionController().getManagedCollection().clear();
         } catch (Exception e) {

@@ -20,7 +20,7 @@ public class PrintDescendingCommand extends BaseCommand {
     }
 
     @Override
-    public void execute() {
+    public void run() {
 
 
         MyCollection<StudyGroup> coll = getParentShell().getParentTerminal().getCollectionController().getManagedCollection();

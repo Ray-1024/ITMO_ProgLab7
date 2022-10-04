@@ -34,7 +34,7 @@ public class ExecuteScriptCommand extends BaseCommand {
     }
 
     @Override
-    public void execute() {
+    public void run() {
         try {
             scriptCommandBuilder = new CommandBuilder(new ListSourceReader(scriptText), getParentShell().getWriter());
             getParentShell().getParentTerminal().addMicroshell(new MicroShell(getParentShell().getParentTerminal(), scriptCommandBuilder, false));

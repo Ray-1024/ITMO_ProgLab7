@@ -8,14 +8,21 @@ import ray1024.projects.collectioncontroller.general.tools.Tickable;
 import ray1024.projects.collectioncontroller.general.writers.IOutputSource;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
 
 /**
  * Класс хранящий коллекцию и управляющий дочерними MicroShell'ами
  * Так же занимается загрузкой и сохранением коллекции
  * Максимальное колличество исполняющихся Microshell'ов : 10
  */
-public class Terminal implements Tickable {
+public class Terminal implements Tickable, Executor {
     private static final int microShellsLimit = 10;
+
+    @Override
+    public void execute(Runnable command) {
+
+    }
+
     private static final int MainShell = 0;
     private ArrayList<MicroShell> microShells;
     private StudyGroupCollectionController collectionController;

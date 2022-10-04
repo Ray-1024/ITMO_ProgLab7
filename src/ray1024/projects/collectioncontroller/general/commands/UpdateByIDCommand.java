@@ -18,7 +18,7 @@ public class UpdateByIDCommand extends BaseCommand {
     }
 
     @Override
-    public void execute() {
+    public void run() {
 
         elem.setId(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> {
             return elem.getId() == updateID;

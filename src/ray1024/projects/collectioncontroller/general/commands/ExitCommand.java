@@ -15,7 +15,7 @@ public class ExitCommand extends BaseCommand {
     }
 
     @Override
-    public void execute() {
+    public void run() {
         System.exit(0);
     }
 

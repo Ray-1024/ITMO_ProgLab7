@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
-import ray1024.projects.collectioncontroller.general.tools.IExecute;
 import ray1024.projects.collectioncontroller.general.terminal.MicroShell;
 import ray1024.projects.collectioncontroller.general.data.SteppedInputObject;
 
@@ -9,7 +8,7 @@ import java.io.Serializable;
 /**
  * Базовый класс для реализации команд, исполняемых Microshell
  */
-public abstract class BaseCommand extends SteppedInputObject implements IExecute, Serializable, Cloneable {
+public abstract class BaseCommand extends SteppedInputObject implements Runnable, Serializable, Cloneable {
 
     private String name = "BaseCommand";
     private String description = "Base command";

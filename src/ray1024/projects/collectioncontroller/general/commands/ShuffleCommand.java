@@ -16,7 +16,7 @@ public class ShuffleCommand extends BaseCommand {
     }
 
     @Override
-    public void execute() {
+    public void run() {
         Collections.shuffle(getParentShell().getParentTerminal().getCollectionController().getManagedCollection().getVec());
     }
 

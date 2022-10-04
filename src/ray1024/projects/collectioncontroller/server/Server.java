@@ -17,6 +17,7 @@ import ray1024.projects.collectioncontroller.general.writers.ResponseWriter;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.concurrent.Executor;
 
 public class Server implements Tickable {
     private ConnectionAcceptor connectionAcceptor;
@@ -56,6 +57,10 @@ public class Server implements Tickable {
     }
 
     public Terminal getServerTerminal() {
+        return serverTerminal;
+    }
+
+    public Executor getExecutor() {
         return serverTerminal;
     }
 

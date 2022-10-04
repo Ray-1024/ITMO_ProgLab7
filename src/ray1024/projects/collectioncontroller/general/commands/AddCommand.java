@@ -18,7 +18,7 @@ public class AddCommand extends BaseCommand {
 
 
     @Override
-    public void execute() {
+    public void run() {
         try {
             studyGroup.setId(StudyGroup.getNextID());
             StudyGroup.setNextID(StudyGroup.getNextID() + 1);

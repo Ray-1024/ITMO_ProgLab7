@@ -16,7 +16,7 @@ public class HelpCommand extends BaseCommand {
     }
 
     @Override
-    public void execute() throws RuntimeException {
+    public void run() throws RuntimeException {
         try {
             final int[] strNumber = {0};
             CommandRegister.getRegisteredCommandsStream().forEach((command) -> {

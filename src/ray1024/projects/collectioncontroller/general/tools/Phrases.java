@@ -90,6 +90,8 @@ public class Phrases {
             phrases.put("EndOfInputSource", "Источник ввода закрыт, дальнейшее считывание команд невозможно.");
             phrases.put("UnsupportedScriptLevel", "Исполнение вложенных скриптов пока недоступно.");
             phrases.put("TooLongScript", "Для запуска больших скриптов необходима Pro версия лабы.");
+            phrases.put("CommandBuilderIsNull", "Нельзя строить команды не существующим CommandBuilder'ом");
+
         }
     }
 }
