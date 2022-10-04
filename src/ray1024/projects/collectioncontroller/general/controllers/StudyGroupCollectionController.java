@@ -31,7 +31,7 @@ public class StudyGroupCollectionController implements Serializable {
         managedCollection.getVec().sort(Comparator.naturalOrder());
     }
 
-    public void loadCollectionFromFile() throws Exception {
+    public void loadCollectionFromFile() {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(Files.newInputStream(Paths.get(collectionFilename)));
             XMLDecoder xmlDecoder = new XMLDecoder(new InputSource(inputStreamReader));
@@ -42,7 +42,7 @@ public class StudyGroupCollectionController implements Serializable {
                 if (StudyGroup.getNextID() <= studyGroup.getId()) StudyGroup.setNextID(studyGroup.getId() + 1);
         } catch (Throwable ex) {
             managedCollection = new MyCollection<>();
-            throw new Exception(Phrases.getPhrase("CantLoadCollectionFromFile"));
+            //throw new Exception(Phrases.getPhrase("CantLoadCollectionFromFile"));
         }
     }
 

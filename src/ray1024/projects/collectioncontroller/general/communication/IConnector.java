@@ -10,4 +10,5 @@ public interface IConnector {
     IConnector sendResponse(IResponse response);
 
     boolean isConnected();
+    void disconnect();
 }

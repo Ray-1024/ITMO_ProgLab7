@@ -1,5 +1,7 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
+import ray1024.projects.collectioncontroller.general.communication.IConnector;
+import ray1024.projects.collectioncontroller.general.data.IUser;
 import ray1024.projects.collectioncontroller.general.data.SteppedInputObject;
 import ray1024.projects.collectioncontroller.general.terminal.Terminal;
 
@@ -13,6 +15,16 @@ public abstract class BaseCommand extends SteppedInputObject implements Runnable
     private String name = "BaseCommand";
     private String description = "Base command";
     private Terminal terminal = null;
+    private IUser user;
+
+    public IUser getUser() {
+        return user;
+    }
+
+    public BaseCommand setUser(IUser user) {
+        this.user = user;
+        return this;
+    }
 
     public BaseCommand() {
         stepsCount = 0;

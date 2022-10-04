@@ -43,7 +43,7 @@ public class ServerConnector implements IConnector {
     }
 
     @Override
-    public IRequest receiveRequest() {
+    public synchronized IRequest receiveRequest() {
         try {
             if (!isConnected()) return null;
             if (sizeBufferIn.remaining() == 0) {
@@ -83,7 +83,7 @@ public class ServerConnector implements IConnector {
     }
 
     @Override
-    public IConnector sendResponse(IResponse response) {
+    public synchronized IConnector sendResponse(IResponse response) {
         try {
             if (!isConnected()) return this;
             byte[] buff = Serializer.serialize(response);
@@ -109,5 +109,13 @@ public class ServerConnector implements IConnector {
             }
         }
         return socket.isConnected();
+    }
+
+    @Override
+    public void disconnect() {
+        try {
+            socket.close();
+        } catch (Throwable ignored) {
+        }
     }
 }

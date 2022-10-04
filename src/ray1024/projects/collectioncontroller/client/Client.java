@@ -35,7 +35,7 @@ public class Client implements Tickable {
             if (scanner.hasNextLine()) user.setPassword(scanner.nextLine());
             commandBuilder = new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
             connector = new ClientConnector(InetAddress.getByName("localhost"), 44147);
-            IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.CONNECTION);
+            IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.REGISTRATION);
             connector.sendRequest(registrationRequest);
             lastAnswerTime = System.currentTimeMillis();
             lastReConnectTime = System.currentTimeMillis();
@@ -53,7 +53,7 @@ public class Client implements Tickable {
         } else if (System.currentTimeMillis() - lastAnswerTime > 1000 * 10 && System.currentTimeMillis() - lastReConnectTime > 1000) {
             try {
                 connector = new ClientConnector(InetAddress.getByName("localhost"), 44147);
-                IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.CONNECTION);
+                IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.REGISTRATION);
                 connector.sendRequest(registrationRequest);
                 lastReConnectTime = System.currentTimeMillis();
             } catch (Throwable ignored) {
