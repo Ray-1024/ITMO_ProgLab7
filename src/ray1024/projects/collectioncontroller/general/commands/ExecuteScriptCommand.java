@@ -1,20 +1,11 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
-import ray1024.projects.collectioncontroller.general.communication.Request;
-import ray1024.projects.collectioncontroller.general.communication.RequestType;
 import ray1024.projects.collectioncontroller.general.readers.ListSourceReader;
-import ray1024.projects.collectioncontroller.general.terminal.MicroShell;
-import ray1024.projects.collectioncontroller.general.writers.ConsoleSourceWriter;
-import ray1024.projects.collectioncontroller.general.readers.FileSourceReader;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
-import ray1024.projects.collectioncontroller.general.writers.DevNullWriter;
 
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Команда запускающая на исполнение скрипт

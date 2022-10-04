@@ -23,25 +23,15 @@ public class Server implements Tickable {
     private ConnectionAcceptor connectionAcceptor;
     private IUserManager usersManager;
     private Terminal serverTerminal;
-    private String usersFilename = "users.bin";
 
     public Server() {
         try {
             connectionAcceptor = new ConnectionAcceptor();
-            loadUsers(usersFilename);
             serverTerminal = new Terminal(new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter()));
             serverTerminal.setCollectionController(new StudyGroupCollectionController(System.getenv("CCFilename")));
             serverTerminal.getCollectionController().loadCollectionFromFile();
         } catch (Exception e) {
             serverTerminal.getWriter().println(e.getMessage());
-        }
-    }
-
-    private void loadUsers(String filename) {
-        try {
-            usersManager = (IUserManager) Serializer.deserialize(Files.readAllBytes(Paths.get(filename)));
-        } catch (Throwable ex) {
-            usersManager = new UserManager();
         }
     }
 
@@ -72,16 +62,14 @@ public class Server implements Tickable {
                 System.out.println("---NEW CONNECTION---");
                 Terminal userTerminal = new Terminal(new CommandBuilder(new DevNullReader(), new ResponseWriter(currConnect))).setCollectionController(serverTerminal.getCollectionController());
                 IUser user = new User();
-                userTerminal.setMaster(user);
-                usersManager.addUser(user.setConnection(currConnect).setLastAccessTime(System.currentTimeMillis()).setTerminal(userTerminal));
+                //usersManager.addUser(user.setConnection(currConnect).setLastAccessTime(System.currentTimeMillis()).setTerminal(userTerminal));
             } catch (Throwable e) {
                 System.out.println(e.getMessage());
-                saveUsers(usersFilename);
                 System.exit(0);
             }
             currConnect = connectionAcceptor.getNewConnection();
         }
-        usersManager.tick();
+        //usersManager.tick();
         serverTerminal.tick();
     }
 }

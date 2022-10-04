@@ -33,23 +33,21 @@ public class ServerApplication {
 
 
     public static void main(String[] args) {
-        try {
+        /*try {
 
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/studs", "postgres", "zh159sm212140");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-        /*Server server = new Server();
+        }*/
+        Server server = new Server();
         while (true) {
             try {
                 server.tick();
             } catch (Throwable e) {
                 System.out.println(e.getMessage());
             }
-        }*/
-
-
+        }
     }
 
 }

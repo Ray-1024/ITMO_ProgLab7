@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
-import ray1024.projects.collectioncontroller.general.terminal.MicroShell;
 import ray1024.projects.collectioncontroller.general.data.SteppedInputObject;
 
 import java.io.Serializable;
