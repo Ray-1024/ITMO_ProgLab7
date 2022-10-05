@@ -4,6 +4,7 @@ import org.xml.sax.InputSource;
 import ray1024.projects.collectioncontroller.general.data.MyCollection;
 import ray1024.projects.collectioncontroller.general.data.StudyGroup;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
+import ray1024.projects.collectioncontroller.server.Server;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -16,22 +17,24 @@ public class StudyGroupCollectionController implements Serializable {
 
     private String collectionFilename;
     private MyCollection<StudyGroup> managedCollection;
+    private Server server;
 
     public MyCollection<StudyGroup> getManagedCollection() {
         return managedCollection;
     }
 
-    public StudyGroupCollectionController(String collectionFilename) {
+    public StudyGroupCollectionController(Server server, String collectionFilename) {
         this.collectionFilename = collectionFilename;
         if (collectionFilename == null)
             managedCollection = new MyCollection<>();
     }
 
+
     public void sortManagedCollection() {
         managedCollection.getVec().sort(Comparator.naturalOrder());
     }
 
-    public void loadCollectionFromFile() {
+    public synchronized void loadCollection() {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(Files.newInputStream(Paths.get(collectionFilename)));
             XMLDecoder xmlDecoder = new XMLDecoder(new InputSource(inputStreamReader));
@@ -46,7 +49,7 @@ public class StudyGroupCollectionController implements Serializable {
         }
     }
 
-    public void saveCollection() throws RuntimeException {
+    public synchronized void saveCollection() throws RuntimeException {
         if (collectionFilename == null) collectionFilename = "Coll.xml";
         try {
             XMLEncoder xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(collectionFilename)));
@@ -57,7 +60,7 @@ public class StudyGroupCollectionController implements Serializable {
         }
     }
 
-    public void setManagedCollection(MyCollection<StudyGroup> managedCollection) {
+    public synchronized void setManagedCollection(MyCollection<StudyGroup> managedCollection) {
         this.managedCollection = managedCollection;
     }
 

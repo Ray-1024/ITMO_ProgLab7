@@ -26,7 +26,7 @@ public class Client implements Tickable {
 
     Client() {
         try {
-            collectionController = new StudyGroupCollectionController(null);
+            collectionController = new StudyGroupCollectionController(null, null);
             user = new User();
             Scanner scanner = new Scanner(System.in);
             System.out.println(Phrases.getPhrase("PleaseEnterLogin"));

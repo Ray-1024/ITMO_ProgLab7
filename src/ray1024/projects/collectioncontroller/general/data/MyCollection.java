@@ -25,6 +25,7 @@ public class MyCollection<T> implements Serializable {
         this.vec = vec;
     }
 
+
     public void setCollectionInfo(CollectionInfo collectionInfo) {
         this.collectionInfo = collectionInfo;
     }

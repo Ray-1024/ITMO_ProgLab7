@@ -11,11 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="64ad19ee-ac90-4d5a-bae1-1d252618de2e" name="Changes" comment="prePostgreSQL">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/controllers/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/controllers/UserManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/commands/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/commands/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/controllers/StudyGroupCollectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/controllers/StudyGroupCollectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/MyCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/data/MyCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/tools/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/general/tools/Serializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ConnectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/RequestExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/RequestExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ResponseSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ResponseSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/ServerConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray1024/projects/collectioncontroller/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,14 +143,7 @@
       <workItem from="1664609609352" duration="165000" />
       <workItem from="1664742231615" duration="7938000" />
       <workItem from="1664889840737" duration="3338000" />
-      <workItem from="1664898162544" duration="14925000" />
-    </task>
-    <task id="LOCAL-00023" summary="1">
-      <created>1660505248834</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1660505248834</updated>
+      <workItem from="1664898162544" duration="17513000" />
     </task>
     <task id="LOCAL-00024" summary="1">
       <created>1660559682326</created>
@@ -486,7 +481,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664914878087</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="prePostgreSQL">
+      <created>1664916972775</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1664916972775</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

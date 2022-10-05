@@ -1,12 +1,10 @@
 package ray1024.projects.collectioncontroller.server;
 
 import ray1024.projects.collectioncontroller.general.communication.IConnector;
-import ray1024.projects.collectioncontroller.general.communication.IResponse;
 import ray1024.projects.collectioncontroller.general.tools.Tickable;
 
 import java.util.LinkedList;
 import java.util.concurrent.ForkJoinPool;
-import java.util.stream.Collectors;
 
 public class ConnectionManager implements Tickable {
 

@@ -27,8 +27,8 @@ public class Server implements Tickable {
     public Server() {
 
         terminal = new Terminal(new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter()),
-                new StudyGroupCollectionController(System.getenv("CCFilename")));
-        terminal.getCollectionController().loadCollectionFromFile();
+                new StudyGroupCollectionController(this, System.getenv("CCFilename")));
+        terminal.getCollectionController().loadCollection();
         usersManager = new UserManager();
         connectionManager = new ConnectionManager(this);
         requestExecutor = new RequestExecutor(this);
