@@ -20,6 +20,7 @@ public class ConnectionManager implements Tickable {
         server = currentServer;
         connectionAcceptor = new ConnectionAcceptor();
         forkJoinPool = new ForkJoinPool();
+
     }
 
     public synchronized void addConnector(IConnector connector) {
