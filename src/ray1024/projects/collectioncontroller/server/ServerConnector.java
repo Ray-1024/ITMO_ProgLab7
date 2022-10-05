@@ -23,7 +23,6 @@ public class ServerConnector implements IConnector {
     private long lastActionTime;
 
     public ServerConnector(Socket socket) {
-        lastActionTime = System.currentTimeMillis();
         this.socket = socket;
         socketChannel = socket.getChannel();
         try {
@@ -35,6 +34,7 @@ public class ServerConnector implements IConnector {
         objectSizeIn = -1;
         sizeBufferOut = ByteBuffer.allocate(4).clear();
         objectSizeOut = -1;
+        lastActionTime = System.currentTimeMillis();
     }
 
     @Override
@@ -72,7 +72,9 @@ public class ServerConnector implements IConnector {
                 objectSizeIn = -1;
             }
             return null;
-        } catch (IOException e) {
+        } catch (IOException ex) {
+            System.out.println("--- SERVER CONNECTOR EXCEPTION ---");
+            System.out.println(ex.getMessage());
             return null;
         }
     }
@@ -95,20 +97,20 @@ public class ServerConnector implements IConnector {
             socketChannel.write(sizeBufferOut);
             socketChannel.write(byteBuffer);
             lastActionTime = System.currentTimeMillis();
-        } catch (IOException ignored) {
+        } catch (IOException ex) {
+            System.out.println("--- SERVER CONNECTOR EXCEPTION ---");
+            System.out.println(ex.getMessage());
         }
         return this;
     }
 
     @Override
     public synchronized boolean isConnected() {
-        if (System.currentTimeMillis() - lastActionTime > 60000) {
-            try {
-                socket.close();
-            } catch (IOException ignored) {
-            }
+        if (!isNoise()) {
+            disconnect();
+            return false;
         }
-        return socket.isConnected();
+        return true;
     }
 
     @Override
@@ -117,5 +119,10 @@ public class ServerConnector implements IConnector {
             socket.close();
         } catch (Throwable ignored) {
         }
+    }
+
+    @Override
+    public synchronized boolean isNoise() {
+        return System.currentTimeMillis() - lastActionTime <= 60000;
     }
 }

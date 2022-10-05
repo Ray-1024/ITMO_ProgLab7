@@ -1,6 +1,7 @@
 package ray1024.projects.collectioncontroller.server;
 
 import ray1024.projects.collectioncontroller.general.communication.IConnector;
+import ray1024.projects.collectioncontroller.general.communication.IRequest;
 import ray1024.projects.collectioncontroller.general.tools.Tickable;
 
 import java.util.LinkedList;
@@ -30,13 +31,18 @@ public class ConnectionManager implements Tickable {
     public void tick() {
         try {
             IConnector curr = connectionAcceptor.getNewConnection();
-            if (curr != null) connections.add(curr);
+            if (curr != null) {
+                connections.add(curr);
+                System.out.println("--- NEW CONNECTION ---");
+            }
             connections.forEach((conn) -> {
-                if (conn.isConnected())
+                if (conn.isConnected()) {
                     server.getRequestExecutor().execute(conn.receiveRequest(), conn);
+                }
             });
             connections.removeAll(connections.stream().filter((conn) -> !conn.isConnected()).toList());
-        } catch (Throwable ignored) {
+        } catch (Throwable ex) {
+            throw ex;
         }
     }
 }

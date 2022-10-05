@@ -5,6 +5,7 @@ import ray1024.projects.collectioncontroller.general.commands.ICommandBuilder;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.general.tools.Tickable;
 import ray1024.projects.collectioncontroller.general.writers.IOutputSource;
+import ray1024.projects.collectioncontroller.server.Server;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
@@ -19,6 +20,11 @@ public class Terminal implements Tickable, Executor {
     private final StudyGroupCollectionController collectionController;
     private final ICommandBuilder commandBuilder;
     private final ForkJoinPool forkJoinPool;
+    private final Server server;
+
+    public Server getServer() {
+        return server;
+    }
 
     public IOutputSource getWriter() {
         return commandBuilder.getWriter();
@@ -32,10 +38,11 @@ public class Terminal implements Tickable, Executor {
         }
     }
 
-    public Terminal(ICommandBuilder commandBuilder, StudyGroupCollectionController studyGroupCollectionController) {
+    public Terminal(Server server, ICommandBuilder commandBuilder, StudyGroupCollectionController studyGroupCollectionController) {
         this.commandBuilder = commandBuilder;
         collectionController = studyGroupCollectionController;
         forkJoinPool = new ForkJoinPool();
+        this.server = server;
     }
 
     public StudyGroupCollectionController getCollectionController() {
@@ -45,12 +52,14 @@ public class Terminal implements Tickable, Executor {
     @Override
     public void tick() {
         try {
+            commandBuilder.tick();
             BaseCommand curr = commandBuilder.getCommand();
             if (curr != null) {
-                execute(curr);
+                execute(curr.setUser(server.admin).setTerminal(this));
                 commandBuilder.reset();
             }
-        } catch (Throwable ignored) {
+        } catch (Throwable ex) {
+            throw ex;
         }
     }
 }

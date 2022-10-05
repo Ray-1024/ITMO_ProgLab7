@@ -4,14 +4,19 @@ import ray1024.projects.collectioncontroller.general.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.general.controllers.IUserManager;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.general.controllers.UserManager;
+import ray1024.projects.collectioncontroller.general.data.IUser;
+import ray1024.projects.collectioncontroller.general.data.User;
 import ray1024.projects.collectioncontroller.general.readers.NonBlockingConsoleSourceReader;
 import ray1024.projects.collectioncontroller.general.terminal.Terminal;
 import ray1024.projects.collectioncontroller.general.tools.Tickable;
 import ray1024.projects.collectioncontroller.general.writers.ConsoleSourceWriter;
 
+import java.util.UUID;
 import java.util.concurrent.Executor;
 
 public class Server implements Tickable {
+
+    public final IUser admin = new User().setLogin("administrator").setPassword(UUID.randomUUID().toString());
     private final IUserManager usersManager;
     private final Terminal terminal;
 
@@ -26,7 +31,7 @@ public class Server implements Tickable {
 
     public Server() {
 
-        terminal = new Terminal(new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter()),
+        terminal = new Terminal(this, new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter()),
                 new StudyGroupCollectionController(this, System.getenv("CCFilename")));
         terminal.getCollectionController().loadCollection();
         usersManager = new UserManager();
@@ -44,10 +49,6 @@ public class Server implements Tickable {
     }
 
     public Terminal getTerminal() {
-        return terminal;
-    }
-
-    public Executor getExecutor() {
         return terminal;
     }
 

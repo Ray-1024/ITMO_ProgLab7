@@ -1,5 +1,7 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
+import ray1024.projects.collectioncontroller.general.communication.Response;
+import ray1024.projects.collectioncontroller.general.communication.ResponseType;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 /**
@@ -18,10 +20,16 @@ public class HelpCommand extends BaseCommand {
     @Override
     public void run() throws RuntimeException {
         try {
+            StringBuilder stringBuilder = new StringBuilder();
             final int[] strNumber = {0};
             CommandRegister.getRegisteredCommandsStream().forEach((command) -> {
-                getTerminal().getWriter().println(String.format("%d. %s: %s", ++strNumber[0], command.getName(), command.getDescription()));
+                stringBuilder.append(String.format("%d. %s: %s\n", ++strNumber[0], command.getName(), command.getDescription()));
             });
+            if (getUser().equals(getTerminal().getServer().admin))
+                getTerminal().getWriter().println(stringBuilder.toString());
+            else
+                getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(stringBuilder.toString()), getUser().getConnector());
+            System.out.println("--- HELP COMMAND ---");
         } catch (Throwable throwable) {
             throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }

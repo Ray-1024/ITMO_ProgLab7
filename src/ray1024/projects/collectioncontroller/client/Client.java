@@ -21,24 +21,21 @@ public class Client implements Tickable {
     private IConnector connector;
     private StudyGroupCollectionController collectionController;
     private IUser user;
-    private long lastAnswerTime;
-    private long lastReConnectTime;
 
     Client() {
         try {
             collectionController = new StudyGroupCollectionController(null, null);
             user = new User();
+
             Scanner scanner = new Scanner(System.in);
             System.out.println(Phrases.getPhrase("PleaseEnterLogin"));
             if (scanner.hasNextLine()) user.setLogin(scanner.nextLine());
             System.out.println(Phrases.getPhrase("PleaseEnterPassword"));
             if (scanner.hasNextLine()) user.setPassword(scanner.nextLine());
+
             commandBuilder = new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
             connector = new ClientConnector(InetAddress.getByName("localhost"), 44147);
-            IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.REGISTRATION);
-            connector.sendRequest(registrationRequest);
-            lastAnswerTime = System.currentTimeMillis();
-            lastReConnectTime = System.currentTimeMillis();
+            connector.sendRequest(new Request().setUser(user).setRequestType(RequestType.REGISTRATION));
         } catch (Throwable e) {
             System.out.println("SERVER DOESN'T EXIST");
             System.exit(0);
@@ -47,19 +44,6 @@ public class Client implements Tickable {
 
     @Override
     public void tick() {
-        if (System.currentTimeMillis() - lastAnswerTime > 1000 * 60) {
-            System.out.println("---CONNECTION HAS BEEN CLOSED BECAUSE TOO LONG---");
-            System.exit(0);
-        } else if (System.currentTimeMillis() - lastAnswerTime > 1000 * 10 && System.currentTimeMillis() - lastReConnectTime > 1000) {
-            try {
-                connector = new ClientConnector(InetAddress.getByName("localhost"), 44147);
-                IRequest registrationRequest = new Request().setCommand(null).setUser(user).setRequestType(RequestType.REGISTRATION);
-                connector.sendRequest(registrationRequest);
-                lastReConnectTime = System.currentTimeMillis();
-            } catch (Throwable ignored) {
-
-            }
-        }
         commandBuilder.tick();
         BaseCommand currCommand = commandBuilder.getCommand();
         if (currCommand != null) {
@@ -72,7 +56,6 @@ public class Client implements Tickable {
         }
         IResponse response = connector.receiveResponse();
         if (response != null) {
-            lastAnswerTime = System.currentTimeMillis();
             if (response.getResponseType() == ResponseType.ANSWER) {
                 commandBuilder.getWriter().println(response.getAnswer());
             } else if (response.getResponseType() == ResponseType.COLLECTION_UPDATE) {
@@ -80,8 +63,6 @@ public class Client implements Tickable {
             } else if (response.getResponseType() == ResponseType.DISCONNECT) {
                 commandBuilder.getWriter().println("---CONNECTION HAS BEEN CLOSED---");
                 System.exit(0);
-            } else if (response.getResponseType() == ResponseType.I_AM_ALIVE) {
-
             }
         }
     }

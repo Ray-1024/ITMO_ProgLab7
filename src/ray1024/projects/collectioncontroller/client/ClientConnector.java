@@ -23,11 +23,13 @@ public class ClientConnector implements IConnector {
 
     private int objectSizeIn;
     private int objectSizeOut;
+    private long lastActionTime;
 
     public ClientConnector(InetAddress serverAddress, int port) {
         try {
             socket = SocketChannel.open().socket();
             socket.connect(new InetSocketAddress(serverAddress, port));
+            lastActionTime = System.currentTimeMillis();
         } catch (IOException e) {
             throw new RuntimeException("SOCKET_CONNECTOR_ERROR");
         }
@@ -54,6 +56,7 @@ public class ClientConnector implements IConnector {
             sizeBufferOut.clear();
             socketChannel.write(sizeBufferOut);
             socketChannel.write(byteBuffer);
+            lastActionTime = System.currentTimeMillis();
         } catch (IOException ignored) {
         }
         return this;
@@ -81,6 +84,7 @@ public class ClientConnector implements IConnector {
                         objectSizeIn = -1;
                         objectBufferIn.clear();
                         byte[] arr = objectBufferIn.array();
+                        lastActionTime = System.currentTimeMillis();
                         return (IResponse) Serializer.deserialize(objectBufferIn.array());
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
@@ -104,7 +108,23 @@ public class ClientConnector implements IConnector {
 
     @Override
     public boolean isConnected() {
-        return socket.isConnected();
+        if (!isNoise()) {
+            disconnect();
+            return false;
+        }
+        return true;
     }
 
+    @Override
+    public void disconnect() {
+        try {
+            socket.close();
+        } catch (Throwable ignored) {
+        }
+    }
+
+    @Override
+    public boolean isNoise() {
+        return System.currentTimeMillis() - lastActionTime <= 60000;
+    }
 }

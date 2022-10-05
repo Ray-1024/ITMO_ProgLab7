@@ -19,7 +19,7 @@ public class StudyGroupCollectionController implements Serializable {
     private MyCollection<StudyGroup> managedCollection;
     private Server server;
 
-    public MyCollection<StudyGroup> getManagedCollection() {
+    public synchronized MyCollection<StudyGroup> getManagedCollection() {
         return managedCollection;
     }
 

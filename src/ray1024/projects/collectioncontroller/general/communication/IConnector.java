@@ -11,4 +11,6 @@ public interface IConnector {
 
     boolean isConnected();
     void disconnect();
+
+    boolean isNoise();
 }

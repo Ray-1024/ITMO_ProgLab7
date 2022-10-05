@@ -17,10 +17,12 @@ public class RequestExecutor {
     }
 
     public synchronized void execute(IRequest request, IConnector connector) {
-        if (request == null || connector == null) return;
         try {
+            if (request == null || connector == null || !server.getUsersManager().isRegistered(request.getUser().getLogin()))
+                return;
             switch (request.getRequestType()) {
                 case REGISTRATION -> {
+                    System.out.println("--- REGISTRATION REQUEST ---");
                     forkJoinPool.execute(() -> {
                         if (!server.getUsersManager().isRegistered(request.getUser().getLogin()))
                             server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.DISCONNECT), connector);
@@ -30,17 +32,20 @@ public class RequestExecutor {
                     break;
                 }
                 case EXECUTION_COMMAND -> {
+                    System.out.println("--- EXECUTION REQUEST ---");
                     forkJoinPool.execute(() -> {
-                        server.getExecutor().execute(request.getCommand().setUser(request.getUser()));
+                        server.getTerminal().execute(request.getCommand().setUser(request.getUser()));
                     });
                     break;
                 }
                 case DISCONNECTION -> {
+                    System.out.println("--- DISCONNECTION REQUEST ---");
                     forkJoinPool.execute(connector::disconnect);
                     break;
                 }
             }
-        } catch (Throwable ignored) {
+        } catch (Throwable ex) {
+            throw ex;
         }
     }
 }

@@ -9,8 +9,8 @@ import java.util.stream.Stream;
  * Класс управляющий коллекцией учебных групп
  */
 public class MyCollection<T> implements Serializable {
-    private Vector<T> vec = new Vector<T>();
-    private CollectionInfo collectionInfo = new CollectionInfo();
+    private final Vector<T> vec = new Vector<T>();
+    private final CollectionInfo collectionInfo = new CollectionInfo();
 
     public MyCollection() {
         collectionInfo.initializationDateTime = LocalDateTime.now();
@@ -19,15 +19,6 @@ public class MyCollection<T> implements Serializable {
 
     public Vector<T> getVec() {
         return vec;
-    }
-
-    public void setVec(Vector<T> vec) {
-        this.vec = vec;
-    }
-
-
-    public void setCollectionInfo(CollectionInfo collectionInfo) {
-        this.collectionInfo = collectionInfo;
     }
 
     public void clear() {
@@ -43,9 +34,12 @@ public class MyCollection<T> implements Serializable {
         return vec.stream();
     }
 
-    public String get(int index) {
-        if (index < 0 || index >= vec.size()) return null;
-        return (String) vec.get(index);
+    public <T> T get(int index) {
+        return (T) vec.get(index);
+    }
+
+    public void add(T elem) {
+        vec.add(elem);
     }
 
     public int size() {

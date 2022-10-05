@@ -15,12 +15,15 @@ public class ResponseSender {
         cachedThreadPool = Executors.newCachedThreadPool();
     }
 
-    public void sendResponse(IResponse response, IConnector connector) {
+    public synchronized void sendResponse(IResponse response, IConnector connector) {
         try {
+            System.out.println("--- SEND ANSWER ---");
             cachedThreadPool.execute(() -> {
                 connector.sendResponse(response);
             });
-        } catch (Throwable ignored) {
+
+        } catch (Throwable ex) {
+            throw ex;
         }
     }
 
