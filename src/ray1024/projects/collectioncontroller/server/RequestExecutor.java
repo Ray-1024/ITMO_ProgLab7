@@ -19,6 +19,7 @@ public class RequestExecutor {
     public synchronized void execute(IRequest request, IConnector connector) {
         if (request == null || connector == null) return;
         try {
+            System.out.println("--- REQUEST ---");
             switch (request.getRequestType()) {
                 case REGISTRATION -> {
                     System.out.println("--- REGISTRATION REQUEST ---");

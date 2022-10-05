@@ -31,10 +31,10 @@ public class CommandRegister {
         BaseCommand prototype = null;
         try {
             prototype = commands.get(args[0]).clone().setArgs(args);
+            prototype.reset();
         } catch (CloneNotSupportedException e) {
             System.out.println("COMMAND_BUILDER_COMMAND_CLONE_NOT_SUPPORTED_EXEPTION");
         }
-        if (prototype != null) prototype.reset();
         return prototype;
     }
 
