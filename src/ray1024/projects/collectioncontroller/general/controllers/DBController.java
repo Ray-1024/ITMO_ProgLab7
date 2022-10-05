@@ -1,5 +1,8 @@
 package ray1024.projects.collectioncontroller.general.controllers;
 
+import ray1024.projects.collectioncontroller.general.data.IUser;
+import ray1024.projects.collectioncontroller.general.data.User;
+
 import java.sql.*;
 
 public class DBController {
@@ -13,13 +16,14 @@ public class DBController {
     public DBController() {
         try {
             connection = DriverManager.getConnection(url, login, password);
+            connection.setAutoCommit(true);
             statement = connection.createStatement();
-            statement.execute("CREATE TABLE IF NOT EXISTS users\n" +
-                    "(\n" +
-                    "    id            SERIAL8 PRIMARY KEY,\n" +
-                    "    login         VARCHAR(30) UNIQUE NOT NULL,\n" +
-                    "    salt          VARCHAR(10)        NOT NULL,\n" +
-                    "    password_hash VARCHAR(30)\n" +
+            statement.execute("CREATE TABLE IF NOT EXISTS users" +
+                    "(" +
+                    "    id            SERIAL8 PRIMARY KEY," +
+                    "    login         VARCHAR(30) UNIQUE NOT NULL," +
+                    "    salt          VARCHAR(10)        NOT NULL," +
+                    "    password_hash VARCHAR(30)" +
                     ")");
 
         } catch (SQLException e) {
@@ -28,12 +32,18 @@ public class DBController {
     }
 
     public UserManager getUsers() {
+        UserManager userManager = new UserManager();
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
-            return new UserManager();
+            while (resultSet.next()) {
+                IUser curr = new User();
+                curr.setLogin(resultSet.getString("login"))
+                        .setPassword(resultSet.getString(""));
+            }
         } catch (Throwable ex) {
-            return new UserManager();
+            throw new RuntimeException(ex);
         }
+        return userManager;
     }
 }

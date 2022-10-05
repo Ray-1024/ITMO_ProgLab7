@@ -33,6 +33,7 @@ public class Terminal implements Tickable, Executor {
     @Override
     public synchronized void execute(Runnable command) {
         try {
+            if (command == null) return;
             forkJoinPool.execute(command);
         } catch (Throwable ex) {
             throw ex;

@@ -13,40 +13,47 @@ public class RequestExecutor {
 
     public RequestExecutor(Server server) {
         this.server = server;
-        forkJoinPool = ForkJoinPool.commonPool();
+        forkJoinPool = new ForkJoinPool();
     }
 
-    public synchronized void execute(IRequest request, IConnector connector) {
-        if (request == null || connector == null) return;
+    public synchronized void executeRequest(IRequest request, IConnector connector) {
+        if (request == null || connector == null) {
+            return;
+        }
         try {
             System.out.println("--- REQUEST ---");
             switch (request.getRequestType()) {
                 case REGISTRATION -> {
-                    System.out.println("--- REGISTRATION REQUEST ---");
-                    forkJoinPool.execute(() -> {
-                        if (!server.getUsersManager().isRegistered(request.getUser().getLogin()))
-                            server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.DISCONNECT), connector);
-                        else
-                            server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer("SUCCESS"), connector);
-                    });
-                    break;
+                    try {
+                        System.out.println("--- REGISTRATION REQUEST ---");
+                        forkJoinPool.execute(() -> {
+                            if (!server.getUsersManager().isRegistered(request.getUser().getLogin()))
+                                server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.DISCONNECT), connector);
+                            else
+                                server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer("SUCCESS"), connector);
+                        });
+                    } catch (Exception ex) {
+                        System.out.println("---REGISTRATION ERROR ---");
+                    }
+                    return;
                 }
                 case EXECUTION_COMMAND -> {
+                    if (request.getUser() == null || request.getCommand() == null) return;
                     if (!server.getUsersManager().isRegistered(request.getUser().getLogin())) return;
                     System.out.println("--- EXECUTION REQUEST ---");
                     forkJoinPool.execute(() -> {
                         server.getTerminal().execute(request.getCommand().setUser(request.getUser()));
                     });
-                    break;
+                    return;
                 }
                 case DISCONNECTION -> {
                     System.out.println("--- DISCONNECTION REQUEST ---");
                     forkJoinPool.execute(connector::disconnect);
-                    break;
+                    return;
                 }
             }
         } catch (Throwable ex) {
-            throw ex;
+            //throw ex;
         }
     }
 }

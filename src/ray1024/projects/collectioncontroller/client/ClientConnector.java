@@ -79,16 +79,12 @@ public class ClientConnector implements IConnector {
                 }
                 if (objectBufferIn.remaining() > 0) socketChannel.read(objectBufferIn);
                 if (objectBufferIn.remaining() == 0) {
-                    try {
-                        sizeBufferIn.clear();
-                        objectSizeIn = -1;
-                        objectBufferIn.clear();
-                        byte[] arr = objectBufferIn.array();
-                        lastActionTime = System.currentTimeMillis();
-                        return (IResponse) Serializer.deserialize(objectBufferIn.array());
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
+                    sizeBufferIn.clear();
+                    objectSizeIn = -1;
+                    objectBufferIn.clear();
+                    byte[] arr = objectBufferIn.array();
+                    lastActionTime = System.currentTimeMillis();
+                    return (IResponse) Serializer.deserialize(objectBufferIn.array());
                 }
             } else {
                 socketChannel.read(sizeBufferIn);

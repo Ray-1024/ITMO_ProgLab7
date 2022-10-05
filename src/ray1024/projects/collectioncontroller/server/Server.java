@@ -32,11 +32,11 @@ public class Server implements Tickable {
     }
 
     public Server() {
+
         dbController = new DBController();
         usersManager = dbController.getUsers();
-        
-        terminal = new Terminal(this, new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter()),
-                new StudyGroupCollectionController(this, System.getenv("CCFilename")));
+
+        terminal = new Terminal(this, new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter()), new StudyGroupCollectionController(this, System.getenv("CCFilename")));
         terminal.getCollectionController().loadCollection();
 
         connectionManager = new ConnectionManager(this);

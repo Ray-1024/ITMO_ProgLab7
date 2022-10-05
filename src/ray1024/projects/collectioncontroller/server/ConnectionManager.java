@@ -1,7 +1,6 @@
 package ray1024.projects.collectioncontroller.server;
 
 import ray1024.projects.collectioncontroller.general.communication.IConnector;
-import ray1024.projects.collectioncontroller.general.communication.IRequest;
 import ray1024.projects.collectioncontroller.general.tools.Tickable;
 
 import java.util.LinkedList;
@@ -24,7 +23,19 @@ public class ConnectionManager implements Tickable {
     }
 
     public synchronized void addConnector(IConnector connector) {
+
         connections.add(connector);
+        forkJoinPool.execute(() -> {
+                    try {
+                        while (connector.isConnected()) {
+                            server.getRequestExecutor().executeRequest(connector.receiveRequest(), connector);
+                            Thread.sleep(1000);
+                        }
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+        );
     }
 
     @Override
@@ -32,14 +43,9 @@ public class ConnectionManager implements Tickable {
         try {
             IConnector curr = connectionAcceptor.getNewConnection();
             if (curr != null) {
-                connections.add(curr);
+                addConnector(curr);
                 System.out.println("--- NEW CONNECTION ---");
             }
-            connections.forEach((conn) -> {
-                System.out.println("--- REQUEST RECEIVED IN CONNECTION MANAGER ---");
-                server.getRequestExecutor().execute(conn.receiveRequest(), conn);
-
-            });
             connections.removeAll(connections.stream().filter((conn) -> !conn.isConnected()).toList());
         } catch (Throwable ex) {
             throw ex;

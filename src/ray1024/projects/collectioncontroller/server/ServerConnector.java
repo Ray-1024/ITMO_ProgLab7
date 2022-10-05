@@ -51,20 +51,15 @@ public class ServerConnector implements IConnector {
                     sizeBufferIn.clear();
                     objectSizeIn = sizeBufferIn.getInt();
                     if (objectSizeIn > 0) objectBufferIn = ByteBuffer.allocate(objectSizeIn);
-                    objectBufferIn.clear();
+                    else return null;
                 }
                 if (objectBufferIn.remaining() > 0) socketChannel.read(objectBufferIn);
                 if (objectBufferIn.remaining() == 0) {
-                    try {
-                        sizeBufferIn.clear();
-                        objectSizeIn = -1;
-                        objectBufferIn.clear();
-                        byte[] arr = objectBufferIn.array();
-                        lastActionTime = System.currentTimeMillis();
-                        return (IRequest) Serializer.deserialize(objectBufferIn.array());
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
+                    sizeBufferIn.clear();
+                    objectSizeIn = -1;
+                    objectBufferIn.clear();
+                    lastActionTime = System.currentTimeMillis();
+                    return (IRequest) Serializer.deserialize(objectBufferIn.array());
                 }
             } else {
                 socketChannel.read(sizeBufferIn);
@@ -72,9 +67,11 @@ public class ServerConnector implements IConnector {
                 objectSizeIn = -1;
             }
             return null;
-        } catch (IOException ex) {
-            //System.out.println("--- SERVER CONNECTOR EXCEPTION ---");
-            //System.out.println(ex.getMessage());
+        } catch (Throwable ex) {
+            System.out.println("--- SERVER CONNECTOR EXCEPTION ---");
+            System.out.println(ex.getMessage());
+            sizeBufferIn.clear();
+            objectSizeIn = -1;
             return null;
         }
     }
