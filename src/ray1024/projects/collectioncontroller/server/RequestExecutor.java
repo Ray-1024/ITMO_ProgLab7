@@ -17,9 +17,8 @@ public class RequestExecutor {
     }
 
     public synchronized void execute(IRequest request, IConnector connector) {
+        if (request == null || connector == null) return;
         try {
-            if (request == null || connector == null || !server.getUsersManager().isRegistered(request.getUser().getLogin()))
-                return;
             switch (request.getRequestType()) {
                 case REGISTRATION -> {
                     System.out.println("--- REGISTRATION REQUEST ---");
@@ -32,6 +31,7 @@ public class RequestExecutor {
                     break;
                 }
                 case EXECUTION_COMMAND -> {
+                    if (!server.getUsersManager().isRegistered(request.getUser().getLogin())) return;
                     System.out.println("--- EXECUTION REQUEST ---");
                     forkJoinPool.execute(() -> {
                         server.getTerminal().execute(request.getCommand().setUser(request.getUser()));

@@ -51,11 +51,13 @@ public class Client implements Tickable {
                 connector.sendRequest(new Request().setRequestType(RequestType.DISCONNECTION));
                 System.exit(0);
             }
+            System.out.println("--- REQUEST SENT ---");
             connector.sendRequest(new Request().setCommand(currCommand).setRequestType(RequestType.EXECUTION_COMMAND).setUser(user));
             commandBuilder.reset();
         }
         IResponse response = connector.receiveResponse();
         if (response != null) {
+            System.out.println("--- RESPONSE ---");
             if (response.getResponseType() == ResponseType.ANSWER) {
                 commandBuilder.getWriter().println(response.getAnswer());
             } else if (response.getResponseType() == ResponseType.COLLECTION_UPDATE) {

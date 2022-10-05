@@ -34,7 +34,8 @@ public class Terminal implements Tickable, Executor {
     public synchronized void execute(Runnable command) {
         try {
             forkJoinPool.execute(command);
-        } catch (Throwable ignored) {
+        } catch (Throwable ex) {
+            throw ex;
         }
     }
 
@@ -53,9 +54,8 @@ public class Terminal implements Tickable, Executor {
     public void tick() {
         try {
             commandBuilder.tick();
-            BaseCommand curr = commandBuilder.getCommand();
-            if (curr != null) {
-                execute(curr.setUser(server.admin).setTerminal(this));
+            if (commandBuilder.getCommand() != null) {
+                execute(commandBuilder.getCommand().setUser(server.admin).setTerminal(this));
                 commandBuilder.reset();
             }
         } catch (Throwable ex) {

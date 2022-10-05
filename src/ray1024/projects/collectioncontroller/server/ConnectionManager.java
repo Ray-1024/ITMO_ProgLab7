@@ -36,9 +36,7 @@ public class ConnectionManager implements Tickable {
                 System.out.println("--- NEW CONNECTION ---");
             }
             connections.forEach((conn) -> {
-                if (conn.isConnected()) {
-                    server.getRequestExecutor().execute(conn.receiveRequest(), conn);
-                }
+                server.getRequestExecutor().execute(conn.receiveRequest(), conn);
             });
             connections.removeAll(connections.stream().filter((conn) -> !conn.isConnected()).toList());
         } catch (Throwable ex) {

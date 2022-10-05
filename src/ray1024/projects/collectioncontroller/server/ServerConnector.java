@@ -73,8 +73,8 @@ public class ServerConnector implements IConnector {
             }
             return null;
         } catch (IOException ex) {
-            System.out.println("--- SERVER CONNECTOR EXCEPTION ---");
-            System.out.println(ex.getMessage());
+            //System.out.println("--- SERVER CONNECTOR EXCEPTION ---");
+            //System.out.println(ex.getMessage());
             return null;
         }
     }
@@ -98,8 +98,8 @@ public class ServerConnector implements IConnector {
             socketChannel.write(byteBuffer);
             lastActionTime = System.currentTimeMillis();
         } catch (IOException ex) {
-            System.out.println("--- SERVER CONNECTOR EXCEPTION ---");
-            System.out.println(ex.getMessage());
+            //System.out.println("--- SERVER CONNECTOR EXCEPTION ---");
+            //System.out.println(ex.getMessage());
         }
         return this;
     }
