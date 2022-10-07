@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="postgresql-42.5.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/META-INF/java/sql/Driver/postgresql-42.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/production/Lab5_CollectionController/META-INF/java/sql/Driver/postgresql-42.5.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
