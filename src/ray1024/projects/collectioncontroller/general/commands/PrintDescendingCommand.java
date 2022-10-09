@@ -1,5 +1,7 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
+import ray1024.projects.collectioncontroller.general.communication.Response;
+import ray1024.projects.collectioncontroller.general.communication.ResponseType;
 import ray1024.projects.collectioncontroller.general.data.MyCollection;
 import ray1024.projects.collectioncontroller.general.data.StudyGroup;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
@@ -22,15 +24,22 @@ public class PrintDescendingCommand extends BaseCommand {
     @Override
     public void run() {
 
+        try {
+            StringBuilder stringBuilder = new StringBuilder();
+            MyCollection<StudyGroup> coll = getTerminal().getCollectionController().getManagedCollection();
+            ArrayList<Integer> arr = new ArrayList<>(coll.size());
+            for (int i = 0; i < coll.size(); ++i) arr.add(i);
 
-        MyCollection<StudyGroup> coll = getTerminal().getCollectionController().getManagedCollection();
-        ArrayList<Integer> arr = new ArrayList<>(coll.size());
-        for (int i = 0; i < coll.size(); ++i) arr.add(i);
-
-        arr.sort(Comparator.comparing(coll::get));
-        for (int i = coll.size() - 1; i >= 0; --i) {
-            getTerminal().getWriter().print("    " + (coll.size() - i) + ". ");
-            getTerminal().getWriter().println(coll.get(arr.get(i)));
+            arr.sort(Comparator.comparing(coll::get));
+            for (int i = coll.size() - 1; i >= 0; --i) {
+                stringBuilder.append("    " + (coll.size() - i) + ". ");
+                stringBuilder.append(coll.get(arr.get(i)).toString());
+            }
+            if (getUser().equals(getTerminal().getServer().serverAdmin))
+                getTerminal().getWriter().println(stringBuilder.toString());
+            else
+                getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(stringBuilder.toString()), getUser().getConnector());
+        } catch (Throwable ignored) {
         }
     }
 

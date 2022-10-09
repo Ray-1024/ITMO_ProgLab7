@@ -1,5 +1,7 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
+import ray1024.projects.collectioncontroller.general.communication.Response;
+import ray1024.projects.collectioncontroller.general.communication.ResponseType;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 /**
@@ -17,9 +19,12 @@ public class InfoCommand extends BaseCommand {
     @Override
     public void run() throws RuntimeException {
         try {
-            getTerminal().getWriter().println(getTerminal().getCollectionController().getManagedCollection().getCollectionInfo().toString());
+            if (getUser().equals(getTerminal().getServer().serverAdmin))
+                getTerminal().getWriter().println(getTerminal().getCollectionController().getManagedCollection().getCollectionInfo().toString());
+            else
+                getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(getTerminal().getCollectionController().getManagedCollection().getCollectionInfo().toString()), getUser().getConnector());
         } catch (Throwable ex) {
-            throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
+            //throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }
     }
 

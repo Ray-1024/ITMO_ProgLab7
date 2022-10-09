@@ -1,5 +1,7 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
+import ray1024.projects.collectioncontroller.general.communication.Response;
+import ray1024.projects.collectioncontroller.general.communication.ResponseType;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 /**
@@ -16,11 +18,20 @@ public class FilterLessThanStudentsCountCommand extends BaseCommand {
 
     @Override
     public void run() {
-        final int[] ind = new int[1];
-        getTerminal().getCollectionController().getManagedCollection().stream()
-                .filter((elem) -> elem.getStudentsCount() < studentsCount).forEach((elem) -> {
-                    getTerminal().getWriter().println(String.format("\t%d. %s", ++ind[0], elem));
-                });
+        try {
+            final int[] ind = new int[1];
+            StringBuilder stringBuilder = new StringBuilder();
+            getTerminal().getCollectionController().getManagedCollection().stream()
+                    .filter((elem) -> elem.getStudentsCount() < studentsCount).forEach((elem) -> {
+                        stringBuilder.append(String.format("\t%d. %s", ++ind[0], elem));
+                        stringBuilder.append("\n");
+                    });
+            if (getUser().equals(getTerminal().getServer().serverAdmin))
+                getTerminal().getWriter().println(stringBuilder.toString());
+            else
+                getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(stringBuilder.toString()), getUser().getConnector());
+        } catch (Throwable ignored) {
+        }
     }
 
     @Override
