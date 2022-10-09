@@ -1,13 +1,15 @@
 package ray1024.projects.collectioncontroller.general.tools;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Serializer {
     public static byte[] serialize(Object obj) {
-        try (ByteArrayOutputStream boas = new ByteArrayOutputStream(); ObjectOutputStream ois = new ObjectOutputStream(boas)) {
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream(); ObjectOutputStream ois = new ObjectOutputStream(baos)) {
             ois.writeObject(obj);
-            return boas.toByteArray();
+            return baos.toByteArray();
         } catch (IOException ex) {
+            ex.printStackTrace();
             return null;
         }
     }

@@ -5,7 +5,7 @@ import ray1024.projects.collectioncontroller.general.data.IUser;
 import java.util.stream.Stream;
 
 public interface IUserManager {
-    boolean isRegistered(String login);
+    boolean isRegistered(IUser user);
 
     IUserManager addUser(IUser user);
 

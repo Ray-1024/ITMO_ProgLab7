@@ -68,8 +68,8 @@ public class ServerConnector implements IConnector {
             }
             return null;
         } catch (Throwable ex) {
-            System.out.println("--- SERVER CONNECTOR EXCEPTION ---");
-            System.out.println(ex.getMessage());
+            //System.out.println("--- SERVER CONNECTOR EXCEPTION ---");
+            //System.out.println(ex.getMessage());
             sizeBufferIn.clear();
             objectSizeIn = -1;
             return null;
@@ -86,6 +86,7 @@ public class ServerConnector implements IConnector {
         try {
             if (!isConnected()) return this;
             byte[] buff = Serializer.serialize(response);
+            if (buff == null) return this;
             objectSizeOut = buff.length;
             sizeBufferOut.clear();
             sizeBufferOut.putInt(objectSizeOut);

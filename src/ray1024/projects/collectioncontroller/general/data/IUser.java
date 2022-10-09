@@ -2,7 +2,9 @@ package ray1024.projects.collectioncontroller.general.data;
 
 import ray1024.projects.collectioncontroller.general.communication.IConnector;
 
-public interface IUser {
+import java.io.Serializable;
+
+public interface IUser extends Serializable {
 
     IUser setLogin(String login);
 

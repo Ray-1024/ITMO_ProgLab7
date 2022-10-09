@@ -49,6 +49,7 @@ public class ClientConnector implements IConnector {
     public IConnector sendRequest(IRequest request) {
         try {
             byte[] buff = Serializer.serialize(request);
+            if (buff == null) throw new IOException("ksdjsncio;,vlmkdv");
             objectSizeOut = buff.length;
             sizeBufferOut.clear();
             sizeBufferOut.putInt(objectSizeOut);
@@ -57,7 +58,8 @@ public class ClientConnector implements IConnector {
             socketChannel.write(sizeBufferOut);
             socketChannel.write(byteBuffer);
             lastActionTime = System.currentTimeMillis();
-        } catch (IOException ignored) {
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
         return this;
     }
@@ -82,7 +84,6 @@ public class ClientConnector implements IConnector {
                     sizeBufferIn.clear();
                     objectSizeIn = -1;
                     objectBufferIn.clear();
-                    byte[] arr = objectBufferIn.array();
                     lastActionTime = System.currentTimeMillis();
                     return (IResponse) Serializer.deserialize(objectBufferIn.array());
                 }

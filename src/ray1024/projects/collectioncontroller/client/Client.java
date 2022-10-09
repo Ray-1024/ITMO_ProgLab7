@@ -13,14 +13,15 @@ import ray1024.projects.collectioncontroller.general.tools.Tickable;
 import ray1024.projects.collectioncontroller.general.writers.ConsoleSourceWriter;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Client implements Tickable {
 
-    private CommandBuilder commandBuilder;
-    private IConnector connector;
-    private StudyGroupCollectionController collectionController;
-    private IUser user;
+    private final CommandBuilder commandBuilder;
+    private final IConnector connector;
+    private final StudyGroupCollectionController collectionController;
+    private final IUser user;
 
     Client() {
         try {
@@ -38,7 +39,12 @@ public class Client implements Tickable {
             connector.sendRequest(new Request().setUser(user).setRequestType(RequestType.REGISTRATION));
         } catch (Throwable e) {
             System.out.println("SERVER DOESN'T EXIST");
-            System.exit(0);
+            try {
+                throw e;
+            } catch (UnknownHostException ex) {
+                throw new RuntimeException(ex);
+            }
+
         }
     }
 

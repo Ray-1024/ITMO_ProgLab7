@@ -1,6 +1,8 @@
 package ray1024.projects.collectioncontroller.general.communication;
 
-public interface IConnector {
+import java.io.Serializable;
+
+public interface IConnector extends Serializable {
     IConnector sendRequest(IRequest request);
 
     IRequest receiveRequest();

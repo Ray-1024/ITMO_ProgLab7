@@ -13,20 +13,20 @@ public class UserManager implements IUserManager {
     }
 
     @Override
-    public boolean isRegistered(String login) {
-        return login != null && users.containsKey(login);
+    public boolean isRegistered(IUser user) {
+        return user.getLogin() != null && users.containsKey(user.getLogin());
     }
 
     @Override
     public synchronized IUserManager addUser(IUser user) {
         if (user == null) return this;
-        if (!isRegistered(user.getLogin())) users.put(user.getLogin(), user);
+        if (!isRegistered(user)) users.put(user.getLogin(), user);
         return this;
     }
 
     @Override
     public IUser getUser(String login) {
-        return isRegistered(login) ? users.get(login) : null;
+        return users.get(login);
     }
 
     @Override

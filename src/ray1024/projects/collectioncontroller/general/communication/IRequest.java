@@ -3,7 +3,9 @@ package ray1024.projects.collectioncontroller.general.communication;
 import ray1024.projects.collectioncontroller.general.commands.BaseCommand;
 import ray1024.projects.collectioncontroller.general.data.IUser;
 
-public interface IRequest {
+import java.io.Serializable;
+
+public interface IRequest extends Serializable {
     public RequestType getRequestType();
 
     public IRequest setRequestType(RequestType requestType);

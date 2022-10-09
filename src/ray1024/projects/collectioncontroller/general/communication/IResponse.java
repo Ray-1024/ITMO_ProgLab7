@@ -3,7 +3,9 @@ package ray1024.projects.collectioncontroller.general.communication;
 import ray1024.projects.collectioncontroller.general.data.MyCollection;
 import ray1024.projects.collectioncontroller.general.data.StudyGroup;
 
-public interface IResponse {
+import java.io.Serializable;
+
+public interface IResponse extends Serializable {
     ResponseType getResponseType();
 
     IResponse setResponseType(ResponseType responseType);

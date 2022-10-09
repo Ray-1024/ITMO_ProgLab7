@@ -21,7 +21,6 @@ public class ResponseSender {
             cachedThreadPool.execute(() -> {
                 connector.sendResponse(response);
             });
-
         } catch (Throwable ex) {
             throw ex;
         }

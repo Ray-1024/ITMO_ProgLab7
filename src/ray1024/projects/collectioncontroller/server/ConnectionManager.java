@@ -26,24 +26,25 @@ public class ConnectionManager implements Tickable {
     }
 
     private void addConnector(IConnector connector) {
-
         connections.add(connector);
-        forkJoinPool.execute(() -> {
-            IRequest request;
+        /*forkJoinPool.execute(() -> {
             while (connector.isConnected()) {
-                request = connector.receiveRequest();
-                if (request == null) {
+                IRequest request = connector.receiveRequest();
+                if (request != null) {
+                    System.out.println("--- START EXECUTION REQUEST ---");
+                    server.getRequestExecutor().executeRequest(request, connector);
+                } else {
                     try {
                         wait(1000);
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeException(ex);
+                    } catch (InterruptedException e) {
+                        //throw new RuntimeException(e);
                     }
-                } else server.getRequestExecutor().executeRequest(request, connector);
+                }
             }
             synchronized (disconnected) {
                 disconnected.add(connector);
             }
-        });
+        });*/
     }
 
     @Override
@@ -53,6 +54,29 @@ public class ConnectionManager implements Tickable {
             addConnector(curr);
             System.out.println("--- NEW CONNECTION ---");
         }
+        connections.forEach((connector) -> forkJoinPool.execute(() -> {
+            if (!connector.isConnected()) {
+                synchronized (disconnected) {
+                    disconnected.add(connector);
+                }
+            }
+            IRequest request = connector.receiveRequest();
+            if (request != null) System.out.println("--- START EXECUTION REQUEST ---");
+            server.getRequestExecutor().executeRequest(request, connector);
+        }));
+
+        /*for (IConnector connector : connections) {
+            if (!connector.isConnected()) {
+                synchronized (disconnected) {
+                    disconnected.add(connector);
+                }
+            }
+            IRequest request = connector.receiveRequest();
+            if (request != null) {
+                System.out.println("--- START EXECUTION REQUEST ---");
+                server.getRequestExecutor().executeRequest(request, connector);
+            }
+        }*/
         synchronized (disconnected) {
             connections.removeAll(disconnected);
             disconnected.clear();
