@@ -1,4 +1,4 @@
-package ray1024.projects.collectioncontroller.general.controllers;
+package ray1024.projects.collectioncontroller.server;
 
 import ray1024.projects.collectioncontroller.general.data.IUser;
 

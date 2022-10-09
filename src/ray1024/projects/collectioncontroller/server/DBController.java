@@ -1,7 +1,8 @@
-package ray1024.projects.collectioncontroller.general.controllers;
+package ray1024.projects.collectioncontroller.server;
 
 import ray1024.projects.collectioncontroller.general.data.IUser;
 import ray1024.projects.collectioncontroller.general.data.User;
+import ray1024.projects.collectioncontroller.server.UserManager;
 
 import java.sql.*;
 
@@ -27,7 +28,7 @@ public class DBController {
                     ")");
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
     }
 
@@ -42,7 +43,7 @@ public class DBController {
                         .setPassword(resultSet.getString(""));
             }
         } catch (Throwable ex) {
-            throw new RuntimeException(ex);
+            //throw new RuntimeException(ex);
         }
         return userManager;
     }

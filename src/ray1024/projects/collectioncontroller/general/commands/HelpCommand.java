@@ -25,7 +25,7 @@ public class HelpCommand extends BaseCommand {
             CommandRegister.getRegisteredCommandsStream().forEach((command) -> {
                 stringBuilder.append(String.format("%d. %s: %s\n", ++strNumber[0], command.getName(), command.getDescription()));
             });
-            if (getUser().equals(getTerminal().getServer().admin))
+            if (getUser().equals(getTerminal().getServer().serverAdmin))
                 getTerminal().getWriter().println(stringBuilder.toString());
             else
                 getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(stringBuilder.toString()), getUser().getConnector());

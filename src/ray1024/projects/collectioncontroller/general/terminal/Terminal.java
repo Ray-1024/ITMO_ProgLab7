@@ -1,6 +1,5 @@
 package ray1024.projects.collectioncontroller.general.terminal;
 
-import ray1024.projects.collectioncontroller.general.commands.BaseCommand;
 import ray1024.projects.collectioncontroller.general.commands.ICommandBuilder;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.general.tools.Tickable;
@@ -56,7 +55,7 @@ public class Terminal implements Tickable, Executor {
         try {
             commandBuilder.tick();
             if (commandBuilder.getCommand() != null) {
-                execute(commandBuilder.getCommand().setUser(server.admin).setTerminal(this));
+                execute(commandBuilder.getCommand().setUser(server.serverAdmin).setTerminal(this));
                 commandBuilder.reset();
             }
         } catch (Throwable ex) {

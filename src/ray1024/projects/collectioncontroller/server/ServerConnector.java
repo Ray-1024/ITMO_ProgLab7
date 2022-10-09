@@ -102,7 +102,7 @@ public class ServerConnector implements IConnector {
     }
 
     @Override
-    public synchronized boolean isConnected() {
+    public boolean isConnected() {
         if (!isNoise()) {
             disconnect();
             return false;
@@ -119,7 +119,7 @@ public class ServerConnector implements IConnector {
     }
 
     @Override
-    public synchronized boolean isNoise() {
+    public boolean isNoise() {
         return System.currentTimeMillis() - lastActionTime <= 60000;
     }
 }
