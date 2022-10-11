@@ -50,6 +50,10 @@ public class Client implements Tickable {
 
     @Override
     public void tick() {
+        if (!connector.isConnected()) {
+            commandBuilder.getWriter().println("---CONNECTION TIMEDOUT ---");
+            System.exit(0);
+        }
         commandBuilder.tick();
         BaseCommand currCommand = commandBuilder.getCommand();
         if (currCommand != null) {

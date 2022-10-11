@@ -37,7 +37,7 @@ public class ClientApplication {
             try {
                 client.tick();
             } catch (Throwable e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }

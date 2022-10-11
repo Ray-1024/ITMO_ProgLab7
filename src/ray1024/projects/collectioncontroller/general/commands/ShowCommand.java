@@ -1,5 +1,7 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
+import ray1024.projects.collectioncontroller.general.communication.Response;
+import ray1024.projects.collectioncontroller.general.communication.ResponseType;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
 /**
@@ -15,11 +17,16 @@ public class ShowCommand extends BaseCommand {
 
     @Override
     public void run() {
-        //getParentShell().getWriter().println(getParentShell().getCollectionController().getManagedCollection().toString());
-        int[] ind = new int[1];
-        getTerminal().getCollectionController().getManagedCollection().stream().forEach((elem -> {
-            getTerminal().getWriter().println((++ind[0]) + elem.toString());
-        }));
+        try {
+            StringBuilder stringBuilder = new StringBuilder();
+            int[] ind = new int[1];
+            getTerminal().getCollectionController().getManagedCollection().stream().forEach((elem -> {
+                stringBuilder.append((++ind[0]) + elem.toString());
+                stringBuilder.append("\n");
+            }));
+            getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(stringBuilder.toString()), getUser().getConnector());
+        } catch (Throwable ignored) {
+        }
     }
 
     @Override

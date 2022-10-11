@@ -2,6 +2,7 @@ package ray1024.projects.collectioncontroller.general.commands;
 
 import ray1024.projects.collectioncontroller.general.readers.ListSourceReader;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
+import ray1024.projects.collectioncontroller.general.writers.DevNullWriter;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,11 +28,11 @@ public class ExecuteScriptCommand extends BaseCommand {
     @Override
     public void run() {
         try {
-            scriptCommandBuilder = new CommandBuilder(new ListSourceReader(scriptText), getTerminal().getWriter());
+            scriptCommandBuilder = new CommandBuilder(new ListSourceReader(scriptText), new DevNullWriter());
             while (!scriptCommandBuilder.isDone()) {
                 scriptCommandBuilder.tick();
                 if (scriptCommandBuilder.getCommand() != null) {
-                    getTerminal().execute(scriptCommandBuilder.getCommand());
+                    getTerminal().execute(scriptCommandBuilder.getCommand().setUser(getUser()).setTerminal(getTerminal()));
                     scriptCommandBuilder.reset();
                 }
             }

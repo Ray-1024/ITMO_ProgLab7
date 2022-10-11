@@ -1,5 +1,7 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
+import ray1024.projects.collectioncontroller.general.communication.Response;
+import ray1024.projects.collectioncontroller.general.communication.ResponseType;
 import ray1024.projects.collectioncontroller.general.data.StudyGroup;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
@@ -25,7 +27,7 @@ public class AddCommand extends BaseCommand {
             getTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
 
         } catch (Exception e) {
-            getTerminal().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));
+            getTerminal().getServer().getResponseSender().sendResponse(new Response().setAnswer(Phrases.getPhrase("Can'tExecuteCommand")).setResponseType(ResponseType.ANSWER), getUser().getConnector());
         }
     }
 
