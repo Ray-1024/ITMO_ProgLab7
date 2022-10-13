@@ -2,9 +2,12 @@ package ray1024.projects.collectioncontroller.client;
 
 import ray1024.projects.collectioncontroller.general.commands.*;
 import ray1024.projects.collectioncontroller.general.readers.NonBlockingConsoleSourceReader;
+import ray1024.projects.collectioncontroller.server.CryptoController;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.UnknownHostException;
+import java.util.Scanner;
 
 /**
  * Главный красс создающий и запускающий Терминал

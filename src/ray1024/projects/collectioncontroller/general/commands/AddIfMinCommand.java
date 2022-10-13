@@ -1,5 +1,7 @@
 package ray1024.projects.collectioncontroller.general.commands;
 
+import ray1024.projects.collectioncontroller.general.communication.Response;
+import ray1024.projects.collectioncontroller.general.communication.ResponseType;
 import ray1024.projects.collectioncontroller.general.data.StudyGroup;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
@@ -22,14 +24,15 @@ public class AddIfMinCommand extends BaseCommand {
     @Override
     public void run() {
         try {
-            studyGroup.setId(StudyGroup.getNextID());
+            studyGroup.setId(StudyGroup.getNextID()).setOwnen(getUser());
             StudyGroup.setNextID(StudyGroup.getNextID() + 1);
-            if (getTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> {
-                return i.compareTo(studyGroup) > 0;
-            }))
-                getTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
-        } catch (Exception e) {
-            getTerminal().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));
+            if (getTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> i.compareTo(studyGroup) > 0))
+                getTerminal().getCollectionController().add(studyGroup);
+        } catch (Throwable e) {
+            if (getTerminal().getServer().serverAdmin.equals(getUser()))
+                getTerminal().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));
+            else
+                getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(Phrases.getPhrase("Can'tExecuteCommand")), getUser().getConnector());
         }
     }
 

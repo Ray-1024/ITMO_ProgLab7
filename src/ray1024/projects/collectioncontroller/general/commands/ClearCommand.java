@@ -2,6 +2,8 @@ package ray1024.projects.collectioncontroller.general.commands;
 
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 
+import java.util.stream.Collectors;
+
 /**
  * Команда очищающая коллекцию, делая ее пустой
  */
@@ -16,9 +18,13 @@ public class ClearCommand extends BaseCommand {
     @Override
     public void run() throws RuntimeException {
         try {
-            getTerminal().getCollectionController().getManagedCollection().clear();
+            getTerminal().getCollectionController().removeAll(
+                    getTerminal().getCollectionController().stream()
+                            .filter((studyGroup -> studyGroup.getOwnen().equals(getUser())))
+                            .collect(Collectors.toList()));
         } catch (Exception e) {
-            throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
+            //throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
+            e.printStackTrace();
         }
     }
 

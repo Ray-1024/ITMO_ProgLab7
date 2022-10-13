@@ -24,6 +24,7 @@ public class InfoCommand extends BaseCommand {
             else
                 getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(getTerminal().getCollectionController().getManagedCollection().getCollectionInfo().toString()), getUser().getConnector());
         } catch (Throwable ex) {
+            ex.printStackTrace();
             //throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
         }
     }

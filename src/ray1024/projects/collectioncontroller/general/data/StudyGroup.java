@@ -22,6 +22,8 @@ public class StudyGroup extends SteppedInputObject implements Comparable<StudyGr
     private Semester semesterEnum; //Поле не может быть null
     private Person groupAdmin; //Поле может быть null
 
+    private IUser ownen;
+
 
     public StudyGroup() {
         id = (NextID++);
@@ -35,6 +37,15 @@ public class StudyGroup extends SteppedInputObject implements Comparable<StudyGr
         groupAdmin = Person.emptyPerson;
         groupAdmin.reset();
         stepsCount = 6 + Coordinates.emptyCoordinates.getStepsCount() + Person.emptyPerson.getStepsCount();
+    }
+
+    public IUser getOwnen() {
+        return ownen;
+    }
+
+    public StudyGroup setOwnen(IUser ownen) {
+        this.ownen = ownen;
+        return this;
     }
 
     @Override
@@ -117,56 +128,64 @@ public class StudyGroup extends SteppedInputObject implements Comparable<StudyGr
         NextID = nextID;
     }
 
-    public void setId(int id) {
+    public StudyGroup setId(int id) {
         this.id = id;
+        return this;
     }
 
-    public void setName(String name) {
+    public StudyGroup setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Coordinates getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(Coordinates coordinates) {
+    public StudyGroup setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
+        return this;
     }
 
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
+    public StudyGroup setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+        return this;
     }
 
-    public void setStudentsCount(int studentsCount) {
+    public StudyGroup setStudentsCount(int studentsCount) {
         this.studentsCount = studentsCount;
+        return this;
     }
 
     public FormOfEducation getFormOfEducation() {
         return formOfEducation;
     }
 
-    public void setFormOfEducation(FormOfEducation formOfEducation) {
+    public StudyGroup setFormOfEducation(FormOfEducation formOfEducation) {
         this.formOfEducation = formOfEducation;
+        return this;
     }
 
     public Semester getSemesterEnum() {
         return semesterEnum;
     }
 
-    public void setSemesterEnum(Semester semesterEnum) {
+    public StudyGroup setSemesterEnum(Semester semesterEnum) {
         this.semesterEnum = semesterEnum;
+        return this;
     }
 
     public Person getGroupAdmin() {
         return groupAdmin;
     }
 
-    public void setGroupAdmin(Person groupAdmin) {
+    public StudyGroup setGroupAdmin(Person groupAdmin) {
         this.groupAdmin = groupAdmin;
+        return this;
     }
 
     public String getName() {
@@ -195,6 +214,11 @@ public class StudyGroup extends SteppedInputObject implements Comparable<StudyGr
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != getClass()) return false;
         StudyGroup gr = (StudyGroup) obj;
-        return name.equals(gr.name) && coordinates.equals(gr.coordinates) && studentsCount == gr.studentsCount && formOfEducation.equals(gr.formOfEducation) && semesterEnum.equals(gr.semesterEnum) && groupAdmin.equals(gr.groupAdmin);
+        return name.equals(gr.name) &&
+                coordinates.equals(gr.coordinates) &&
+                studentsCount == gr.studentsCount &&
+                ((formOfEducation == null && gr.formOfEducation == null) || formOfEducation.equals(gr.formOfEducation)) &&
+                semesterEnum.equals(gr.semesterEnum) &&
+                ((groupAdmin == null && gr.groupAdmin == null) || groupAdmin.equals(gr.groupAdmin));
     }
 }

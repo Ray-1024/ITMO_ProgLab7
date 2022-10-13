@@ -17,9 +17,7 @@ public class RemoveByIDCommand extends BaseCommand {
 
     @Override
     public void run() {
-        getTerminal().getCollectionController().getManagedCollection().getVec().removeIf((elem) -> {
-            return elem.getId() == removeID;
-        });
+        getTerminal().getCollectionController().getManagedCollection().getVec().removeIf((elem) -> getUser().equals(elem.getOwnen()) && elem.getId() == removeID);
     }
 
     @Override

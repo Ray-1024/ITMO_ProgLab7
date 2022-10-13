@@ -2,20 +2,26 @@ package ray1024.projects.collectioncontroller.general.data;
 
 import ray1024.projects.collectioncontroller.general.communication.IConnector;
 
-public class User implements IUser {
+public class ClientUser implements IUser {
+
     private String login;
     private String password;
-    private IConnector connector;
+
+    @Override
+    public IUser setLogin(String login) {
+        this.login = login;
+        return this;
+    }
+
+    @Override
+    public IUser setPassword(String password) {
+        this.password = password;
+        return this;
+    }
 
     @Override
     public String getLogin() {
         return login;
-    }
-
-    @Override
-    public User setLogin(String login) {
-        this.login = login;
-        return this;
     }
 
     @Override
@@ -24,19 +30,12 @@ public class User implements IUser {
     }
 
     @Override
-    public User setPassword(String passwordHash) {
-        this.password = passwordHash;
-        return this;
-    }
-
-    @Override
     public IUser setConnector(IConnector connector) {
-        this.connector = connector;
         return this;
     }
 
     @Override
     public IConnector getConnector() {
-        return connector;
+        return null;
     }
 }

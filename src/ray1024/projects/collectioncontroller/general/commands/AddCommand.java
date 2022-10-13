@@ -24,9 +24,10 @@ public class AddCommand extends BaseCommand {
         try {
             studyGroup.setId(StudyGroup.getNextID());
             StudyGroup.setNextID(StudyGroup.getNextID() + 1);
-            getTerminal().getCollectionController().getManagedCollection().getVec().add(studyGroup);
+            getTerminal().getCollectionController().add(studyGroup.setOwnen(getUser()));
 
         } catch (Exception e) {
+            e.printStackTrace();
             getTerminal().getServer().getResponseSender().sendResponse(new Response().setAnswer(Phrases.getPhrase("Can'tExecuteCommand")).setResponseType(ResponseType.ANSWER), getUser().getConnector());
         }
     }

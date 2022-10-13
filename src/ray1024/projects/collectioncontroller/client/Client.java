@@ -6,7 +6,7 @@ import ray1024.projects.collectioncontroller.general.commands.ExitCommand;
 import ray1024.projects.collectioncontroller.general.communication.*;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.general.data.IUser;
-import ray1024.projects.collectioncontroller.general.data.User;
+import ray1024.projects.collectioncontroller.general.data.ServerUser;
 import ray1024.projects.collectioncontroller.general.readers.NonBlockingConsoleSourceReader;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 import ray1024.projects.collectioncontroller.general.tools.Tickable;
@@ -25,8 +25,8 @@ public class Client implements Tickable {
 
     Client() {
         try {
-            collectionController = new StudyGroupCollectionController(null, null);
-            user = new User();
+            collectionController = new StudyGroupCollectionController(null);
+            user = new ServerUser();
 
             Scanner scanner = new Scanner(System.in);
             System.out.println(Phrases.getPhrase("PleaseEnterLogin"));
@@ -44,14 +44,13 @@ public class Client implements Tickable {
             } catch (UnknownHostException ex) {
                 throw new RuntimeException(ex);
             }
-
         }
     }
 
     @Override
     public void tick() {
         if (!connector.isConnected()) {
-            commandBuilder.getWriter().println("---CONNECTION TIMEDOUT ---");
+            commandBuilder.getWriter().println("--- CONNECTION TIMED OUT ---");
             System.exit(0);
         }
         commandBuilder.tick();
@@ -61,19 +60,19 @@ public class Client implements Tickable {
                 connector.sendRequest(new Request().setRequestType(RequestType.DISCONNECTION));
                 System.exit(0);
             }
-            System.out.println("--- REQUEST SENT ---");
+            System.out.println("--- REQUEST WAS SENT ---");
             connector.sendRequest(new Request().setCommand(currCommand).setRequestType(RequestType.EXECUTION_COMMAND).setUser(user));
             commandBuilder.reset();
         }
         IResponse response = connector.receiveResponse();
         if (response != null) {
-            System.out.println("--- RESPONSE ---");
+            System.out.println("--- RESPONSE WAS RECEIVED ---");
             if (response.getResponseType() == ResponseType.ANSWER) {
                 commandBuilder.getWriter().println(response.getAnswer());
             } else if (response.getResponseType() == ResponseType.COLLECTION_UPDATE) {
                 collectionController.setManagedCollection(response.getCollection());
             } else if (response.getResponseType() == ResponseType.DISCONNECT) {
-                commandBuilder.getWriter().println("---CONNECTION HAS BEEN CLOSED---");
+                commandBuilder.getWriter().println("--- CONNECTION WAS CLOSED ---");
                 System.exit(0);
             }
         }

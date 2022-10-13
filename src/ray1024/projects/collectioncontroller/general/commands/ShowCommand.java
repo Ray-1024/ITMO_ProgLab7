@@ -21,7 +21,7 @@ public class ShowCommand extends BaseCommand {
             StringBuilder stringBuilder = new StringBuilder();
             int[] ind = new int[1];
             getTerminal().getCollectionController().getManagedCollection().stream().forEach((elem -> {
-                stringBuilder.append((++ind[0]) + elem.toString());
+                stringBuilder.append((++ind[0]) + ". " + elem.toString());
                 stringBuilder.append("\n");
             }));
             getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(stringBuilder.toString()), getUser().getConnector());

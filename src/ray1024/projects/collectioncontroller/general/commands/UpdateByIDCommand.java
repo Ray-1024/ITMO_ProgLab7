@@ -16,17 +16,19 @@ public class UpdateByIDCommand extends BaseCommand {
         CommandRegister.registerCommand(this);
         stepsCount = elem.getStepsCount();
     }
-    
+
     @Override
     public void run() {
-
-        elem.setId(getTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> {
-            return elem.getId() == updateID;
-        }).findFirst().get().getId());
-        getTerminal().getCollectionController().getManagedCollection().getVec().replaceAll((i) -> {
-            if (i.getId() == elem.getId()) return elem;
-            return i;
-        });
+        try {
+            elem.setId(getTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> {
+                return elem.getId() == updateID && elem.getOwnen().equals(getUser());
+            }).findFirst().get().getId());
+            getTerminal().getCollectionController().getManagedCollection().getVec().replaceAll((i) -> {
+                if (i.getId() == elem.getId()) return elem;
+                return i;
+            });
+        } catch (Throwable ex) {
+        }
     }
 
     @Override

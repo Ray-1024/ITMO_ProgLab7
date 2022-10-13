@@ -1,6 +1,7 @@
 package ray1024.projects.collectioncontroller.general.controllers;
 
 import org.xml.sax.InputSource;
+import ray1024.projects.collectioncontroller.general.data.IUser;
 import ray1024.projects.collectioncontroller.general.data.MyCollection;
 import ray1024.projects.collectioncontroller.general.data.StudyGroup;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
@@ -11,57 +12,78 @@ import java.beans.XMLEncoder;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.stream.Stream;
 
 public class StudyGroupCollectionController implements Serializable {
 
-    private String collectionFilename;
     private MyCollection<StudyGroup> managedCollection;
     private Server server;
 
-    public synchronized MyCollection<StudyGroup> getManagedCollection() {
-        return managedCollection;
+    private ReentrantReadWriteLock reentrantReadWriteLock;
+
+    public MyCollection<StudyGroup> getManagedCollection() {
+        try {
+            reentrantReadWriteLock.readLock().lock();
+            return managedCollection;
+        } finally {
+            reentrantReadWriteLock.readLock().unlock();
+        }
     }
 
-    public StudyGroupCollectionController(Server server, String collectionFilename) {
-        this.collectionFilename = collectionFilename;
-        if (collectionFilename == null)
-            managedCollection = new MyCollection<>();
+    public StudyGroupCollectionController(Server server) {
+        this.server = server;
+        reentrantReadWriteLock = new ReentrantReadWriteLock();
     }
 
 
     public void sortManagedCollection() {
-        managedCollection.getVec().sort(Comparator.naturalOrder());
+        try {
+            reentrantReadWriteLock.writeLock().lock();
+            managedCollection.getVec().sort(Comparator.naturalOrder());
+        } finally {
+            reentrantReadWriteLock.writeLock().unlock();
+        }
     }
 
-    public synchronized void loadCollection() {
+    public void loadCollection() {
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(Files.newInputStream(Paths.get(collectionFilename)));
-            XMLDecoder xmlDecoder = new XMLDecoder(new InputSource(inputStreamReader));
-            managedCollection = (MyCollection<StudyGroup>) xmlDecoder.readObject();
-            xmlDecoder.close();
-            inputStreamReader.close();
-            for (StudyGroup studyGroup : managedCollection.getVec())
-                if (StudyGroup.getNextID() <= studyGroup.getId()) StudyGroup.setNextID(studyGroup.getId() + 1);
-        } catch (Throwable ex) {
+            managedCollection = server.getDbController().getCollection();
+        } catch (Throwable ignored) {
             managedCollection = new MyCollection<>();
-            //throw new Exception(Phrases.getPhrase("CantLoadCollectionFromFile"));
         }
     }
 
-    public synchronized void saveCollection() throws RuntimeException {
-        if (collectionFilename == null) collectionFilename = "Coll.xml";
+    public void saveCollection() throws RuntimeException {
+
+    }
+
+    public void setManagedCollection(MyCollection<StudyGroup> managedCollection) {
         try {
-            XMLEncoder xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(collectionFilename)));
-            xmlEncoder.writeObject(managedCollection);
-            xmlEncoder.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(Phrases.getPhrase("CantSaveCollectionToFile"));
+            reentrantReadWriteLock.writeLock().lock();
+            this.managedCollection = managedCollection;
+        } finally {
+            reentrantReadWriteLock.writeLock().unlock();
         }
     }
 
-    public synchronized void setManagedCollection(MyCollection<StudyGroup> managedCollection) {
-        this.managedCollection = managedCollection;
+    public void removeAll(Collection<StudyGroup> collection) {
+        try {
+            reentrantReadWriteLock.writeLock().lock();
+            managedCollection.getVec().removeAll(collection);
+        } finally {
+            reentrantReadWriteLock.writeLock().unlock();
+        }
+    }
+
+    public Stream<StudyGroup> stream() {
+        return managedCollection.stream();
+    }
+
+    public void add(StudyGroup elem) {
+        managedCollection.add(elem);
     }
 
 }
