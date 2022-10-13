@@ -18,17 +18,22 @@ import java.util.Scanner;
 
 public class Client implements Tickable {
 
-    private final CommandBuilder commandBuilder;
-    private final IConnector connector;
-    private final StudyGroupCollectionController collectionController;
-    private final IUser user;
+    private CommandBuilder commandBuilder;
+    private IConnector connector;
+    private StudyGroupCollectionController collectionController;
+    private IUser user;
 
     Client() {
         try {
             collectionController = new StudyGroupCollectionController(null);
             user = new ServerUser();
-
             Scanner scanner = new Scanner(System.in);
+            System.out.println("Sign in or sign up?");
+            String mode = scanner.nextLine();
+            while (!"sign_in".equals(mode) && !"sign_up".equals(mode)) {
+                System.out.println("Sign in or sign up?");
+                mode = scanner.nextLine();
+            }
             System.out.println(Phrases.getPhrase("PleaseEnterLogin"));
             if (scanner.hasNextLine()) user.setLogin(scanner.nextLine());
             System.out.println(Phrases.getPhrase("PleaseEnterPassword"));
@@ -36,14 +41,11 @@ public class Client implements Tickable {
 
             commandBuilder = new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
             connector = new ClientConnector(InetAddress.getByName("localhost"), 44147);
-            connector.sendRequest(new Request().setUser(user).setRequestType(RequestType.REGISTRATION));
+            if ("sign_up".equals(mode))
+                connector.sendRequest(new Request().setUser(user).setRequestType(RequestType.SIGN_UP));
+            else connector.sendRequest(new Request().setUser(user).setRequestType(RequestType.SIGN_IN));
         } catch (Throwable e) {
             System.out.println("SERVER DOESN'T EXIST");
-            try {
-                throw e;
-            } catch (UnknownHostException ex) {
-                throw new RuntimeException(ex);
-            }
         }
     }
 

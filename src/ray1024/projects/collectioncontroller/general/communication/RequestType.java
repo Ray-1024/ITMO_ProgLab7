@@ -1,5 +1,5 @@
 package ray1024.projects.collectioncontroller.general.communication;
 
 public enum RequestType {
-    REGISTRATION, AUTHORIZATION, EXECUTION_COMMAND, DISCONNECTION
+    SIGN_UP, SIGN_IN, EXECUTION_COMMAND, DISCONNECTION
 }

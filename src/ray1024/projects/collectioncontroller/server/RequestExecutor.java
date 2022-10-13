@@ -20,7 +20,7 @@ public class RequestExecutor {
         try {
             System.out.println("--- REQUEST ---");
             switch (request.getRequestType()) {
-                case REGISTRATION: {
+                case SIGN_UP: {
                     try {
                         System.out.println("--- REGISTRATION REQUEST ---");
                         forkJoinPool.execute(() -> {
@@ -34,7 +34,7 @@ public class RequestExecutor {
                     }
                     return;
                 }
-                case AUTHORIZATION: {
+                case SIGN_IN: {
                     try {
                         if (!server.getUsersManager().isRegistered(request.getUser()))
                             server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.DISCONNECT), connector);
