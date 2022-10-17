@@ -3,7 +3,7 @@ package ray1024.projects.collectioncontroller.server;
 import ray1024.projects.collectioncontroller.general.commands.CommandBuilder;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.general.data.IUser;
-import ray1024.projects.collectioncontroller.general.data.ServerUser;
+import ray1024.projects.collectioncontroller.general.data.User;
 import ray1024.projects.collectioncontroller.general.readers.NonBlockingConsoleSourceReader;
 import ray1024.projects.collectioncontroller.general.terminal.Terminal;
 import ray1024.projects.collectioncontroller.general.tools.Tickable;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class Server implements Tickable {
 
-    public final IUser serverAdmin = new ServerUser().setLogin("administrator").setPassword(UUID.randomUUID().toString());
+    public final IUser serverAdmin = new User().setLogin("administrator").setPassword(UUID.randomUUID().toString());
     private final IUserManager usersManager;
     private final Terminal terminal;
 

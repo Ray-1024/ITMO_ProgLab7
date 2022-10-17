@@ -14,6 +14,10 @@ public interface IUser extends Serializable {
 
     String getPassword();
 
+    IUser setSalt(String salt);
+
+    String getSalt();
+
     IUser setConnector(IConnector connector);
 
     IConnector getConnector();

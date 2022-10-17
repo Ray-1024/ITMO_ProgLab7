@@ -6,14 +6,13 @@ import ray1024.projects.collectioncontroller.general.commands.ExitCommand;
 import ray1024.projects.collectioncontroller.general.communication.*;
 import ray1024.projects.collectioncontroller.general.controllers.StudyGroupCollectionController;
 import ray1024.projects.collectioncontroller.general.data.IUser;
-import ray1024.projects.collectioncontroller.general.data.ServerUser;
+import ray1024.projects.collectioncontroller.general.data.User;
 import ray1024.projects.collectioncontroller.general.readers.NonBlockingConsoleSourceReader;
 import ray1024.projects.collectioncontroller.general.tools.Phrases;
 import ray1024.projects.collectioncontroller.general.tools.Tickable;
 import ray1024.projects.collectioncontroller.general.writers.ConsoleSourceWriter;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Client implements Tickable {
@@ -26,11 +25,11 @@ public class Client implements Tickable {
     Client() {
         try {
             collectionController = new StudyGroupCollectionController(null);
-            user = new ServerUser();
+            user = new User();
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Sign in or sign up?");
+            System.out.println("sign in or sign up?");
             String mode = scanner.nextLine();
-            while (!"sign_in".equals(mode) && !"sign_up".equals(mode)) {
+            while (!"sign in".equals(mode) && !"sign up".equals(mode)) {
                 System.out.println("Sign in or sign up?");
                 mode = scanner.nextLine();
             }
@@ -41,7 +40,7 @@ public class Client implements Tickable {
 
             commandBuilder = new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
             connector = new ClientConnector(InetAddress.getByName("localhost"), 44147);
-            if ("sign_up".equals(mode))
+            if ("sign up".equals(mode))
                 connector.sendRequest(new Request().setUser(user).setRequestType(RequestType.SIGN_UP));
             else connector.sendRequest(new Request().setUser(user).setRequestType(RequestType.SIGN_IN));
         } catch (Throwable e) {

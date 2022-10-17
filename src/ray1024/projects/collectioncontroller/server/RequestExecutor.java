@@ -25,8 +25,13 @@ public class RequestExecutor {
                         System.out.println("--- REGISTRATION REQUEST ---");
                         forkJoinPool.execute(() -> {
                             if (!server.getUsersManager().isRegistered(request.getUser())) {
-                                server.getUsersManager().addUser(request.getUser());
-                                server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer("SUCCESS"), connector);
+                                if (server.getDbController().addUser(request.getUser())) {
+                                    server.getUsersManager().addUser(request.getUser());
+                                    server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer("SUCCESS"), connector);
+                                }
+                            } else {
+                                server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer("This user already registered"), connector);
+                                server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.DISCONNECT), connector);
                             }
                         });
                     } catch (Exception ex) {
@@ -36,10 +41,14 @@ public class RequestExecutor {
                 }
                 case SIGN_IN: {
                     try {
-                        if (!server.getUsersManager().isRegistered(request.getUser()))
-                            server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.DISCONNECT), connector);
-                        else
-                            server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer("SUCCESS"), connector);
+                        System.out.println("--- SIGN IN REQUEST ---");
+                        forkJoinPool.execute(() -> {
+                            if (!server.getUsersManager().contains(request.getUser())) {
+                                server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer("Wrong login or password"), connector);
+                                server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.DISCONNECT), connector);
+                            } else
+                                server.getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer("SUCCESS"), connector);
+                        });
                     } catch (Throwable ignored) {
                         System.out.println("--- AUTHORIZATION ERROR ---");
                     }
@@ -47,7 +56,8 @@ public class RequestExecutor {
                 }
                 case EXECUTION_COMMAND: {
                     if (request.getUser() == null || request.getCommand() == null) return;
-                    if (!server.getUsersManager().isRegistered(request.getUser())) return;
+                    if (!server.getUsersManager().isRegistered(request.getUser()) || !server.getUsersManager().contains(request.getUser()))
+                        return;
                     System.out.println("--- EXECUTION REQUEST ---");
                     System.out.println("--- " + request.getCommand().getName() + " command ---");
                     forkJoinPool.execute(() -> server.getTerminal().execute(request.getCommand().setUser(request.getUser().setConnector(connector)).setTerminal(server.getTerminal())));
