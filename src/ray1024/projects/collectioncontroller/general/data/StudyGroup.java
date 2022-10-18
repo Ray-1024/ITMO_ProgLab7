@@ -11,9 +11,7 @@ import java.time.LocalDateTime;
  * Сортировка по-умолчанию : по лексикографическому неубыванию названий групп
  */
 public class StudyGroup extends SteppedInputObject implements Comparable<StudyGroup> {
-    private static int NextID = 1;
-
-    private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
     private java.time.LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
@@ -25,8 +23,8 @@ public class StudyGroup extends SteppedInputObject implements Comparable<StudyGr
     private IUser ownen;
 
 
+
     public StudyGroup() {
-        id = (NextID++);
         creationDate = LocalDateTime.now();
         name = "EmptyName";
         coordinates = Coordinates.emptyCoordinates;
@@ -120,15 +118,7 @@ public class StudyGroup extends SteppedInputObject implements Comparable<StudyGr
         return this.studentsCount - o.studentsCount;
     }
 
-    public static int getNextID() {
-        return NextID;
-    }
-
-    public static void setNextID(int nextID) {
-        NextID = nextID;
-    }
-
-    public StudyGroup setId(int id) {
+    public StudyGroup setId(long id) {
         this.id = id;
         return this;
     }
@@ -196,7 +186,7 @@ public class StudyGroup extends SteppedInputObject implements Comparable<StudyGr
         return studentsCount;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -214,11 +204,6 @@ public class StudyGroup extends SteppedInputObject implements Comparable<StudyGr
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != getClass()) return false;
         StudyGroup gr = (StudyGroup) obj;
-        return name.equals(gr.name) &&
-                coordinates.equals(gr.coordinates) &&
-                studentsCount == gr.studentsCount &&
-                ((formOfEducation == null && gr.formOfEducation == null) || formOfEducation.equals(gr.formOfEducation)) &&
-                semesterEnum.equals(gr.semesterEnum) &&
-                ((groupAdmin == null && gr.groupAdmin == null) || groupAdmin.equals(gr.groupAdmin));
+        return name.equals(gr.name) && coordinates.equals(gr.coordinates) && studentsCount == gr.studentsCount && ((formOfEducation == null && gr.formOfEducation == null) || formOfEducation.equals(gr.formOfEducation)) && semesterEnum.equals(gr.semesterEnum) && ((groupAdmin == null && gr.groupAdmin == null) || groupAdmin.equals(gr.groupAdmin));
     }
 }

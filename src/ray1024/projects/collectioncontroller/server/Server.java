@@ -29,7 +29,7 @@ public class Server implements Tickable {
 
     public Server() {
 
-        dbController = new DBController();
+        dbController = new DBController(this);
         usersManager = dbController.getUsers();
 
         terminal = new Terminal(this, new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter()), new StudyGroupCollectionController(this));

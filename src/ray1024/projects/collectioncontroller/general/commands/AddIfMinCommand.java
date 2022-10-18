@@ -24,10 +24,11 @@ public class AddIfMinCommand extends BaseCommand {
     @Override
     public void run() {
         try {
-            studyGroup.setId(StudyGroup.getNextID()).setOwnen(getUser());
-            StudyGroup.setNextID(StudyGroup.getNextID() + 1);
-            if (getTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> i.compareTo(studyGroup) > 0))
+            studyGroup.setOwnen(getUser());
+            if (getTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> i.compareTo(studyGroup) > 0)) {
+                getTerminal().getServer().getDbController().addCollectionElement(studyGroup);
                 getTerminal().getCollectionController().add(studyGroup);
+            }
         } catch (Throwable e) {
             if (getTerminal().getServer().serverAdmin.equals(getUser()))
                 getTerminal().getWriter().println(Phrases.getPhrase("Can'tExecuteCommand"));

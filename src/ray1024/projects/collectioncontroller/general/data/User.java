@@ -7,6 +7,7 @@ public class User implements IUser {
     private String password;
     private String salt;
     private IConnector connector;
+    private long id;
 
     @Override
     public String getLogin() {
@@ -14,7 +15,18 @@ public class User implements IUser {
     }
 
     @Override
-    public User setLogin(String login) {
+    public IUser setId(long id) {
+        this.id = id;
+        return this;
+    }
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    @Override
+    public IUser setLogin(String login) {
         this.login = login;
         return this;
     }
@@ -36,7 +48,7 @@ public class User implements IUser {
     }
 
     @Override
-    public User setPassword(String passwordHash) {
+    public IUser setPassword(String passwordHash) {
         this.password = passwordHash;
         return this;
     }

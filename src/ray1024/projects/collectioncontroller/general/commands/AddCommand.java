@@ -22,10 +22,9 @@ public class AddCommand extends BaseCommand {
     @Override
     public void run() {
         try {
-            studyGroup.setId(StudyGroup.getNextID());
-            StudyGroup.setNextID(StudyGroup.getNextID() + 1);
+            studyGroup.setOwnen(getUser());
+            getTerminal().getServer().getDbController().addCollectionElement(studyGroup);
             getTerminal().getCollectionController().add(studyGroup.setOwnen(getUser()));
-
         } catch (Exception e) {
             e.printStackTrace();
             getTerminal().getServer().getResponseSender().sendResponse(new Response().setAnswer(Phrases.getPhrase("Can'tExecuteCommand")).setResponseType(ResponseType.ANSWER), getUser().getConnector());

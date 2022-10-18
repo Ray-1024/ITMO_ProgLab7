@@ -6,6 +6,10 @@ import java.io.Serializable;
 
 public interface IUser extends Serializable {
 
+    IUser setId(long id);
+
+    long getId();
+
     IUser setLogin(String login);
 
     IUser setPassword(String password);

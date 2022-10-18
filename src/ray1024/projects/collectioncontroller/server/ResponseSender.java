@@ -19,10 +19,10 @@ public class ResponseSender {
         try {
             System.out.println("--- SEND ANSWER ---");
             cachedThreadPool.execute(() -> {
-                connector.sendResponse(response);
+                if (connector != null && response != null) connector.sendResponse(response);
             });
         } catch (Throwable ex) {
-            throw ex;
+            ex.printStackTrace();
         }
     }
 
