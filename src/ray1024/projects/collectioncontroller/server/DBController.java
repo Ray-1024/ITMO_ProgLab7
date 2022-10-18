@@ -61,7 +61,7 @@ public class DBController {
             statement.setString(3, user.getPassword());
             statement.execute();
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT id from users WHERE password_hash='%s'".formatted(user.getPassword()));
-            user.setId(resultSet.getLong("id"));
+            if (resultSet.next()) user.setId(resultSet.getLong("id"));
             return true;
         } catch (Throwable ex) {
             return false;
@@ -145,8 +145,9 @@ public class DBController {
             statement.setLong(7, element.getOwnen().getId());
             statement.setFloat(8, element.getCoordinates().getX());
             statement.setInt(9, element.getCoordinates().getY());
-
             statement.execute();
+            ResultSet resultSet = connection.createStatement().executeQuery("SELECT id from collection WHERE owner_id=%d".formatted(element.getOwnen().getId()));
+            if (resultSet.next()) element.setId(resultSet.getLong("id"));
             return true;
         } catch (Throwable ex) {
             ex.printStackTrace();
