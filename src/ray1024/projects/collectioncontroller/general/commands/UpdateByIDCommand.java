@@ -20,9 +20,8 @@ public class UpdateByIDCommand extends BaseCommand {
     @Override
     public void run() {
         try {
-            elem.setId(getTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> {
-                return elem.getId() == updateID && elem.getOwnen().equals(getUser());
-            }).findFirst().get().getId());
+            getTerminal().getServer().getDbController().updateElementById(getUser(), updateID, elem);
+            elem.setId(getTerminal().getCollectionController().getManagedCollection().stream().filter((elem) -> elem.getId() == updateID && elem.getOwnen().equals(getUser())).findFirst().get().getId());
             getTerminal().getCollectionController().getManagedCollection().getVec().replaceAll((i) -> {
                 if (i.getId() == elem.getId()) return elem;
                 return i;

@@ -13,7 +13,8 @@ import java.util.UUID;
 
 public class Server implements Tickable {
 
-    public final IUser serverAdmin = new User().setLogin("administrator").setPassword(UUID.randomUUID().toString());
+    public final IUser serverAdmin = new User().setLogin("admin").setPassword("admin");
+    // IMPOSSIBLE TO HACK
     private final IUserManager usersManager;
     private final Terminal terminal;
 
@@ -30,6 +31,7 @@ public class Server implements Tickable {
     public Server() {
 
         dbController = new DBController(this);
+        dbController.addUser(serverAdmin);
         usersManager = dbController.getUsers();
 
         terminal = new Terminal(this, new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter()), new StudyGroupCollectionController(this));

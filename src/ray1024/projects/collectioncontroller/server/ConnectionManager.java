@@ -48,7 +48,7 @@ public class ConnectionManager implements Tickable {
                     request.getUser().setSalt(server.getUsersManager().getUser(request.getUser().getLogin()).getSalt());
                     server.getDbController().getCryptoController().fixUser(request.getUser());
                     if (server.getUsersManager().contains(request.getUser()))
-                        request.setUser(server.getUsersManager().getUser(request.getUser().getLogin()));
+                        request.getUser().setConnector(connector).setId(server.getUsersManager().getUser(request.getUser().getLogin()).getId());
                 }
                 server.getRequestExecutor().executeRequest(request, connector);
             }

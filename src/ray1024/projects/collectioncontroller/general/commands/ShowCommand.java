@@ -24,8 +24,11 @@ public class ShowCommand extends BaseCommand {
                 stringBuilder.append((++ind[0]) + ". " + elem.toString());
                 stringBuilder.append("\n");
             }));
-            getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(stringBuilder.toString()), getUser().getConnector());
-        } catch (Throwable ignored) {
+            if (getTerminal().getServer().serverAdmin.equals(getUser())) System.out.println(stringBuilder.toString());
+            else
+                getTerminal().getServer().getResponseSender().sendResponse(new Response().setResponseType(ResponseType.ANSWER).setAnswer(stringBuilder.toString()), getUser().getConnector());
+        } catch (Throwable ex) {
+            ex.printStackTrace();
         }
     }
 

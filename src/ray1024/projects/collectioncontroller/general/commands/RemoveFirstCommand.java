@@ -16,8 +16,10 @@ public class RemoveFirstCommand extends BaseCommand {
     @Override
     public void run() {
         try {
-            if (getTerminal().getCollectionController().stream().limit(1).allMatch(elem -> elem.getOwnen().equals(getUser())))
+            if (getTerminal().getCollectionController().stream().limit(1).allMatch(elem -> elem.getOwnen().equals(getUser()))) {
+                getTerminal().getServer().getDbController().deleteFirst(getUser());
                 getTerminal().getCollectionController().getManagedCollection().getVec().remove(0);
+            }
         } catch (Throwable ex) {
         }
     }

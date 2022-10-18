@@ -3,15 +3,14 @@ package ray1024.projects.collectioncontroller.server;
 import ray1024.projects.collectioncontroller.general.data.*;
 
 import java.sql.*;
-import java.text.Normalizer;
 import java.time.LocalDateTime;
 
 public class DBController {
     private Connection connection;
-    private String login = "postgres";
-    private String password = "postgres";
+    private String login = "s335135";
+    private String password = "r9kNM3hIapwJL2N5";
     // Bad Practice
-    private String url = "jdbc:postgresql://localhost:5432/studs";
+    private String url = "jdbc:postgresql://pg:5432/studs";
     private Server server;
 
     private final CryptoController cryptoController = new CryptoController();
@@ -111,40 +110,7 @@ public class DBController {
     public boolean addCollectionElement(StudyGroup element) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO collection(name, create_time, students_count, form_of_education, semester, has_person, owner_id, coords_x, coords_y, person_name, person_weight, person_has_location, person_location_x, person_location_y, person_location_z) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            statement.setString(1, element.getName());
-            statement.setString(2, element.getCreationDate().toString());
-            statement.setInt(3, element.getStudentsCount());
-            if (element.getFormOfEducation() == null) statement.setNull(4, Types.VARCHAR);
-            else statement.setString(4, String.valueOf(element.getFormOfEducation()));
-            statement.setString(5, String.valueOf(element.getSemesterEnum()));
-            if (element.getGroupAdmin() == null) {
-                statement.setBoolean(6, false);
-                ////////////////////////////////////////////////
-                statement.setString(10, "empty_name_because_group_admin_is_null");
-                statement.setDouble(11, 0.1d);
-                statement.setBoolean(12, false);
-                statement.setDouble(13, 0.0d);
-                statement.setInt(14, 0);
-                statement.setInt(15, 0);
-            } else {
-                statement.setBoolean(6, true);
-                ///////////////////////////////////////////////
-                statement.setString(10, element.getGroupAdmin().getName());
-                statement.setDouble(11, element.getGroupAdmin().getWeight());
-                statement.setBoolean(12, element.getGroupAdmin().getLocation() != null);
-                if (element.getGroupAdmin().getLocation() == null) {
-                    statement.setDouble(13, 0.0d);
-                    statement.setInt(14, 0);
-                    statement.setInt(15, 0);
-                } else {
-                    statement.setDouble(13, element.getGroupAdmin().getLocation().getX());
-                    statement.setInt(14, element.getGroupAdmin().getLocation().getY());
-                    statement.setInt(15, element.getGroupAdmin().getLocation().getZ());
-                }
-            }
-            statement.setLong(7, element.getOwnen().getId());
-            statement.setFloat(8, element.getCoordinates().getX());
-            statement.setInt(9, element.getCoordinates().getY());
+            WriteElementToPreparedStatement(element, statement);
             statement.execute();
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT id from collection WHERE owner_id=%d".formatted(element.getOwnen().getId()));
             if (resultSet.next()) element.setId(resultSet.getLong("id"));
@@ -153,6 +119,74 @@ public class DBController {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    public void deleteUserElements(IUser user) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeQuery("DELETE FROM collection WHERE owner_id=%d".formatted(user.getId()));
+        } catch (Throwable ignored) {
+        }
+    }
+
+    public void deleteByElementId(IUser user, long elementId) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeQuery("DELETE FROM collection WHERE id=%d AND owner_id=%d".formatted(elementId, user.getId()));
+        } catch (Throwable ignored) {
+        }
+    }
+
+    public void deleteFirst(IUser user) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeQuery("DELETE FROM collection WHERE owner_id=%d AND id=(SELECT MIN(id) FROM collection WHERE owner_id=%d)".formatted(user.getId(), user.getId()));
+        } catch (Throwable ignored) {
+        }
+    }
+
+    public void updateElementById(IUser user, long elementId, StudyGroup element) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE collection SET name=?, create_time=?, students_count=?, form_of_education=?, semester=?, has_person=?, owner_id=?, coords_x=?, coords_y=?, person_name=?, person_weight=?, person_has_location=?, person_location_x=?, person_location_y=?, person_location_z=? WHERE owner_id=%d AND id=%d".formatted(user.getId(), elementId));
+            WriteElementToPreparedStatement(element, statement);
+            statement.execute();
+        } catch (Throwable ignored) {
+        }
+    }
+
+    private void WriteElementToPreparedStatement(StudyGroup element, PreparedStatement statement) throws SQLException {
+        statement.setString(1, element.getName());
+        statement.setString(2, element.getCreationDate().toString());
+        statement.setInt(3, element.getStudentsCount());
+        if (element.getFormOfEducation() == null) statement.setNull(4, Types.VARCHAR);
+        else statement.setString(4, String.valueOf(element.getFormOfEducation()));
+        statement.setString(5, String.valueOf(element.getSemesterEnum()));
+        if (element.getGroupAdmin() == null) {
+            statement.setBoolean(6, false);
+            ////////////////////////////////////////////////
+            statement.setString(10, "empty_name_because_group_admin_is_null");
+            statement.setDouble(11, 0.1d);
+            statement.setBoolean(12, false);
+            statement.setDouble(13, 0.0d);
+            statement.setInt(14, 0);
+            statement.setInt(15, 0);
+        } else {
+            statement.setBoolean(6, true);
+            ///////////////////////////////////////////////
+            statement.setString(10, element.getGroupAdmin().getName());
+            statement.setDouble(11, element.getGroupAdmin().getWeight());
+            statement.setBoolean(12, element.getGroupAdmin().getLocation() != null);
+            if (element.getGroupAdmin().getLocation() == null) {
+                statement.setDouble(13, 0.0d);
+                statement.setInt(14, 0);
+                statement.setInt(15, 0);
+            } else {
+                statement.setDouble(13, element.getGroupAdmin().getLocation().getX());
+                statement.setInt(14, element.getGroupAdmin().getLocation().getY());
+                statement.setInt(15, element.getGroupAdmin().getLocation().getZ());
+            }
+        }
+        statement.setLong(7, element.getOwnen().getId());
+        statement.setFloat(8, element.getCoordinates().getX());
+        statement.setInt(9, element.getCoordinates().getY());
+
     }
 
     public CryptoController getCryptoController() {

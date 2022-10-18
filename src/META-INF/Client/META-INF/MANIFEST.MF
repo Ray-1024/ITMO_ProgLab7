@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: ray1024.projects.collectioncontroller.client.ClientApplicati
+ on
+

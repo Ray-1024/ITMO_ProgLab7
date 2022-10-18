@@ -23,8 +23,8 @@ public class AddCommand extends BaseCommand {
     public void run() {
         try {
             studyGroup.setOwnen(getUser());
-            getTerminal().getServer().getDbController().addCollectionElement(studyGroup);
-            getTerminal().getCollectionController().add(studyGroup.setOwnen(getUser()));
+            if (getTerminal().getServer().getDbController().addCollectionElement(studyGroup))
+                getTerminal().getCollectionController().add(studyGroup);
         } catch (Exception e) {
             e.printStackTrace();
             getTerminal().getServer().getResponseSender().sendResponse(new Response().setAnswer(Phrases.getPhrase("Can'tExecuteCommand")).setResponseType(ResponseType.ANSWER), getUser().getConnector());

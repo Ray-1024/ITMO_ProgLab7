@@ -12,7 +12,7 @@ public class ConnectionAcceptor {
 
     public ConnectionAcceptor() {
         try {
-            serverSocket = ServerSocketChannel.open().bind(new InetSocketAddress("localhost", 44147));
+            serverSocket = ServerSocketChannel.open().bind(new InetSocketAddress("localhost", 20661));
             serverSocket.configureBlocking(false);
             serverSocket.socket().setSoTimeout(1);
         } catch (IOException e) {

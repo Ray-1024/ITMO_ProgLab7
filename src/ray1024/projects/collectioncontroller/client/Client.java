@@ -39,7 +39,7 @@ public class Client implements Tickable {
             if (scanner.hasNextLine()) user.setPassword(scanner.nextLine());
 
             commandBuilder = new CommandBuilder(new NonBlockingConsoleSourceReader(), new ConsoleSourceWriter());
-            connector = new ClientConnector(InetAddress.getByName("localhost"), 44147);
+            connector = new ClientConnector(InetAddress.getByName("localhost"), 20661);
             if ("sign up".equals(mode))
                 connector.sendRequest(new Request().setUser(user).setRequestType(RequestType.SIGN_UP));
             else connector.sendRequest(new Request().setUser(user).setRequestType(RequestType.SIGN_IN));

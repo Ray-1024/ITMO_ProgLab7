@@ -18,10 +18,8 @@ public class ClearCommand extends BaseCommand {
     @Override
     public void run() throws RuntimeException {
         try {
-            getTerminal().getCollectionController().removeAll(
-                    getTerminal().getCollectionController().stream()
-                            .filter((studyGroup -> studyGroup.getOwnen().equals(getUser())))
-                            .collect(Collectors.toList()));
+            getTerminal().getServer().getDbController().deleteUserElements(getUser());
+            getTerminal().getCollectionController().removeAll(getTerminal().getCollectionController().stream().filter((studyGroup -> studyGroup.getOwnen().equals(getUser()))).collect(Collectors.toList()));
         } catch (Exception e) {
             //throw new RuntimeException(Phrases.getPhrase("Can'tExecuteCommand"));
             e.printStackTrace();

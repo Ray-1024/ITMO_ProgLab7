@@ -26,8 +26,8 @@ public class AddIfMinCommand extends BaseCommand {
         try {
             studyGroup.setOwnen(getUser());
             if (getTerminal().getCollectionController().getManagedCollection().getVec().stream().allMatch((i) -> i.compareTo(studyGroup) > 0)) {
-                getTerminal().getServer().getDbController().addCollectionElement(studyGroup);
-                getTerminal().getCollectionController().add(studyGroup);
+                if (getTerminal().getServer().getDbController().addCollectionElement(studyGroup))
+                    getTerminal().getCollectionController().add(studyGroup);
             }
         } catch (Throwable e) {
             if (getTerminal().getServer().serverAdmin.equals(getUser()))
@@ -55,8 +55,7 @@ public class AddIfMinCommand extends BaseCommand {
     @Override
     public BaseCommand setArgs(String[] args) throws RuntimeException {
         studyGroup = new StudyGroup();
-        if (args == null || args.length != 1)
-            getTerminal().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
+        if (args == null || args.length != 1) getTerminal().getWriter().println(Phrases.getPhrase("WrongCommandArgs"));
         return this;
     }
 

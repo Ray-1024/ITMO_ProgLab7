@@ -79,7 +79,12 @@ public class StudyGroupCollectionController implements Serializable {
     }
 
     public Stream<StudyGroup> stream() {
-        return managedCollection.stream();
+        try {
+            reentrantReadWriteLock.readLock().lock();
+            return managedCollection.stream();
+        } finally {
+            reentrantReadWriteLock.readLock().unlock();
+        }
     }
 
     public void add(StudyGroup elem) {
